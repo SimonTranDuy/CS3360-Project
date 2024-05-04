@@ -1,4 +1,4 @@
-package backend.com.example.backendcs3360.Models;
+package backend.com.example.backendcs3360.models;
 
 import jakarta.persistence.*;
 
@@ -15,16 +15,19 @@ public class Customer
     private String customerName;
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
+    @Column(name = "address")
+    private String address;
     
     // Default constructor
-    public Customer(){
-    }
+    public Customer(){ }
+
     // Constructor with parameters
-    public Customer(int customer_id, String customerName, String phoneNumber)
+    public Customer(int customer_id, String customerName, String phoneNumber, String address)
     {
         this.customer_id = customer_id;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
     // Getter and setter
@@ -57,6 +60,16 @@ public class Customer
     {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
     
     @Override
     public String toString()
@@ -65,6 +78,7 @@ public class Customer
         "customer_id=" + customer_id + 
         ", customerName='" + customerName + '\'' + 
         ", phoneNumber='" + phoneNumber + '\'' + 
+        ", address='" + address + '\'' +
         "}";
     }
 }
