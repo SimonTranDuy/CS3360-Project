@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Backendcs3360Application<backendcs3360>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "backend.com.example.backendcs3360.Backendcs3360Application",
+            "projectName": "backendcs3360",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
