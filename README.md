@@ -1,6 +1,57 @@
 
 <h1>DATABASE DESIGN</h1>
-<image src="ER Diagram.png"></image>
+<image src="db.png"></image>
+
+
+```sql
+enum Material {
+  "golden" 
+  "sliver"
+  "copper"
+}
+
+Table customer {
+  id integer [primary key]
+  username varchar(255)
+  phone_number varchar(10)
+  address text
+}
+
+Table item {
+  id integer [primary key]
+  name varchar(255)
+  price double
+  description text
+}
+
+Table clothes {
+  id integer [primary key, ref: < item.id]
+  brand varchar(255)
+  size varchar(255)
+}
+
+Table accessories {
+  id integer [primary key, ref: < item.id]
+  material Material
+  type varchar(255)
+  weight double
+}
+
+
+Table list_of_items {
+  // order_code integer [primary key, ref: > order.code] 
+  code integer [primary key]
+  customer_id integer [primary key, ref: > customer.id]
+  item_id integer [primary key, ref: > item.id]
+  quantity integer
+  
+}
+
+Table purchased_order {
+  code integer [primary key]
+  date_of_purchase timestamp
+}
+```
 
 <br/>
 <br/>
@@ -9,7 +60,8 @@
 <br/>
 
 <h1>CLASS DESIGN</h1>
-<image src="class-design.png"></image>
+<image src="classDesign.png"></image>
+
 
 <br/>
 <br/>
