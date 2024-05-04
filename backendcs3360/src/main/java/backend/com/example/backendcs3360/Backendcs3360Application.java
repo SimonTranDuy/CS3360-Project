@@ -11,6 +11,7 @@ import backend.com.example.backendcs3360.models.Customer;
 public class Backendcs3360Application {
 
 	public static void main(String[] args) {
+		// Test new branch
 
 		SpringApplication.run(Backendcs3360Application.class, args);
 		Customer customer = new Customer(123, "Tuan Anh", "0123456789", "26 Hang Ma, HN");
