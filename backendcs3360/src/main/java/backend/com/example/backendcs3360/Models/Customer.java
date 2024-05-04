@@ -19,8 +19,8 @@ public class Customer
     private String address;
     
     // Default constructor
-    public Customer(){ }
-
+    public Customer(){
+    }
     // Constructor with parameters
     public Customer(int customer_id, String customerName, String phoneNumber, String address)
     {
@@ -60,16 +60,6 @@ public class Customer
     {
         this.phoneNumber = phoneNumber;
     }
-
-    public String getAddress()
-    {
-        return address;
-    }
-
-    public void setAddress(String address)
-    {
-        this.address = address;
-    }
     
     @Override
     public String toString()
@@ -78,7 +68,6 @@ public class Customer
         "customer_id=" + customer_id + 
         ", customerName='" + customerName + '\'' + 
         ", phoneNumber='" + phoneNumber + '\'' + 
-        ", address='" + address + '\'' +
         "}";
     }
 }

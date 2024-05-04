@@ -1,5 +1,8 @@
-package backend.com.example.backendcs3360.models;
+// package backend.com.example.backendcs3360.models;
 
-public class Cart {
+// import jakarta.persistence.*;
+
+// @Entity
+// public class Cart {
     
-}
+// }
