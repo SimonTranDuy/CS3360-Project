@@ -1,7 +1,18 @@
 
 <h1>DATABASE DESIGN</h1>
-<image src="db.png"></image>
+<image src="Design/db.png"></image>
 
+<h2>- NẾU TRẢ VỀ BẢN GHI THÌ LẤY LIST OF ITEMS ID ĐÓ ĐỂ ADD ITEM MỚI VÀO DỰA TRÊN LIST OF ITEMS ID ĐÓ (THÊM VÀO GIỎ HÀNG)</h2>
+<h2>- NẾU NHƯ KO TRẢ VỀ GÌ (GIỎ HÀNG TRỐNG) THÌ GENERATE LIST OF ITEMS ID MỚI VÀ INSERT VÀO BẢNG</h2>
+<h2>- DỰA VÀO CUSTOMER ID VÀ DATE OF PURCHASE ĐỂ LẤY CÁC ĐƠN HÀNG ĐÃ MUA, CÁC ĐƠN HÀNG CÓ CÙNG DATE OF PURCHASE GỘP VÀO MỘT ĐƠN, CÁC ĐƠN HÀNG DATE OF PURCHASE NULL LÀ HÀNG CHƯA THANH TOÁN TRONG GIỎ</h2>
+
+```sql
+SELECT customer_id = ? 
+FROM list_of_items
+WHERE date_of_purchase = NULL;
+```
+<br/>
+<br/>
 
 ```sql
 enum Material {
@@ -39,17 +50,12 @@ Table accessories {
 
 
 Table list_of_items {
-  // order_code integer [primary key, ref: > order.code] 
-  code integer [primary key]
+  list_of_items_id integer
   customer_id integer [primary key, ref: > customer.id]
   item_id integer [primary key, ref: > item.id]
   quantity integer
+  date_of_purchase datetime
   
-}
-
-Table purchased_order {
-  code integer [primary key]
-  date_of_purchase timestamp
 }
 ```
 
@@ -60,7 +66,7 @@ Table purchased_order {
 <br/>
 
 <h1>CLASS DESIGN</h1>
-<image src="classDesign.png"></image>
+<image src="Design/classDesign.png"></image>
 
 
 <br/>
