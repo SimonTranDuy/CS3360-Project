@@ -87,4 +87,5 @@ Table list_of_items {
 <h1>UPDATE NOTES</h1>
 <ul>
     <li>02/05/2024: Init project</li>
+    <li>05/05/2024: Đã xong models, đang làm repositories</li>
 </ul>
