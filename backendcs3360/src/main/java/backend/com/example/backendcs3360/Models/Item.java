@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "items")
 
-public abstract class Items {
+public abstract class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
@@ -17,10 +17,10 @@ public abstract class Items {
     @Column(name = "description")
     private String description;
 
-    public Items() {
+    public Item() {
     }
 
-    public Items(int item_id, String productName, double price, String description) {
+    public Item(int item_id, String productName, double price, String description) {
         this.item_id = item_id;
         this.productName = productName;
         this.price = price;

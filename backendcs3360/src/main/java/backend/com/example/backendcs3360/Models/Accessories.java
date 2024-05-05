@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "accessories")
 
-public class Accessories extends Items {
+public class Accessories extends Item {
     @Column(name = "type")
     private String type;
     

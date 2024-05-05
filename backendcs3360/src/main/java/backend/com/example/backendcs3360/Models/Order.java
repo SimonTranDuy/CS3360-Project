@@ -1,20 +1,19 @@
 package backend.com.example.backendcs3360.models;
 
-import jakarta.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cart")
-
-public class Cart {
+@Table(name = "order")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "card_id")
-    private int cardId;
+    @Column(name = "order_id")
+    private int orderId;
     @Column(name = "total")
     private double total;
     @Column(name = "phone_number")
@@ -26,22 +25,23 @@ public class Cart {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     private List<OrderItem> orderItems;
-    
-    public Cart() {
+
+    public Order() {
     }
 
-    public Cart(double total, String phoneNumber, Date dateOfPurchase) {
+    public Order(int orderId, double total, String phoneNumber, Date dateOfPurchase, List<OrderItem> orderItems) {
+        this.orderId = orderId;
         this.total = total;
         this.phoneNumber = phoneNumber;
         this.dateOfPurchase = dateOfPurchase;
     }
 
-    public int getCardId() {
-        return cardId;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public double getTotal() {
@@ -64,8 +64,8 @@ public class Cart {
         return dateOfPurchase;
     }
 
-    public void setDateOfPurchase(Date date_of_purchase) {
-        this.dateOfPurchase = date_of_purchase;
+    public void setDateOfPurchase(Date dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
     }
 
     public List<OrderItem> getOrderItems() {
@@ -74,16 +74,5 @@ public class Cart {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
-    }
-
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "cartId=" + cardId +
-                ", orderItems=" + orderItems +
-                ", total=" + total +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", dateOfPurchase=" + dateOfPurchase +
-                '}';
     }
 }

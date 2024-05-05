@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "clothes")
 
-public class Clothes extends Items {
+public class Clothes extends Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "brand")
     private String brand;
     @Column(name = "size")
