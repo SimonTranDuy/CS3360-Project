@@ -1,4 +1,4 @@
-package backend.com.example.backendcs3360.Repositories;
+package backend.com.example.backendcs3360.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
