@@ -21,3 +21,10 @@
 - POST: Insert dữ liệu (Ex: create new order, insert new product,...)
 - PUT: Update dữ liệu (Ex: update user's profile, update product's detail...)
 - DELETE: Xóa dữ liệu (Ex: remove an order, delete product)
+
+3. CRUD
+- CRUD là viết tắt của Create, Read, Update và Delete:
++ Create: Tạo mới một bản ghi trong cơ sở dữ liệu.
++ Read: Đọc thông tin từ một hoặc nhiều bản ghi trong cơ sở dữ liệu.
++ Update: Cập nhật thông tin cho một bản ghi đã tồn tại trong cơ sở dữ liệu.
++ Delete: Xóa một bản ghi khỏi cơ sở dữ liệu.

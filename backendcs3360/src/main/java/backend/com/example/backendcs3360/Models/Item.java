@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "items")
-
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,8 +62,8 @@ public abstract class Item {
     @Override
     public String toString() {
         return "Product{" +
-                "product_name='" + productName + '\'' +
-                ", item_id=" + item_id +
+                "item_id=" + item_id +
+                ", product_name='" + productName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 '}';
