@@ -1,0 +1,194 @@
+Index: backendcs3360/src/main/java/backend/com/example/backendcs3360/Backendcs3360Application.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package backend.com.example.backendcs3360;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\n\r\nimport backend.com.example.backendcs3360.models.Accessories;\r\nimport backend.com.example.backendcs3360.models.Clothes;\r\nimport backend.com.example.backendcs3360.models.Customer;\r\n\r\n@SpringBootApplication\r\npublic class Backendcs3360Application {\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\t// Test new branch\r\n\r\n\t\tSpringApplication.run(Backendcs3360Application.class, args);\r\n\t\tCustomer customer = new Customer(123, \"Tuan Anh\", \"0123456789\", \"26 Hang Ma, HN\");\r\n\t\tAccessories accessories = new Accessories(1, \"Necklace\", 50.0, \"Beautiful necklace\", \"Gold\", \"Diamond\", 0.2);\r\n\t\tClothes clothes = new Clothes(2, \"Shirt\", 30.0, \"Comfortable shirt\", \"Adidas\", \"M\");\r\n\r\n\t\tSystem.out.println(customer.toString());\r\n\t\tSystem.out.println(accessories.toString());\r\n\t\tSystem.out.println(clothes.toString());\r\n\t}\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Backendcs3360Application.java b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Backendcs3360Application.java
+--- a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Backendcs3360Application.java	
++++ b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Backendcs3360Application.java	
+@@ -1,12 +1,11 @@
+ package backend.com.example.backendcs3360;
+ 
++import backend.com.example.backendcs3360.Models.Clothes;
++import backend.com.example.backendcs3360.models.Accessories;
++import backend.com.example.backendcs3360.Models.Customer;
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 
+-import backend.com.example.backendcs3360.models.Accessories;
+-import backend.com.example.backendcs3360.models.Clothes;
+-import backend.com.example.backendcs3360.models.Customer;
+-
+ @SpringBootApplication
+ public class Backendcs3360Application {
+ 
+@@ -16,8 +15,8 @@
+ 		SpringApplication.run(Backendcs3360Application.class, args);
+ 		Customer customer = new Customer(123, "Tuan Anh", "0123456789", "26 Hang Ma, HN");
+ 		Accessories accessories = new Accessories(1, "Necklace", 50.0, "Beautiful necklace", "Gold", "Diamond", 0.2);
++
+ 		Clothes clothes = new Clothes(2, "Shirt", 30.0, "Comfortable shirt", "Adidas", "M");
+-
+ 		System.out.println(customer.toString());
+ 		System.out.println(accessories.toString());
+ 		System.out.println(clothes.toString());
+Index: backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Items.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package backend.com.example.backendcs3360.models;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n@Table(name = \"items\")\r\n\r\npublic abstract class Items {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    @Column(name = \"item_id\")\r\n    private int item_id;\r\n    @Column(name = \"product_name\")\r\n    private String productName;\r\n    @Column(name = \"price\")\r\n    private double price;\r\n    @Column(name = \"description\")\r\n    private String description;\r\n\r\n    public Items() {\r\n    }\r\n\r\n    public Items(int item_id, String productName, double price, String description) {\r\n        this.item_id = item_id;\r\n        this.productName = productName;\r\n        this.price = price;\r\n        this.description = description;\r\n    }\r\n\r\n    public int getItem_id() {\r\n        return item_id;\r\n    }\r\n\r\n    public void setItem_id(int item_id) {\r\n        this.item_id = item_id;\r\n    }\r\n\r\n    public String getProductName() {\r\n        return productName;\r\n    }\r\n\r\n    public void setProductName(String product_name) {\r\n        this.productName = product_name;\r\n    }\r\n\r\n    public double getPrice() {\r\n        return price;\r\n    }\r\n\r\n    public void setPrice(double price) {\r\n        this.price = price;\r\n    }\r\n\r\n    public String getDescription() {\r\n        return description;\r\n    }\r\n\r\n    public void setDescription(String description) {\r\n        this.description = description;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Product{\" +\r\n                \"product_name='\" + productName + '\\'' +\r\n                \", item_id=\" + item_id +\r\n                \", price=\" + price +\r\n                \", description='\" + description + '\\'' +\r\n                '}';\r\n    }\r\n}
+===================================================================
+diff --git a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Items.java b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Items.java
+--- a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Items.java	
++++ b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Items.java	
+@@ -1,4 +1,4 @@
+-package backend.com.example.backendcs3360.models;
++package backend.com.example.backendcs3360.Models;
+ 
+ import jakarta.persistence.*;
+ 
+Index: backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/OrdersItem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// package backend.com.example.backendcs3360.models;\r\n\r\n// public class OrdersItem {\r\n    \r\n// }\r\n
+===================================================================
+diff --git a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/OrdersItem.java b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/OrdersItem.java
+--- a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/OrdersItem.java	
++++ b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/OrdersItem.java	
+@@ -1,5 +1,47 @@
+-// package backend.com.example.backendcs3360.models;
++ package backend.com.example.backendcs3360.Models;
++
++ public class OrdersItem {
++    private int quantity;
++    private Items items;
++    private double total;
++    private int order_id;
++
++     public OrdersItem(int quantity, Items items, double total, int order_id) {
++         this.quantity = quantity;
++         this.items = items;
++         this.total = total;
++         this.order_id = order_id;
++     }
++
++     public int getQuantity() {
++         return quantity;
++     }
++
++     public void setQuantity(int quantity) {
++         this.quantity = quantity;
++     }
++
++     public Items getItems() {
++         return items;
++     }
++
++     public void setItems(Items items) {
++         this.items = items;
++     }
++
++     public double getTotal() {
++         return total;
++     }
+ 
+-// public class OrdersItem {
+-    
+-// }
++     public void setTotal(double total) {
++         this.total = total;
++     }
++
++     public int getOrder_id() {
++         return order_id;
++     }
++
++     public void setOrder_id(int order_id) {
++         this.order_id = order_id;
++     }
++ }
+Index: backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Accessories.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package backend.com.example.backendcs3360.models;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n@Table(name = \"accessories\")\r\n\r\npublic class Accessories extends Items {\r\n    @Column(name = \"type\")\r\n    private String type;\r\n    \r\n    @Column(name = \"material\")\r\n    private String material;\r\n    \r\n    @Column(name = \"weight\")\r\n    private double weight;\r\n\r\n    public Accessories() {\r\n        super();\r\n    }\r\n\r\n    public Accessories(int item_id, String productName, double price, String description, String type, String material, double weight) {\r\n        super(item_id, productName, price, description);\r\n        this.type = type;\r\n        this.material = material;\r\n        this.weight = weight;\r\n    }\r\n    \r\n\r\n    public String getType() {\r\n        return type;\r\n    }\r\n\r\n    public void setType(String type) {\r\n        this.type = type;\r\n    }\r\n\r\n    public String getMaterial() {\r\n        return material;\r\n    }\r\n\r\n    public void setMaterial(String material) {\r\n        this.material = material;\r\n    }\r\n\r\n    public double getWeight() {\r\n        return weight;\r\n    }\r\n\r\n    public void setWeight(double weight) {\r\n        this.weight = weight;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return super.toString() + \" Accessories {\" +\r\n                \"type='\" + type + '\\'' +\r\n                \", material='\" + material + '\\'' +\r\n                \", weight=\" + weight +\r\n                '}';\r\n    }    \r\n}\r\n\r\n
+===================================================================
+diff --git a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Accessories.java b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Accessories.java
+--- a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Accessories.java	
++++ b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Accessories.java	
+@@ -1,6 +1,8 @@
+-package backend.com.example.backendcs3360.models;
+-
+-import jakarta.persistence.*;
++package backend.com.example.backendcs3360.Models;
++import  backend.com.example.backendcs3360.Models.Items;
++import jakarta.persistence.Column;
++import jakarta.persistence.Entity;
++import jakarta.persistence.Table;
+ 
+ @Entity
+ @Table(name = "accessories")
+@@ -8,10 +10,10 @@
+ public class Accessories extends Items {
+     @Column(name = "type")
+     private String type;
+-    
++
+     @Column(name = "material")
+     private String material;
+-    
++
+     @Column(name = "weight")
+     private double weight;
+ 
+@@ -20,12 +22,12 @@
+     }
+ 
+     public Accessories(int item_id, String productName, double price, String description, String type, String material, double weight) {
+-        super(item_id, productName, price, description);
++        super();
+         this.type = type;
+         this.material = material;
+         this.weight = weight;
+     }
+-    
++
+ 
+     public String getType() {
+         return type;
+@@ -58,6 +60,6 @@
+                 ", material='" + material + '\'' +
+                 ", weight=" + weight +
+                 '}';
+-    }    
++    }
+ }
+ 
+Index: backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Customer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package backend.com.example.backendcs3360.models;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n// To assign name of database table corresponds to class Customer\r\n@Table(name = \"customers\")\r\npublic class Customer \r\n{\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment\r\n    @Column(name = \"customer_id\") // To asign name of colume in database table corresponds to customer_id field  \r\n    private int customer_id;\r\n    @Column(name = \"customer_name\")\r\n    private String customerName;\r\n    @Column(name = \"phone_number\", unique = true)\r\n    private String phoneNumber;\r\n    @Column(name = \"address\")\r\n    private String address;\r\n    \r\n    // Default constructor\r\n    public Customer(){\r\n    }\r\n    // Constructor with parameters\r\n    public Customer(int customer_id, String customerName, String phoneNumber, String address)\r\n    {\r\n        this.customer_id = customer_id;\r\n        this.customerName = customerName;\r\n        this.phoneNumber = phoneNumber;\r\n        this.address = address;\r\n    }\r\n\r\n    // Getter and setter\r\n    public int getCustomer_id()\r\n    {\r\n        return customer_id;\r\n    }\r\n\r\n    public void setCustomer_id(int customer_id)\r\n    {\r\n        this.customer_id = customer_id;\r\n    }\r\n\r\n    public String getCustomer_name()\r\n    {\r\n        return customerName;\r\n    }\r\n\r\n    public void setCustomer_name(String customerName)\r\n    {\r\n        this.customerName = customerName;\r\n    }\r\n\r\n    public String getPhoneNumber()\r\n    {\r\n        return phoneNumber;\r\n    }\r\n\r\n    public void setPhoneNumber(String phoneNumber)\r\n    {\r\n        this.phoneNumber = phoneNumber;\r\n    }\r\n    \r\n    @Override\r\n    public String toString()\r\n    {\r\n        return \"Customer{\" + \r\n        \"customer_id=\" + customer_id + \r\n        \", customerName='\" + customerName + '\\'' + \r\n        \", phoneNumber='\" + phoneNumber + '\\'' + \r\n        \"}\";\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Customer.java b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Customer.java
+--- a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Customer.java	
++++ b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Customer.java	
+@@ -1,4 +1,4 @@
+-package backend.com.example.backendcs3360.models;
++package backend.com.example.backendcs3360.Models;
+ 
+ import jakarta.persistence.*;
+ 
+Index: backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Clothes.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package backend.com.example.backendcs3360.models;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n@Table(name = \"clothes\")\r\n\r\npublic class Clothes extends Items {\r\n    @Column(name = \"brand\")\r\n    private String brand;\r\n    @Column(name = \"size\")\r\n    private String size;\r\n\r\n    public Clothes(){\r\n        super();\r\n    }\r\n\r\n    public Clothes(int item_id, String productName, double price, String description, String brand, String size)\r\n    {\r\n        super(item_id, productName, price, description);\r\n        this.brand = brand;\r\n        this.size = size;\r\n    }\r\n\r\n    public String getBrand(){\r\n        return brand;\r\n    }\r\n\r\n    public void setBrand(String brand){\r\n        this.brand = brand;\r\n    }\r\n\r\n    public String getSize(){\r\n        return size;\r\n    }\r\n\r\n    public void setSize(String size){\r\n        this.size = size;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return super.toString() + \" Clothes {\" +\r\n                \"brand='\" + brand + '\\'' +\r\n                \", size='\" + size + '\\'' +\r\n                '}';\r\n    }    \r\n}
+===================================================================
+diff --git a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Clothes.java b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Clothes.java
+--- a/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Clothes.java	
++++ b/backendcs3360/src/main/java/backend/com/example/backendcs3360/Models/Clothes.java	
+@@ -1,4 +1,4 @@
+-package backend.com.example.backendcs3360.models;
++package backend.com.example.backendcs3360.Models;
+ 
+ import jakarta.persistence.*;
+ 

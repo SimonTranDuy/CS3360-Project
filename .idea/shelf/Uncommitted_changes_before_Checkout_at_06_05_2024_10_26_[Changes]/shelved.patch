@@ -1,0 +1,19 @@
+Index: backendcs3360/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=backendcs3360\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/backendcs3360/src/main/resources/application.properties b/backendcs3360/src/main/resources/application.properties
+--- a/backendcs3360/src/main/resources/application.properties	(revision 3b281cc5ff4fdc3df50616037ae24f682be3fc54)
++++ b/backendcs3360/src/main/resources/application.properties	(date 1714964681903)
+@@ -1,1 +1,7 @@
+ spring.application.name=backendcs3360
++
++
++spring.datasource.url=jdbc:mysql://localhost:3306/cs3360-db
++spring.datasource.username=root
++spring.datasource.password=123456
++spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+\ No newline at end of file
