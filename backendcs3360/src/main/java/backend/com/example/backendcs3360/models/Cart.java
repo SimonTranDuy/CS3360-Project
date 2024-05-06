@@ -7,24 +7,18 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "cart")
-
 public class Cart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "card_id")
-    private int cardId;
-    @Column(name = "total")
+    private int cartId;
+//    @Column(name = "total")
     private double total;
-    @Column(name = "phone_number")
+//    @Column(name = "phone_number")
     private String phoneNumber;
-    @Temporal(TemporalType.TIMESTAMP) // Specifies the database field as a TIMESTAMP.
-    @Column(name = "date_of_purchase")
+//    @Temporal(TemporalType.TIMESTAMP) // Specifies the database field as a TIMESTAMP.
+//    @Column(name = "date_of_purchase")
     private Date dateOfPurchase;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+//    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonBackReference
     private List<OrderItem> orderItems;
     
     public Cart() {
@@ -37,11 +31,11 @@ public class Cart {
     }
 
     public int getCardId() {
-        return cardId;
+        return cartId;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setCardId(int cartId) {
+        this.cartId = cartId;
     }
 
     public double getTotal() {
@@ -79,7 +73,7 @@ public class Cart {
     @Override
     public String toString() {
         return "Cart{" +
-                "cartId=" + cardId +
+                "cartId=" + cartId +
                 ", orderItems=" + orderItems +
                 ", total=" + total +
                 ", phoneNumber='" + phoneNumber + '\'' +

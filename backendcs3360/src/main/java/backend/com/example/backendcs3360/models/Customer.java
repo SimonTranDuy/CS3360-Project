@@ -2,20 +2,20 @@ package backend.com.example.backendcs3360.models;
 
 import jakarta.persistence.*;
 
-@Entity
-// To assign name of database table corresponds to class Customer
-@Table(name = "customers")
+//@Entity
+//// To assign name of database table corresponds to class Customer
+//@Table(name = "customers")
 public class Customer 
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
-    @Column(name = "customer_id") // To asign name of colume in database table corresponds to customer_id field  
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
+//    @Column(name = "customer_id") // To asign name of colume in database table corresponds to customer_id field
     private int customer_id;
-    @Column(name = "customer_name")
+//    @Column(name = "customer_name")
     private String customerName;
-    @Column(name = "phone_number", unique = true)
+//    @Column(name = "phone_number", unique = true)
     private String phoneNumber;
-    @Column(name = "address")
+//    @Column(name = "address")
     private String address;
     
     // Default constructor

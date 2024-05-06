@@ -4,53 +4,19 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "list_of_items")
+//@Entity
+//@Table(name = "list_of_items")
 public class OrderItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "list_of_items_id")
-    private int list_of_items_id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
     private Item item;
-
-    @Column(name = "quantity")
     private int quantity;
+    private double total;
+    private int order_id;
 
-    @Column(name = "date_of_purchase")
-    private Date date_of_purchase;
-
-    public OrderItem() {
-    }
-
-    public OrderItem(Customer customer, Item item, int quantity, Date date_of_purchase) {
-        this.customer = customer;
+    public OrderItem(Item item, int quantity, double total, int order_id) {
         this.item = item;
         this.quantity = quantity;
-        this.date_of_purchase = date_of_purchase;
-    }
-
-    // Getters and setters...
-    public int getList_of_items_id() {
-        return list_of_items_id;
-    }
-
-    public void setList_of_items_id(int list_of_items_id) {
-        this.list_of_items_id = list_of_items_id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+        this.total = total;
+        this.order_id = order_id;
     }
 
     public Item getItem() {
@@ -69,22 +35,29 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public Date getDate_of_purchase() {
-        return date_of_purchase;
+    public double getTotal() {
+        return total;
     }
 
-    public void setDate_of_purchase(Date date_of_purchase) {
-        this.date_of_purchase = date_of_purchase;
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
     @Override
     public String toString() {
         return "OrderItem{" +
-                "list_of_items_id=" + list_of_items_id +
-                ", customer=" + customer +
-                ", item=" + item +
+                "item=" + item +
                 ", quantity=" + quantity +
-                ", date_of_purchase=" + date_of_purchase +
+                ", total=" + total +
+                ", order_id=" + order_id +
                 '}';
     }
 }

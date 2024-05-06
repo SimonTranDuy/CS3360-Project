@@ -7,23 +7,23 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "order")
+//@Entity
+//@Table(name = "order")
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "order_id")
     private int orderId;
-    @Column(name = "total")
+//    @Column(name = "total")
     private double total;
-    @Column(name = "phone_number")
+//    @Column(name = "phone_number")
     private String phoneNumber;
-    @Temporal(TemporalType.TIMESTAMP) // Specifies the database field as a TIMESTAMP.
-    @Column(name = "date_of_purchase")
+//    @Temporal(TemporalType.TIMESTAMP) // Specifies the database field as a TIMESTAMP.
+//    @Column(name = "date_of_purchase")
     private Date dateOfPurchase;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+//    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonBackReference
     private List<OrderItem> orderItems;
 
     public Order() {

@@ -2,17 +2,17 @@ package backend.com.example.backendcs3360.models;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "accessories")
+//@Entity
+//@Table(name = "accessories")
 
 public class Accessories extends Item {
-    @Column(name = "type")
+//    @Column(name = "type")
     private String type;
     
-    @Column(name = "material")
+//    @Column(name = "material")
     private String material;
     
-    @Column(name = "weight")
+//    @Column(name = "weight")
     private double weight;
 
     public Accessories() {

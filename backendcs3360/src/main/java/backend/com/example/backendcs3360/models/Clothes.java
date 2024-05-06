@@ -1,16 +1,17 @@
 package backend.com.example.backendcs3360.models;
 
+import backend.com.example.backendcs3360.dto.ClothesDTO;
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "clothes")
+//@Entity
+//@Table(name = "clothes")
 
 public class Clothes extends Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "brand")
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "brand")
     private String brand;
-    @Column(name = "size")
+//    @Column(name = "size")
     private String size;
 
     public Clothes(){
@@ -46,5 +47,15 @@ public class Clothes extends Item {
                 "brand='" + brand + '\'' +
                 ", size='" + size + '\'' +
                 '}';
-    }    
+    }
+    public ClothesDTO convertToDTO(){
+        ClothesDTO newDTO = new ClothesDTO();
+        newDTO.setBrand(this.getBrand());
+        newDTO.setSize(this.getSize());
+        newDTO.setDescription(this.getDescription());
+        newDTO.setPrice(this.getPrice());
+        newDTO.setProductName(this.getProductName());
+        newDTO.setItem_id(this.getItem_id());
+        return newDTO;
+    }
 }

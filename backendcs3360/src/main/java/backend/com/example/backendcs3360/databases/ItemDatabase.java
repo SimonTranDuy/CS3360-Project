@@ -1,20 +1,23 @@
-package backend.com.example.backendcs3360.databases;
-
+//package backend.com.example.backendcs3360.databases;
+//
 // import backend.com.example.backendcs3360.models.Accessories;
 // import backend.com.example.backendcs3360.models.Clothes;
-
+//
+// import backend.com.example.backendcs3360.repositories.ItemRepository;
+// import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.boot.CommandLineRunner;
 // import org.springframework.context.annotation.Configuration;
 // import org.springframework.context.annotation.Bean;
 // import org.slf4j.Logger;
 // import org.slf4j.LoggerFactory;
-
+// import org.springframework.stereotype.Service;
+//
 // Configuration class: manage beans
 // @Configuration
 // public class ItemDatabase {
 //     // Logger: print log
 //     private final Logger logger = LoggerFactory.getLogger(ItemDatabase.class);
-
+//
 //     // Bean: manage objects
 //     @Bean
 //     CommandLineRunner initDatabase(ItemRepository itemRepository) {
@@ -30,40 +33,40 @@ package backend.com.example.backendcs3360.databases;
 //             }
 //         };
 //     }
-
+//
 // }
-
-import backend.com.example.backendcs3360.models.Item;
-import backend.com.example.backendcs3360.repositories.ItemRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class ItemDatabase {
-
-    private final ItemRepository itemRepository;
-
-    @Autowired
-    public ItemDatabase(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-    }
-
-    public List<Item> getAllItems() {
-        return itemRepository.findAll();
-    }
-
-    public Item getItemById(int id) {
-        return itemRepository.findById(id).orElse(null);
-    }
-
-    public Item saveItem(Item item) {
-        return itemRepository.save(item);
-    }
-
-    public void deleteItem(int id) {
-        itemRepository.deleteById(id);
-    }
-}
+//
+//import backend.com.example.backendcs3360.models.Item;
+//import backend.com.example.backendcs3360.repositories.ItemRepository;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//
+//import java.util.List;
+//
+//@Service
+//public class ItemDatabase {
+//
+//    private final ItemRepository itemRepository;
+//
+//    @Autowired
+//    public ItemDatabase(ItemRepository itemRepository) {
+//        this.itemRepository = itemRepository;
+//    }
+//
+//    public List<Item> getAllItems() {
+//        return itemRepository.findAll();
+//    }
+//
+//    public Item getItemById(int id) {
+//        return itemRepository.findById(id).orElse(null);
+//    }
+//
+//    public Item saveItem(Item item) {
+//        return itemRepository.save(item);
+//    }
+//
+//    public void deleteItem(int id) {
+//        itemRepository.deleteById(id);
+//    }
+//}

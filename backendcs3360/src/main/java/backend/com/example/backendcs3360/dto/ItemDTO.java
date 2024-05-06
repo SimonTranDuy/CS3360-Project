@@ -1,31 +1,30 @@
-package backend.com.example.backendcs3360.models;
+package backend.com.example.backendcs3360.dto;
 
-import backend.com.example.backendcs3360.dto.ItemDTO;
 import jakarta.persistence.*;
 
-//@Entity
-//@Table(name = "items")
-//@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Item {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "item_id")
+@Entity
+@Table(name = "items")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class ItemDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_id")
     private int item_id;
-//    @Column(name = "product_name")
+    @Column(name = "product_name")
     private String productName;
-//    @Column(name = "price")
-    private Double price;
-//    @Column(name = "description")
+    @Column(name = "price")
+    private double price;
+    @Column(name = "description")
     private String description;
 
-    public Item() {
-    }
-
-    public Item(int item_id, String productName, Double price, String description) {
+    public ItemDTO(int item_id, String productName, double price, String description) {
         this.item_id = item_id;
         this.productName = productName;
         this.price = price;
         this.description = description;
+    }
+
+    public ItemDTO() {
     }
 
     public int getItem_id() {
@@ -40,15 +39,15 @@ public abstract class Item {
         return productName;
     }
 
-    public void setProductName(String product_name) {
-        this.productName = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -60,12 +59,11 @@ public abstract class Item {
         this.description = description;
     }
 
-
     @Override
     public String toString() {
-        return "Product{" +
+        return "ItemDTO{" +
                 "item_id=" + item_id +
-                ", product_name='" + productName + '\'' +
+                ", productName='" + productName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 '}';
