@@ -1,5 +1,6 @@
 package backend.com.example.backendcs3360.dto;
 
+import backend.com.example.backendcs3360.models.Item;
 import jakarta.persistence.*;
 
 @Entity
@@ -68,4 +69,5 @@ public abstract class ItemDTO {
                 ", description='" + description + '\'' +
                 '}';
     }
+
 }

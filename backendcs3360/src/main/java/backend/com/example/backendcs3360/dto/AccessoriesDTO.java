@@ -19,6 +19,10 @@ public class AccessoriesDTO extends ItemDTO{
     @Column(name = "weight")
     private double weight;
 
+    public AccessoriesDTO() {
+
+    }
+
     public String getType() {
         return type;
     }

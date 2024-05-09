@@ -1,5 +1,6 @@
 package backend.com.example.backendcs3360.controllers;
 
+import backend.com.example.backendcs3360.dto.AccessoriesDTO;
 import backend.com.example.backendcs3360.dto.ItemDTO;
 import backend.com.example.backendcs3360.models.Accessories;
 import backend.com.example.backendcs3360.models.Clothes;
@@ -29,13 +30,21 @@ public class ItemController {
         );
     }
 
-//    @PostMapping("/post-accessories")
-//    public ResponseEntity<ResponseObject> postNewAccessories(@RequestBody Accessories item){
-//        List<ItemDTO> productList = itemService.getAllItems();
-//        return ResponseEntity.status(HttpStatus.OK).body(
-//                new ResponseObject("success", "Query product successfully", productList)
-//        );
-//    }
+    @GetMapping("/get-by-name/{productName}")
+    public ResponseEntity<ResponseObject> getProductByName(@PathVariable String productName){
+        List<ItemDTO> productList = itemService.getByName(productName);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("success", "Query product successfully", productList)
+        );
+    }
+
+    @PostMapping("/post-accessories")
+    public ResponseEntity<ResponseObject> postNewAccessories(@RequestBody Accessories item){
+        itemService.insertNewAccessories(item);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("success", "Insert new product successfully", null)
+        );
+    }
     @PostMapping("/post-clothes")
     public ResponseEntity<ResponseObject> postNewClothes(@RequestBody Clothes item){
         itemService.insertNewClothes(item);
