@@ -7,8 +7,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "accessories")
 public class AccessoriesDTO extends ItemDTO{
-    public AccessoriesDTO(int item_id, String productName, double price, String description) {
-        super(item_id, productName, price, description);
+    public AccessoriesDTO(int itemId, String productName, double price, String description) {
+        super(itemId, productName, price, description);
     }
     @Column(name = "type")
     private String type;

@@ -6,8 +6,8 @@ package backend.com.example.backendcs3360.models;
 public abstract class Item {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "item_id")
-    private int item_id;
+//    @Column(name = "itemId")
+    private int itemId;
 //    @Column(name = "product_name")
     private String productName;
 //    @Column(name = "price")
@@ -18,19 +18,19 @@ public abstract class Item {
     public Item() {
     }
 
-    public Item(int item_id, String productName, Double price, String description) {
-        this.item_id = item_id;
+    public Item(int itemId, String productName, Double price, String description) {
+        this.itemId = itemId;
         this.productName = productName;
         this.price = price;
         this.description = description;
     }
 
-    public int getItem_id() {
-        return item_id;
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setItem_id(int item_id) {
-        this.item_id = item_id;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public String getProductName() {
@@ -61,7 +61,7 @@ public abstract class Item {
     @Override
     public String toString() {
         return "Product{" +
-                "item_id=" + item_id +
+                "itemId=" + itemId +
                 ", product_name='" + productName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +

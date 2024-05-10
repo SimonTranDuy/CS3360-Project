@@ -10,7 +10,7 @@ public class OrderItemDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "list_of_items_id")
-    private int list_of_items_id;
+    private int listOfItemsId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
@@ -23,31 +23,31 @@ public class OrderItemDTO {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "order_code")
-    private String order_code;
+    @Column(name = "orderCode")
+    private String orderCode;
 
     @Column(name = "date_of_purchase")
-    private Date date_of_purchase;
+    private Date dateOfPurchase;
 
     public OrderItemDTO() {
     }
 
-    public OrderItemDTO(int list_of_items_id, CustomerDTO customer, ItemDTO item, int quantity, String order_code,
-            Date date_of_purchase) {
-        this.list_of_items_id = list_of_items_id;
+    public OrderItemDTO(int listOfItemsId, CustomerDTO customer, ItemDTO item, int quantity, String orderCode,
+            Date dateOfPurchase) {
+        this.listOfItemsId = listOfItemsId;
         this.customer = customer;
         this.item = item;
         this.quantity = quantity;
-        this.order_code = order_code;
-        this.date_of_purchase = date_of_purchase;
+        this.orderCode = orderCode;
+        this.dateOfPurchase = dateOfPurchase;
     }
 
-    public int getList_of_items_id() {
-        return list_of_items_id;
+    public int getListOfItemsId() {
+        return listOfItemsId;
     }
 
-    public void setList_of_items_id(int list_of_items_id) {
-        this.list_of_items_id = list_of_items_id;
+    public void setListOfItemsId(int listOfItemsId) {
+        this.listOfItemsId = listOfItemsId;
     }
 
     public CustomerDTO getCustomer() {
@@ -74,19 +74,30 @@ public class OrderItemDTO {
         this.quantity = quantity;
     }
 
-    public Date getDate_of_purchase() {
-        return date_of_purchase;
+    public Date getDateOfPurchase() {
+        return dateOfPurchase;
     }
 
-    public String getOrder_code() {
-        return order_code;
+    public String getOrderCode() {
+        return orderCode;
     }
 
-    public void setOrder_code(String order_code) {
-        this.order_code = order_code;
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 
-    public void setDate_of_purchase(Date date_of_purchase) {
-        this.date_of_purchase = date_of_purchase;
+    public void setDateOfPurchase(Date dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItemDTO{" +
+                "order_id=" + listOfItemsId +
+                ", item=" + item +
+                ", quantity=" + quantity +
+                ", order_code='" + orderCode + '\'' +
+                ", order_date='" + dateOfPurchase + '\'' +
+                '}';
     }
 }

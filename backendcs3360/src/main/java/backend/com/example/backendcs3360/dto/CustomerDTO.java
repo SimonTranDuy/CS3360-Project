@@ -9,7 +9,7 @@ public class CustomerDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
     @Column(name = "customer_id") // To asign name of colume in database table corresponds to customer_id field
-    private int customer_id;
+    private int customerId;
     @Column(name = "customer_name")
     private String customerName;
     @Column(name = "phone_number", unique = true)
@@ -17,19 +17,22 @@ public class CustomerDTO {
     @Column(name = "address")
     private String address;
 
-    public CustomerDTO(int customer_id, String customerName, String phoneNumber, String address) {
-        this.customer_id = customer_id;
+    public CustomerDTO() {
+    }
+
+    public CustomerDTO(int customerId, String customerName, String phoneNumber, String address) {
+        this.customerId = customerId;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {
@@ -59,7 +62,7 @@ public class CustomerDTO {
     @Override
     public String toString() {
         return "CustomerDTO{" +
-                "customer_id=" + customer_id +
+                "customer_id=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +

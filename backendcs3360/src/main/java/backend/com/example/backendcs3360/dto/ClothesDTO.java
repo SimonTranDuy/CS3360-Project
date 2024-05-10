@@ -40,7 +40,7 @@ public class ClothesDTO extends ItemDTO{
     }
     public Clothes convertToClothes  (){
         Clothes newItem = new Clothes();
-        newItem.setItem_id(this.getItem_id());
+        newItem.setItemId(this.getItemId());
         newItem.setBrand(this.getBrand());
         newItem.setDescription(this.getDescription());
         newItem.setPrice(this.getPrice());

@@ -11,7 +11,7 @@ public class Cart {
 //    @Column(name = "phone_number")
     private String phoneNumber;
 //    @Temporal(TemporalType.TIMESTAMP) // Specifies the database field as a TIMESTAMP.
-//    @Column(name = "date_of_purchase")
+//    @Column(name = "dateOfPurchase")
     private Date dateOfPurchase;
 
 //    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -55,8 +55,8 @@ public class Cart {
         return dateOfPurchase;
     }
 
-    public void setDateOfPurchase(Date date_of_purchase) {
-        this.dateOfPurchase = date_of_purchase;
+    public void setDateOfPurchase(Date dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
     }
 
     public List<OrderItem> getOrderItems() {
