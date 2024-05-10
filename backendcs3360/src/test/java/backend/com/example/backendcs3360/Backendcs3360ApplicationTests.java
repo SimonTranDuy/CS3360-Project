@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class Backendcs3360ApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void TestFunction() {
 	}
 
 }
