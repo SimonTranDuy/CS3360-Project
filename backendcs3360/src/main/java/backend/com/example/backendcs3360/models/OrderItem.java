@@ -1,23 +1,38 @@
 package backend.com.example.backendcs3360.models;
 
-import jakarta.persistence.*;
-
 import java.util.Date;
 
-//@Entity
-//@Table(name = "list_of_items")
 public class OrderItem {
+    private int list_of_items_id;
+    private Customer customer;
     private Item item;
     private int quantity;
-    private double total;
-    private int order_id;
+    private String order_code;
+    private Date date_of_purchase;
 
-
-    public OrderItem(Item item, int quantity, double total, int order_id) {
+    public OrderItem(int list_of_items_id, Customer customer, Item item, int quantity, String order_code, Date date_of_purchase) {
+        this.list_of_items_id = list_of_items_id;
+        this.customer = customer;
         this.item = item;
         this.quantity = quantity;
-        this.total = total;
-        this.order_id = order_id;
+        this.order_code = order_code;
+        this.date_of_purchase = date_of_purchase;
+    }
+
+    public int getList_of_items_id() {
+        return list_of_items_id;
+    }
+
+    public void setList_of_items_id(int list_of_items_id) {
+        this.list_of_items_id = list_of_items_id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Item getItem() {
@@ -36,29 +51,30 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public double getTotal() {
-        return total;
+    public String getOrder_code() {
+        return order_code;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setOrder_code(String order_code) {
+        this.order_code = order_code;
     }
 
-    public int getOrder_id() {
-        return order_id;
+    public Date getDate_of_purchase() {
+        return date_of_purchase;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setDate_of_purchase(Date date_of_purchase) {
+        this.date_of_purchase = date_of_purchase;
     }
 
     @Override
     public String toString() {
         return "OrderItem{" +
-                "item=" + item +
+                "order_id=" + list_of_items_id +
+                ", item=" + item +
                 ", quantity=" + quantity +
-                ", total=" + total +
-                ", order_id=" + order_id +
+                ", order_code='" + order_code + '\'' +
+                ", order_date='" + date_of_purchase + '\'' +
                 '}';
     }
 }

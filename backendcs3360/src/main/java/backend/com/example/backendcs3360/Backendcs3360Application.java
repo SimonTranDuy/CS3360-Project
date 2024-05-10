@@ -1,10 +1,10 @@
 package backend.com.example.backendcs3360;
 
 // import org.springframework.boot.SpringApplication;
-import backend.com.example.backendcs3360.models.Accessories;
-import backend.com.example.backendcs3360.models.Clothes;
-import backend.com.example.backendcs3360.models.Customer;
-import backend.com.example.backendcs3360.models.Item;
+// import backend.com.example.backendcs3360.models.Accessories;
+// import backend.com.example.backendcs3360.models.Clothes;
+// import backend.com.example.backendcs3360.models.Customer;
+// import backend.com.example.backendcs3360.models.Item;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

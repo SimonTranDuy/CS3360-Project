@@ -1,7 +1,7 @@
 package backend.com.example.backendcs3360.dto;
 
 import backend.com.example.backendcs3360.models.Clothes;
-import backend.com.example.backendcs3360.models.Item;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

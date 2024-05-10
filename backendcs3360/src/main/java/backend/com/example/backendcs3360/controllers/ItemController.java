@@ -1,6 +1,5 @@
 package backend.com.example.backendcs3360.controllers;
 
-import backend.com.example.backendcs3360.dto.AccessoriesDTO;
 import backend.com.example.backendcs3360.dto.ItemDTO;
 import backend.com.example.backendcs3360.models.Accessories;
 import backend.com.example.backendcs3360.models.Clothes;

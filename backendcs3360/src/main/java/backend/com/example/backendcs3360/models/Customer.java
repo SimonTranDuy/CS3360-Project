@@ -1,6 +1,5 @@
 package backend.com.example.backendcs3360.models;
 
-import jakarta.persistence.*;
 
 //@Entity
 //// To assign name of database table corresponds to class Customer
@@ -60,6 +59,16 @@ public class Customer
     {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
     
     @Override
     public String toString()
@@ -68,6 +77,7 @@ public class Customer
         "customer_id=" + customer_id + 
         ", customerName='" + customerName + '\'' + 
         ", phoneNumber='" + phoneNumber + '\'' + 
+        ", address='" + address + '\'' +
         "}";
     }
 }

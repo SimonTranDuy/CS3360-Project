@@ -1,8 +1,5 @@
 package backend.com.example.backendcs3360.models;
 
-import backend.com.example.backendcs3360.dto.ItemDTO;
-import jakarta.persistence.*;
-
 //@Entity
 //@Table(name = "items")
 //@Inheritance(strategy = InheritanceType.JOINED)

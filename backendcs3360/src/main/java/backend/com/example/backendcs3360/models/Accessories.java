@@ -1,9 +1,6 @@
 package backend.com.example.backendcs3360.models;
 
 import backend.com.example.backendcs3360.dto.AccessoriesDTO;
-import backend.com.example.backendcs3360.dto.ClothesDTO;
-import jakarta.persistence.*;
-
 //@Entity
 //@Table(name = "accessories")
 

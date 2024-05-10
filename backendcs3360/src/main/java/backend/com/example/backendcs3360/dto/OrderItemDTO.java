@@ -1,14 +1,12 @@
 package backend.com.example.backendcs3360.dto;
 
-import backend.com.example.backendcs3360.models.Customer;
-import backend.com.example.backendcs3360.models.Item;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "list_of_items")
-public class ListOfItemsDTO {
+public class OrderItemDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "list_of_items_id")
@@ -25,14 +23,19 @@ public class ListOfItemsDTO {
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name = "order_code")
+    private String order_code;
+
     @Column(name = "date_of_purchase")
     private Date date_of_purchase;
 
-    public ListOfItemsDTO(int list_of_items_id, CustomerDTO customer, ItemDTO item, int quantity, Date date_of_purchase) {
+    public OrderItemDTO(int list_of_items_id, CustomerDTO customer, ItemDTO item, int quantity, String order_code,
+            Date date_of_purchase) {
         this.list_of_items_id = list_of_items_id;
         this.customer = customer;
         this.item = item;
         this.quantity = quantity;
+        this.order_code = order_code;
         this.date_of_purchase = date_of_purchase;
     }
 
@@ -68,8 +71,16 @@ public class ListOfItemsDTO {
         this.quantity = quantity;
     }
 
-        public Date getDate_of_purchase() {
+    public Date getDate_of_purchase() {
         return date_of_purchase;
+    }
+
+    public String getOrder_code() {
+        return order_code;
+    }
+
+    public void setOrder_code(String order_code) {
+        this.order_code = order_code;
     }
 
     public void setDate_of_purchase(Date date_of_purchase) {

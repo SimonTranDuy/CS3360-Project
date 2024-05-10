@@ -1,11 +1,8 @@
 package backend.com.example.backendcs3360.models;
 
-import jakarta.persistence.*;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.util.Date;
+
 
 public class Cart {
     private int cartId;
