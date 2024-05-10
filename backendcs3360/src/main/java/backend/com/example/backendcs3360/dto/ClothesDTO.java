@@ -1,5 +1,7 @@
 package backend.com.example.backendcs3360.dto;
 
+import backend.com.example.backendcs3360.models.Clothes;
+import backend.com.example.backendcs3360.models.Item;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -36,5 +38,16 @@ public class ClothesDTO extends ItemDTO{
     public void setSize(String size) {
         this.size = size;
     }
+    public Clothes convertToClothes  (){
+        Clothes newItem = new Clothes();
+        newItem.setItem_id(this.getItem_id());
+        newItem.setBrand(this.getBrand());
+        newItem.setDescription(this.getDescription());
+        newItem.setPrice(this.getPrice());
+        newItem.setSize(this.getSize());
+        newItem.setProductName(this.getProductName());
+        return newItem;
+    }
+
 
 }

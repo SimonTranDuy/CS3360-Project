@@ -1,5 +1,7 @@
 package backend.com.example.backendcs3360.models;
 
+import backend.com.example.backendcs3360.dto.AccessoriesDTO;
+import backend.com.example.backendcs3360.dto.ClothesDTO;
 import jakarta.persistence.*;
 
 //@Entity
@@ -58,6 +60,18 @@ public class Accessories extends Item {
                 ", material='" + material + '\'' +
                 ", weight=" + weight +
                 '}';
-    }    
+    }
+
+    public AccessoriesDTO convertToDTO() {
+        AccessoriesDTO newDTO = new AccessoriesDTO();
+        newDTO.setMaterial(this.getMaterial());
+        newDTO.setType(this.getType());
+        newDTO.setWeight(this.getWeight());
+        newDTO.setDescription(this.getDescription());
+        newDTO.setPrice(this.getPrice());
+        newDTO.setProductName(this.getProductName());
+        newDTO.setItem_id(this.getItem_id());
+        return newDTO;
+    }
 }
 
