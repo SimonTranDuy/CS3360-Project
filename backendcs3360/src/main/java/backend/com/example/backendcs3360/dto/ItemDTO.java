@@ -9,7 +9,7 @@ public abstract class ItemDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
-    private int item_id;
+    private int itemId;
     @Column(name = "product_name")
     private String productName;
     @Column(name = "price")
@@ -17,8 +17,8 @@ public abstract class ItemDTO {
     @Column(name = "description")
     private String description;
 
-    public ItemDTO(int item_id, String productName, double price, String description) {
-        this.item_id = item_id;
+    public ItemDTO(int itemId, String productName, double price, String description) {
+        this.itemId = itemId;
         this.productName = productName;
         this.price = price;
         this.description = description;
@@ -27,12 +27,12 @@ public abstract class ItemDTO {
     public ItemDTO() {
     }
 
-    public int getItem_id() {
-        return item_id;
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setItem_id(int item_id) {
-        this.item_id = item_id;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public String getProductName() {
@@ -62,7 +62,7 @@ public abstract class ItemDTO {
     @Override
     public String toString() {
         return "ItemDTO{" +
-                "item_id=" + item_id +
+                "itemId=" + itemId +
                 ", productName='" + productName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +

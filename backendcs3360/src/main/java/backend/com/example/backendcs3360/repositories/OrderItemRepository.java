@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface OrderItemRepository extends JpaRepository<OrderItemDTO, Integer> {
-    List<OrderItemDTO> findByCustomerIdAndDateOfPurchaseIsNull(int customerId);
-    List<OrderItemDTO> findByCustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(int customerId);
-    List<OrderItemDTO> findByCustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(int customerId);
+    List<OrderItemDTO> findByCustomer_CustomerIdAndDateOfPurchaseIsNull(int CustomerId);
+    List<OrderItemDTO> findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(int CustomerId);
+    List<OrderItemDTO> findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(int CustomerId);
 }

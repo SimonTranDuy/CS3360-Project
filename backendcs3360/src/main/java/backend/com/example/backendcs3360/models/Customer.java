@@ -8,9 +8,9 @@ public class Customer
 {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
-//    @Column(name = "customer_id") // To asign name of colume in database table corresponds to customer_id field
-    private int customer_id;
-//    @Column(name = "customer_name")
+//    @Column(name = "customerId") // To asign name of colume in database table corresponds to customerId field
+    private int customerId;
+//    @Column(name = "CustomerName")
     private String customerName;
 //    @Column(name = "phone_number", unique = true)
     private String phoneNumber;
@@ -20,32 +20,33 @@ public class Customer
     // Default constructor
     public Customer(){
     }
+    
     // Constructor with parameters
-    public Customer(int customer_id, String customerName, String phoneNumber, String address)
+    public Customer(int customerId, String customerName, String phoneNumber, String address)
     {
-        this.customer_id = customer_id;
+        this.customerId = customerId;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
 
     // Getter and setter
-    public int getCustomer_id()
+    public int getCustomerId()
     {
-        return customer_id;
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id)
+    public void setCustomerId(int customerId)
     {
-        this.customer_id = customer_id;
+        this.customerId = customerId;
     }
 
-    public String getCustomer_name()
+    public String getCustomerName()
     {
         return customerName;
     }
 
-    public void setCustomer_name(String customerName)
+    public void setCustomerName(String customerName)
     {
         this.customerName = customerName;
     }
@@ -74,7 +75,7 @@ public class Customer
     public String toString()
     {
         return "Customer{" + 
-        "customer_id=" + customer_id + 
+        "customer_id=" + customerId + 
         ", customerName='" + customerName + '\'' + 
         ", phoneNumber='" + phoneNumber + '\'' + 
         ", address='" + address + '\'' +

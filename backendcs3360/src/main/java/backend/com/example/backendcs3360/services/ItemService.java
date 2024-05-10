@@ -40,7 +40,7 @@ public class ItemService {
 
     public AccessoriesDTO insertNewAccessories(Accessories newAccessories) {
         AccessoriesDTO newDTO = newAccessories.convertToDTO();
-        newDTO.setItem_id(1);
+        newDTO.setItemId(1);
         return accessoriesRepository.save(newDTO);
     }
 
