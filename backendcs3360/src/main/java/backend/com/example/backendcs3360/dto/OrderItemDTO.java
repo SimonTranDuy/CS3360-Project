@@ -29,6 +29,9 @@ public class OrderItemDTO {
     @Column(name = "date_of_purchase")
     private Date date_of_purchase;
 
+    public OrderItemDTO() {
+    }
+
     public OrderItemDTO(int list_of_items_id, CustomerDTO customer, ItemDTO item, int quantity, String order_code,
             Date date_of_purchase) {
         this.list_of_items_id = list_of_items_id;

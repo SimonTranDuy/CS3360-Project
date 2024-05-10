@@ -10,6 +10,9 @@ public class OrderItem {
     private String order_code;
     private Date date_of_purchase;
 
+    public OrderItem() {
+    }
+
     public OrderItem(int list_of_items_id, Customer customer, Item item, int quantity, String order_code, Date date_of_purchase) {
         this.list_of_items_id = list_of_items_id;
         this.customer = customer;
