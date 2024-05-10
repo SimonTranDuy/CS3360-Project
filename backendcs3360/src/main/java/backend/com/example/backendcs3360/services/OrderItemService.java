@@ -4,7 +4,6 @@ import backend.com.example.backendcs3360.dto.ItemDTO;
 import backend.com.example.backendcs3360.dto.OrderItemDTO;
 
 import backend.com.example.backendcs3360.repositories.OrderItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,7 +14,6 @@ import java.util.UUID;
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
 
-    @Autowired
     public OrderItemService(OrderItemRepository orderItemRepository) {
         this.orderItemRepository = orderItemRepository;
     }

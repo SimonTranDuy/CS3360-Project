@@ -8,18 +8,15 @@ import backend.com.example.backendcs3360.models.Clothes;
 import backend.com.example.backendcs3360.repositories.AccessoriesRepository;
 import backend.com.example.backendcs3360.repositories.ClothesRepository;
 import backend.com.example.backendcs3360.repositories.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ItemService {
-    private ItemRepository itemRepository;
-    private ClothesRepository clothesRepository;
-    private AccessoriesRepository accessoriesRepository;
-
-    @Autowired
+    private final ItemRepository itemRepository;
+    private final ClothesRepository clothesRepository;
+    private final AccessoriesRepository accessoriesRepository;
 
     public ItemService(ItemRepository itemRepository, ClothesRepository clothesRepository,
         AccessoriesRepository accessoriesRepository) {
