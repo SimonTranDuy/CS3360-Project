@@ -4,35 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d006817-8652-4656-94f5-9afeda0fa129" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/controllers/ItemController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/dto/AccessoriesDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/dto/ClothesDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/dto/CustomerDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/dto/ItemDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/dto/ListOfItemsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/ListOfItemsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/services/ItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/Backendcs3360Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/Backendcs3360Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/AccessoriesDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/AccessoriesDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/ClothesDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/ClothesDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/CustomerDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/CustomerDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/ItemDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/ItemDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/OrderItemDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/databases/OrderItemDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Accessories.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Accessories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Clothes.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Clothes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/Order.java" afterDir="false" />
+    <list default="true" id="1d006817-8652-4656-94f5-9afeda0fa129" name="Changes" comment="update 09-05-2024 basic Item flows added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/controllers/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/controllers/ItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/dto/ItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/dto/ItemDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/models/OrderItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/AccessoriesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/AccessoriesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/CartReporitory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/ClothesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/ClothesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/CustomerRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/ItemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/repositories/OrderItemRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/services/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/services/ItemService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +71,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;test__branch&quot;,
     &quot;last_opened_file_path&quot;: &quot;F:/napas-practice/springBootPractice/newdemo/demo&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
   }
 }</component>
@@ -133,7 +112,31 @@
       <option name="project" value="LOCAL" />
       <updated>1714660218505</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update 06-05-2024 DTOs added">
+      <option name="closed" value="true" />
+      <created>1715006859211</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715006859211</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update 09-05-2024 basic Item flows added">
+      <option name="closed" value="true" />
+      <created>1715269466783</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715269466783</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update 09-05-2024 basic Item flows added">
+      <option name="closed" value="true" />
+      <created>1715269580168</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715269580168</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,6 +152,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="update 06-05-2024 DTOs added" />
+    <MESSAGE value="update 09-05-2024 basic Item flows added" />
+    <option name="LAST_COMMIT_MESSAGE" value="update 09-05-2024 basic Item flows added" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backendcs3360/src/main/java/backend/com/example/backendcs3360/controllers/ItemController.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="backend.com.example.backendcs3360.services.ItemService" memberName="itemRepository" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

@@ -19,6 +19,7 @@ public class ItemService {
     private ItemRepository itemRepository;
     private ClothesRepository clothesRepository;
     private AccessoriesRepository accessoriesRepository;
+    @Autowired
 
     public ItemService(ItemRepository itemRepository, ClothesRepository clothesRepository, AccessoriesRepository accessoriesRepository) {
         this.itemRepository = itemRepository;
@@ -26,7 +27,7 @@ public class ItemService {
         this.accessoriesRepository = accessoriesRepository;
     }
 
-    @Autowired
+
 
     public List<ItemDTO> getAllItems(){
         List<ItemDTO> itemFromDB = itemRepository.findAll();
@@ -41,9 +42,16 @@ public class ItemService {
     }
     public AccessoriesDTO insertNewAccessories(Accessories newAccessories){
         AccessoriesDTO newDTO = newAccessories.convertToDTO();
+        newDTO.setItem_id(1);
         return accessoriesRepository.save(newDTO);
     }
     public List<ItemDTO> getByName(String productName){
         return itemRepository.findByProductNameContainingIgnoreCase(productName);
+    }
+    public List<ItemDTO> getAllItemsByPriceAsc(){
+        return itemRepository.findByOrderByPriceAsc();
+    }
+    public List<ItemDTO> getAllItemsByPriceDesc(){
+        return itemRepository.findByOrderByPriceDesc();
     }
 }

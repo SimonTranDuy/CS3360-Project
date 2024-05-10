@@ -37,6 +37,21 @@ public class ItemController {
                 new ResponseObject("success", "Query product successfully", productList)
         );
     }
+    @CrossOrigin
+    @GetMapping("/get-all-asc")
+    public ResponseEntity<ResponseObject> getAllProductsByPriceAsc() {
+        List<ItemDTO> productList =  itemService.getAllItemsByPriceAsc();
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("success", "Query product successfully", productList)
+        );
+    }
+    @GetMapping("/get-all-desc")
+    public ResponseEntity<ResponseObject> getAllProductsByPriceDesc() {
+        List<ItemDTO> productList =  itemService.getAllItemsByPriceDesc();
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("success", "Query product successfully", productList)
+        );
+    }
 
     @PostMapping("/post-accessories")
     public ResponseEntity<ResponseObject> postNewAccessories(@RequestBody Accessories item){
@@ -52,4 +67,5 @@ public class ItemController {
                 new ResponseObject("success", "Insert new product successfully", null)
         );
     }
+
 }

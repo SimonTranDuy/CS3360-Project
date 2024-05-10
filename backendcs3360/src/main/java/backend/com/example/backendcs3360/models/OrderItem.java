@@ -12,6 +12,7 @@ public class OrderItem {
     private double total;
     private int order_id;
 
+
     public OrderItem(Item item, int quantity, double total, int order_id) {
         this.item = item;
         this.quantity = quantity;
