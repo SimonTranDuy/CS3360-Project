@@ -23,7 +23,7 @@ public class OrderItemDTO {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "orderCode")
+    @Column(name = "order_code")
     private String orderCode;
 
     @Column(name = "date_of_purchase")
