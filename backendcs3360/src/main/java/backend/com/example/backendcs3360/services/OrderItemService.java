@@ -1,6 +1,5 @@
 package backend.com.example.backendcs3360.services;
 
-import backend.com.example.backendcs3360.dto.ItemDTO;
 import backend.com.example.backendcs3360.dto.OrderItemDTO;
 
 import backend.com.example.backendcs3360.repositories.OrderItemRepository;
@@ -18,22 +17,33 @@ public class OrderItemService {
         this.orderItemRepository = orderItemRepository;
     }
 
-    // Add an item to the cart
-    public OrderItemDTO addItemToCart(int customerId, ItemDTO newItem) {
+    public OrderItemDTO addItemToCart(int customerId, OrderItemDTO newOrderItem) {
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
         OrderItemDTO orderItem = new OrderItemDTO();
         // If the cart is empty, generate a unique order code for the new item.
         if (cartItems.isEmpty()) {
             orderItem.setOrderCode(generateUniqueOrderCode());
-
         // If the cart is not empty, set the order code to the order code of the first item in the cart.
         } else {
             orderItem.setOrderCode(cartItems.get(0).getOrderCode());
         }
-
+    
         // Set the customer ID and quantity of the new item.
-        orderItem.setItem(newItem);
+        orderItem.setItem(newOrderItem.getItem());
+        orderItem.setQuantity(1); // Set quantity to 1
         return orderItemRepository.save(orderItem);
+    }
+    
+    public OrderItemDTO updateItemQuantity(int customerId, int itemId, int newQuantity) {
+        // Find the item in the cart
+        OrderItemDTO orderItem = orderItemRepository.findByCustomer_CustomerIdAndItem_ItemIdAndDateOfPurchaseIsNull(customerId, itemId);
+        if (orderItem != null) {
+            // Update the quantity of the item
+            orderItem.setQuantity(newQuantity);
+            return orderItemRepository.save(orderItem);
+        } else {
+            throw new RuntimeException("Item not found in cart");
+        }
     }
 
     // Checkout the cart to purchase the items
