@@ -89,4 +89,5 @@ Table list_of_items {
     <li>02/05/2024: Init project</li>
     <li>05/05/2024: Đã xong models, đang làm repositories</li>
     <li>09/05/2024: Đã dựng xong cơ bản của luồng liên quan đến Item, thiếu các luồng findby...</li>
+    <li>11/06/2024: Xong services + controller, check? </li>
 </ul>
