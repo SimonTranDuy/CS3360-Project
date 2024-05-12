@@ -30,7 +30,7 @@ public class OrderItemService {
         this.customerRepository = customerRepository;
         this.itemRepository = itemRepository;
     }
-
+    // TODO: VALIDATE ITEM DA CO TRONG CART -> QUANTITY += 1
     public OrderItemDTO addItemToCart(int customerId, int itemId) {
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
         OrderItemDTO orderItem = new OrderItemDTO();
@@ -52,6 +52,8 @@ public class OrderItemService {
         orderItem.setQuantity(1); // Set quantity to 1
         return orderItemRepository.save(orderItem);
     }
+
+    // TODO: FIX ERROR
     @Transactional
     public OrderItemDTO updateItemQuantity(OrderItemDTO newOrderItem, int customerId, int itemId) {
         OrderItemDTO orderItem = orderItemRepository
@@ -83,7 +85,7 @@ public class OrderItemService {
     private String generateUniqueOrderCode() {
         return UUID.randomUUID().toString();
     }
-
+    //TODO: XOA THEO CUSTOMER ID VA ITEM ID VA DATE == NULL
     // Remove an item from the cart
     public void removeItemFromCart(int customerId, String order_code) {
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
@@ -128,5 +130,8 @@ public class OrderItemService {
 //        return orderItemRepository.findByCustomer_CustomerId(customerId);
 //
 //    }
+    //TODO: viet ham tra ve cac items trong Cart (UU TIEN LAM TRUOC)
 
 }
+
+// TODO: THEM CONFIG VAO README
