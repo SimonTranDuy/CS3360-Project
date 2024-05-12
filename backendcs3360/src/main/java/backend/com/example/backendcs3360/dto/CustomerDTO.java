@@ -8,9 +8,9 @@ import jakarta.persistence.*;
 public class CustomerDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
-    @Column(name = "customer_id") // To asign name of colume in database table corresponds to customer_id field
+    @Column(name = "customerId") // To asign name of colume in database table corresponds to customer_id field
     private int customerId;
-    @Column(name = "customer_name")
+    @Column(name = "customerName")
     private String customerName;
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
@@ -62,7 +62,7 @@ public class CustomerDTO {
     @Override
     public String toString() {
         return "CustomerDTO{" +
-                "customer_id=" + customerId +
+                "customerId=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +

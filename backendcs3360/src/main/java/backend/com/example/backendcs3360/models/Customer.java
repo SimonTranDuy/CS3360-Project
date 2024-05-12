@@ -75,7 +75,7 @@ public class Customer
     public String toString()
     {
         return "Customer{" + 
-        "customer_id=" + customerId + 
+        "customerId=" + customerId + 
         ", customerName='" + customerName + '\'' + 
         ", phoneNumber='" + phoneNumber + '\'' + 
         ", address='" + address + '\'' +
