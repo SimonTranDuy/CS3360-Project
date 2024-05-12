@@ -18,18 +18,18 @@ public class OrderItemController {
         this.orderItemService = orderItemService;
     }
 
-    @PostMapping("/add/{customerId}")
-    public ResponseEntity<ResponseObject> addItemToCart(@PathVariable int customerId, @RequestBody OrderItemDTO newOrderItem) {
-        OrderItemDTO orderItem = orderItemService.addItemToCart(customerId, newOrderItem);
+    @PostMapping("/add/{customerId}/{itemId}")
+    public ResponseEntity<ResponseObject> addItemToCart(@PathVariable int customerId, @PathVariable int itemId) {
+        OrderItemDTO orderItem = orderItemService.addItemToCart(customerId, itemId);
         return ResponseEntity.status(HttpStatus.OK).body(
             new ResponseObject("success", "Add Item to Cart successfully", orderItem));
     }
 
-    @PutMapping("/{customerId}/{itemId}")
-    public ResponseEntity<ResponseObject> updateItemQuantity(@PathVariable int customerId, @PathVariable int itemId, @RequestParam int quantity) {
-        OrderItemDTO updatedItem = orderItemService.updateItemQuantity(customerId, itemId, quantity);
+    @PutMapping("change-quantity/{customerId}/{itemId}")
+    public ResponseEntity<ResponseObject> updateItemQuantity(@RequestBody OrderItemDTO newOrderItem, @PathVariable int customerId, @PathVariable int itemId) {
+        OrderItemDTO updatedItem = orderItemService.updateItemQuantity(newOrderItem, customerId, itemId);
         return ResponseEntity.status(HttpStatus.OK).body(
-            new ResponseObject("success", "Add Item to Cart successfully", updatedItem));
+            new ResponseObject("success", "Update Item to Cart successfully", updatedItem));
     }
 
     @PostMapping("/checkout/{customerId}")

@@ -1,8 +1,13 @@
 package backend.com.example.backendcs3360.services;
 
 import backend.com.example.backendcs3360.dto.OrderItemDTO;
+import backend.com.example.backendcs3360.dto.ItemDTO;
+import backend.com.example.backendcs3360.dto.CustomerDTO;
 
+import backend.com.example.backendcs3360.repositories.CustomerRepository;
+import backend.com.example.backendcs3360.repositories.ItemRepository;
 import backend.com.example.backendcs3360.repositories.OrderItemRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,34 +17,45 @@ import java.util.UUID;
 @Service
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
+    private final CustomerRepository customerRepository;
+    private final ItemRepository itemRepository;
 
-    public OrderItemService(OrderItemRepository orderItemRepository) {
+    public OrderItemService(OrderItemRepository orderItemRepository, CustomerRepository customerRepository,
+            ItemRepository itemRepository) {
         this.orderItemRepository = orderItemRepository;
+        this.customerRepository = customerRepository;
+        this.itemRepository = itemRepository;
     }
 
-    public OrderItemDTO addItemToCart(int customerId, OrderItemDTO newOrderItem) {
+    public OrderItemDTO addItemToCart(int customerId, int itemId) {
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
         OrderItemDTO orderItem = new OrderItemDTO();
         // If the cart is empty, generate a unique order code for the new item.
         if (cartItems.isEmpty()) {
             orderItem.setOrderCode(generateUniqueOrderCode());
-        // If the cart is not empty, set the order code to the order code of the first item in the cart.
+            // If the cart is not empty, set the order code to the order code of the first
+            // item in the cart.
         } else {
             orderItem.setOrderCode(cartItems.get(0).getOrderCode());
         }
-    
-        // Set the customer ID and quantity of the new item.
-        orderItem.setItem(newOrderItem.getItem());
+
+        // Set the customer and item of the new order item.
+        CustomerDTO customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        ItemDTO item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found"));
+        orderItem.setCustomer(customer);
+        orderItem.setItem(item);
         orderItem.setQuantity(1); // Set quantity to 1
         return orderItemRepository.save(orderItem);
     }
-    
-    public OrderItemDTO updateItemQuantity(int customerId, int itemId, int newQuantity) {
-        // Find the item in the cart
-        OrderItemDTO orderItem = orderItemRepository.findByCustomer_CustomerIdAndItem_ItemIdAndDateOfPurchaseIsNull(customerId, itemId);
+
+    public OrderItemDTO updateItemQuantity(OrderItemDTO newOrderItem, int customerId, int itemId) {
+        OrderItemDTO orderItem = orderItemRepository
+                .findByCustomer_CustomerIdAndItem_ItemIdAndDateOfPurchaseIsNull(customerId, itemId);
         if (orderItem != null) {
             // Update the quantity of the item
-            orderItem.setQuantity(newQuantity);
+            
+            orderItem.setQuantity(newOrderItem.getQuantity());
             return orderItemRepository.save(orderItem);
         } else {
             throw new RuntimeException("Item not found in cart");
@@ -49,7 +65,8 @@ public class OrderItemService {
     // Checkout the cart to purchase the items
     public void checkout(int customerId) {
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
-        // If the cart is not empty, set the date of purchase to the current date and save the order items.
+        // If the cart is not empty, set the date of purchase to the current date and
+        // save the order items.
         if (!cartItems.isEmpty()) {
             for (OrderItemDTO orderItem : cartItems) {
                 orderItem.setDateOfPurchase(new Date());
@@ -75,11 +92,13 @@ public class OrderItemService {
     }
 
     public List<OrderItemDTO> getPurchaseHistoryDesc(int customerId) {
-        return orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
+        return orderItemRepository
+                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
     }
 
     public List<OrderItemDTO> getPurchaseHistoryAsc(int customerId) {
-        return orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(customerId);
+        return orderItemRepository
+                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(customerId);
     }
 
 }
