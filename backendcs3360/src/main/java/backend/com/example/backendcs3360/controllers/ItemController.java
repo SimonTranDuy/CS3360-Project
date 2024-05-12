@@ -65,5 +65,12 @@ public class ItemController {
                 new ResponseObject("success", "Insert new product successfully", null)
         );
     }
+    @DeleteMapping("/delete/{itemId}")
+    public ResponseEntity<ResponseObject> deleteItem(@PathVariable int itemId){
+        itemService.deleteItemById(itemId);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("success", "Insert new product successfully", null)
+        );
+    }
 
 }
