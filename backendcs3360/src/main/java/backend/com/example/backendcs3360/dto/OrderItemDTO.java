@@ -1,5 +1,6 @@
 package backend.com.example.backendcs3360.dto;
 
+import backend.com.example.backendcs3360.models.OrderItem;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -99,5 +100,15 @@ public class OrderItemDTO {
                 ", order_code='" + orderCode + '\'' +
                 ", order_date='" + dateOfPurchase + '\'' +
                 '}';
+    }
+    public OrderItem convertToOrderItems(){
+        OrderItem newOrderItem = new OrderItem();
+        newOrderItem.setCustomer(this.convertToOrderItems().getCustomer());
+        newOrderItem.setOrderCode(this.getOrderCode());
+        newOrderItem.setListOfItemsId(this.getListOfItemsId());
+        newOrderItem.setQuantity(this.getQuantity());
+        newOrderItem.setItem(this.convertToOrderItems().getItem());
+        newOrderItem.setDateOfPurchase(this.getDateOfPurchase());
+        return newOrderItem;
     }
 }

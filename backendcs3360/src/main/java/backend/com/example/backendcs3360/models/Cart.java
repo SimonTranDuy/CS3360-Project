@@ -27,11 +27,11 @@ public class Cart {
         this.dateOfPurchase = dateOfPurchase;
     }
 
-    public int getCardId() {
+    public int getCartId() {
         return cartId;
     }
 
-    public void setCardId(int cartId) {
+    public void setCartId(int cartId) {
         this.cartId = cartId;
     }
 

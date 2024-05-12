@@ -1,6 +1,7 @@
 package backend.com.example.backendcs3360.controllers;
 
 import backend.com.example.backendcs3360.dto.OrderItemDTO;
+import backend.com.example.backendcs3360.models.Cart;
 import backend.com.example.backendcs3360.models.ResponseObject;
 import backend.com.example.backendcs3360.services.OrderItemService;
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,7 @@ public class OrderItemController {
 
     @GetMapping("/historyDesc/{customerId}")
     public ResponseEntity<ResponseObject> getPurchaseHistoryDesc(@PathVariable int customerId) {
-        List<OrderItemDTO> purchaseHistory = orderItemService.getPurchaseHistoryDesc(customerId);
+        Cart purchaseHistory = orderItemService.getPurchaseHistoryDesc(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("success", "See History successfully", purchaseHistory));
     }

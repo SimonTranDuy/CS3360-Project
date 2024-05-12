@@ -4,6 +4,8 @@ import backend.com.example.backendcs3360.dto.OrderItemDTO;
 import backend.com.example.backendcs3360.dto.ItemDTO;
 import backend.com.example.backendcs3360.dto.CustomerDTO;
 
+import backend.com.example.backendcs3360.models.Cart;
+import backend.com.example.backendcs3360.models.OrderItem;
 import backend.com.example.backendcs3360.repositories.CustomerRepository;
 import backend.com.example.backendcs3360.repositories.ItemRepository;
 import backend.com.example.backendcs3360.repositories.OrderItemRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderItemService {
@@ -91,10 +94,28 @@ public class OrderItemService {
         }
     }
 
-    public List<OrderItemDTO> getPurchaseHistoryDesc(int customerId) {
-        return orderItemRepository
-                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
-    }
+//    public List<OrderItemDTO> getPurchaseHistoryDesc(int customerId) {
+//        return orderItemRepository
+//                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
+//    }
+    public Cart getPurchaseHistoryDesc(int customerId) {
+    List<OrderItem> lists = orderItemRepository
+            .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId)
+            .stream()
+            .map(OrderItemDTO::convertToOrderItems)
+            .collect(Collectors.toList());
+        double total = lists.stream()
+                .mapToDouble(orderItem -> orderItem.getQuantity() * orderItem.getItem().getPrice())
+                .sum();
+    int customerID = lists.get(0).getCustomer().getCustomerId();
+    String phoneNumber = lists.get(0).getCustomer().getPhoneNumber();
+    Cart newCart = new Cart();
+    newCart.setOrderItems(lists);
+    newCart.setPhoneNumber(phoneNumber);
+    newCart.setTotal(total);
+
+    return newCart;
+}
 
     public List<OrderItemDTO> getPurchaseHistoryAsc(int customerId) {
         return orderItemRepository
