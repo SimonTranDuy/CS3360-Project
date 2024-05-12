@@ -50,7 +50,7 @@ public class OrderItemController {
 
     @GetMapping("/historyDesc/{customerId}")
     public ResponseEntity<ResponseObject> getPurchaseHistoryDesc(@PathVariable int customerId) {
-        Cart purchaseHistory = orderItemService.getPurchaseHistoryDesc(customerId);
+        List<OrderItemDTO> purchaseHistory = orderItemService.getPurchaseHistoryDesc(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("success", "See History successfully", purchaseHistory));
     }

@@ -10,6 +10,7 @@ import backend.com.example.backendcs3360.repositories.CustomerRepository;
 import backend.com.example.backendcs3360.repositories.ItemRepository;
 import backend.com.example.backendcs3360.repositories.OrderItemRepository;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -51,7 +52,7 @@ public class OrderItemService {
         orderItem.setQuantity(1); // Set quantity to 1
         return orderItemRepository.save(orderItem);
     }
-
+    @Transactional
     public OrderItemDTO updateItemQuantity(OrderItemDTO newOrderItem, int customerId, int itemId) {
         OrderItemDTO orderItem = orderItemRepository
                 .findByCustomer_CustomerIdAndItem_ItemIdAndDateOfPurchaseIsNull(customerId, itemId);
@@ -64,7 +65,7 @@ public class OrderItemService {
             throw new RuntimeException("Item not found in cart");
         }
     }
-
+    @Transactional
     // Checkout the cart to purchase the items
     public void checkout(int customerId) {
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
@@ -93,33 +94,39 @@ public class OrderItemService {
             }
         }
     }
-
-//    public List<OrderItemDTO> getPurchaseHistoryDesc(int customerId) {
-//        return orderItemRepository
-//                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
-//    }
-    public Cart getPurchaseHistoryDesc(int customerId) {
-    List<OrderItem> lists = orderItemRepository
-            .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId)
-            .stream()
-            .map(OrderItemDTO::convertToOrderItems)
-            .collect(Collectors.toList());
-        double total = lists.stream()
-                .mapToDouble(orderItem -> orderItem.getQuantity() * orderItem.getItem().getPrice())
-                .sum();
-    int customerID = lists.get(0).getCustomer().getCustomerId();
-    String phoneNumber = lists.get(0).getCustomer().getPhoneNumber();
-    Cart newCart = new Cart();
-    newCart.setOrderItems(lists);
-    newCart.setPhoneNumber(phoneNumber);
-    newCart.setTotal(total);
-
-    return newCart;
-}
-
+//TODO: sua cac ham history de tra ve Cart
+    public List<OrderItemDTO> getPurchaseHistoryDesc(int customerId) {
+        return orderItemRepository
+                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
+    }
+//    @Transactional
+//    public Cart getPurchaseHistoryDesc(int customerId) {
+//    List<OrderItem> lists = orderItemRepository
+//            .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId)
+//            .stream()
+//            .map(OrderItemDTO::convertToOrderItems)
+//            .collect(Collectors.toList());
+//        double total = lists.stream()
+//                .mapToDouble(orderItem -> orderItem.getQuantity() * orderItem.getItem().getPrice())
+//                .sum();
+//    int customerID = lists.get(0).getCustomer().getCustomerId();
+//    String phoneNumber = lists.get(0).getCustomer().getPhoneNumber();
+//    Cart newCart = new Cart();
+//    newCart.setOrderItems(lists);
+//    newCart.setPhoneNumber(phoneNumber);
+//    newCart.setTotal(total);
+//
+//    return newCart;
+//}
+    @Transactional
     public List<OrderItemDTO> getPurchaseHistoryAsc(int customerId) {
         return orderItemRepository
                 .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(customerId);
     }
+//    @Transactional
+//    public List<OrderItemDTO> getPurchaseHistoryAsc(int customerId) {
+//        return orderItemRepository.findByCustomer_CustomerId(customerId);
+//
+//    }
 
 }

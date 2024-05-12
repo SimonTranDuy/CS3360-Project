@@ -13,11 +13,11 @@ public class OrderItemDTO {
     @Column(name = "list_of_items_id")
     private int listOfItemsId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private CustomerDTO customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
     private ItemDTO item;
 

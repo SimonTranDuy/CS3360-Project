@@ -10,4 +10,5 @@ public interface OrderItemRepository extends JpaRepository<OrderItemDTO, Integer
     OrderItemDTO findByCustomer_CustomerIdAndItem_ItemIdAndDateOfPurchaseIsNull(int CustomerId, int ItemId);
     List<OrderItemDTO> findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(int CustomerId);
     List<OrderItemDTO> findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(int CustomerId);
+    List<OrderItemDTO> findByCustomer_CustomerId(int customerId);
 }

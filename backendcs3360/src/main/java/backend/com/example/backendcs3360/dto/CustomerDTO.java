@@ -3,6 +3,8 @@ package backend.com.example.backendcs3360.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 // To assign name of database table corresponds to class Customer
 @Table(name = "customers")
@@ -18,6 +20,9 @@ public class CustomerDTO {
     private String phoneNumber;
     @Column(name = "address")
     private String address;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<OrderItemDTO> orderItems;
 
     public CustomerDTO() {
     }
