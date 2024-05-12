@@ -101,14 +101,37 @@ public class OrderItemDTO {
                 ", order_date='" + dateOfPurchase + '\'' +
                 '}';
     }
-    public OrderItem convertToOrderItems(){
-        OrderItem newOrderItem = new OrderItem();
-        newOrderItem.setCustomer(this.convertToOrderItems().getCustomer());
-        newOrderItem.setOrderCode(this.getOrderCode());
-        newOrderItem.setListOfItemsId(this.getListOfItemsId());
-        newOrderItem.setQuantity(this.getQuantity());
-        newOrderItem.setItem(this.convertToOrderItems().getItem());
-        newOrderItem.setDateOfPurchase(this.getDateOfPurchase());
-        return newOrderItem;
+
+    // public OrderItem convertToOrderItems() {
+    //     OrderItem orderItem = new OrderItem();
+    //     orderItem.setListOfItemsId(this.getListOfItemsId());
+    //     orderItem.setQuantity(this.getQuantity());
+    //     orderItem.setDateOfPurchase(this.getDateOfPurchase());
+    //     orderItem.setOrderCode(this.getOrderCode());
+    //     if (this.getCustomer() != null) {
+    //         orderItem.setCustomer(this.getCustomer().convertToCustomer());
+    //     }
+    //     if (this.getItem() != null) {
+    //         // Assuming OrderItem has a method setItem that accepts an Item object
+    //         // and ItemDTO has a method convertToItem that converts ItemDTO to Item
+    //         orderItem.setItem(this.getItem().convertToItem());
+    //     }
+    //     return orderItem;
+    // }
+
+    public OrderItem convertToOrderItems() {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setListOfItemsId(this.getListOfItemsId());
+        orderItem.setCustomer(this.getCustomer().convertToCustomerModel());
+        ItemDTO item = this.getItem();
+        if (item instanceof AccessoriesDTO) {
+            orderItem.setItem(((AccessoriesDTO) item).convertToAccessories());
+        } else if (item instanceof ClothesDTO) {
+            orderItem.setItem(((ClothesDTO) item).convertToClothes());
+        }
+        orderItem.setQuantity(this.getQuantity());
+        orderItem.setOrderCode(this.getOrderCode());
+        orderItem.setDateOfPurchase(this.getDateOfPurchase());
+        return orderItem;
     }
 }

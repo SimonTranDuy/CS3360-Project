@@ -90,4 +90,24 @@ Table list_of_items {
     <li>05/05/2024: Đã xong models, đang làm repositories</li>
     <li>09/05/2024: Đã dựng xong cơ bản của luồng liên quan đến Item, thiếu các luồng findby...</li>
     <li>11/06/2024: Xong services + controller, check? </li>
+    <li> 12/05/2024: Đã xong toàn bộ backend, cần xem lại customer</li>
 </ul>
+
+<h1>CONFIG SQL</h1>
+
+```
+spring.application.name=demo
+spring.jpa.hibernate.ddl-auto=update
+
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.datasource.url=jdbc:mysql://localhost:3306/your_schema
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+#allow table's name like tblProduct (allow creating customized table name)
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.open-in-view=false
+spring.jpa.properties.hibernate.transaction.jta.platform=org.hibernate.engine.transaction.jta.platform.internal.AtomikosJtaPlatform
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```

@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import backend.com.example.backendcs3360.models.Accessories;
+
 @Entity
 @Table(name = "accessories")
 public class AccessoriesDTO extends ItemDTO{
@@ -45,5 +47,17 @@ public class AccessoriesDTO extends ItemDTO{
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public Accessories convertToAccessories() {
+        Accessories newItem = new Accessories();
+        newItem.setItemId(this.getItemId());
+        newItem.setDescription(this.getDescription());
+        newItem.setPrice(this.getPrice());
+        newItem.setProductName(this.getProductName());
+        newItem.setType(this.getType());
+        newItem.setMaterial(this.getMaterial());
+        newItem.setWeight(this.getWeight());
+        return newItem;
     }
 }

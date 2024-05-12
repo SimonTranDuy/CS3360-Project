@@ -1,14 +1,14 @@
 package backend.com.example.backendcs3360.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import backend.com.example.backendcs3360.models.Customer;
 
 import java.util.List;
 
 @Entity
 // To assign name of database table corresponds to class Customer
 @Table(name = "customers")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CustomerDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
@@ -78,10 +78,19 @@ public class CustomerDTO {
 
     public CustomerDTO convertToCustomer(){
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setCustomerId(this.customerId);
+        customerDTO.setCustomerId(this.getCustomerId());
         customerDTO.setCustomerName(this.getCustomerName());
         customerDTO.setAddress(this.getAddress());
         customerDTO.setPhoneNumber(this.getPhoneNumber());
         return customerDTO;
+    }
+
+    public Customer convertToCustomerModel(){
+        Customer customer = new Customer();
+        customer.setCustomerId(this.getCustomerId());
+        customer.setCustomerName(this.getCustomerName());
+        customer.setAddress(this.getAddress());
+        customer.setPhoneNumber(this.getPhoneNumber());
+        return customer;
     }
 }

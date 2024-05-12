@@ -38,6 +38,7 @@ public class ClothesDTO extends ItemDTO{
     public void setSize(String size) {
         this.size = size;
     }
+    
     public Clothes convertToClothes  (){
         Clothes newItem = new Clothes();
         newItem.setItemId(this.getItemId());
@@ -48,6 +49,4 @@ public class ClothesDTO extends ItemDTO{
         newItem.setProductName(this.getProductName());
         return newItem;
     }
-
-
 }

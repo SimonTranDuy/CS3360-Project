@@ -30,43 +30,57 @@ public class OrderItemService {
         this.customerRepository = customerRepository;
         this.itemRepository = itemRepository;
     }
-    // TODO: VALIDATE ITEM DA CO TRONG CART -> QUANTITY += 1
+
+    @Transactional
     public OrderItemDTO addItemToCart(int customerId, int itemId) {
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
-        OrderItemDTO orderItem = new OrderItemDTO();
-        // If the cart is empty, generate a unique order code for the new item.
-        if (cartItems.isEmpty()) {
-            orderItem.setOrderCode(generateUniqueOrderCode());
-            // If the cart is not empty, set the order code to the order code of the first
-            // item in the cart.
-        } else {
-            orderItem.setOrderCode(cartItems.get(0).getOrderCode());
+        OrderItemDTO orderItem = null;
+
+        // Check if the item already exists in the cart
+        for (OrderItemDTO cartItem : cartItems) {
+            if (cartItem.getItem().getItemId() == itemId) {
+                orderItem = cartItem;
+                break;
+            }
         }
 
-        // Set the customer and item of the new order item.
-        CustomerDTO customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-        ItemDTO item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found"));
-        orderItem.setCustomer(customer);
-        orderItem.setItem(item);
-        orderItem.setQuantity(1); // Set quantity to 1
+        // If the item exists in the cart, increase its quantity by 1
+        if (orderItem != null) {
+            orderItem.setQuantity(orderItem.getQuantity() + 1);
+        } else {
+            // If the item does not exist in the cart, create a new order item
+            orderItem = new OrderItemDTO();
+            if (cartItems.isEmpty()) {
+                orderItem.setOrderCode(generateUniqueOrderCode());
+            } else {
+                orderItem.setOrderCode(cartItems.get(0).getOrderCode());
+            }
+
+            CustomerDTO customer = customerRepository.findById(customerId)
+                    .orElseThrow(() -> new RuntimeException("Customer not found"));
+            ItemDTO item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found"));
+            orderItem.setCustomer(customer);
+            orderItem.setItem(item);
+            orderItem.setQuantity(1);
+        }
+
         return orderItemRepository.save(orderItem);
     }
 
-    // TODO: FIX ERROR
     @Transactional
     public OrderItemDTO updateItemQuantity(OrderItemDTO newOrderItem, int customerId, int itemId) {
         OrderItemDTO orderItem = orderItemRepository
                 .findByCustomer_CustomerIdAndItem_ItemIdAndDateOfPurchaseIsNull(customerId, itemId);
         if (orderItem != null) {
             // Update the quantity of the item
-            
+
             orderItem.setQuantity(newOrderItem.getQuantity());
             return orderItemRepository.save(orderItem);
         } else {
             throw new RuntimeException("Item not found in cart");
         }
     }
+
     @Transactional
     // Checkout the cart to purchase the items
     public void checkout(int customerId) {
@@ -85,53 +99,90 @@ public class OrderItemService {
     private String generateUniqueOrderCode() {
         return UUID.randomUUID().toString();
     }
-    //TODO: XOA THEO CUSTOMER ID VA ITEM ID VA DATE == NULL
+
     // Remove an item from the cart
-    public void removeItemFromCart(int customerId, String order_code) {
-        List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
-        for (OrderItemDTO orderItem : cartItems) {
-            if (orderItem.getOrderCode() == order_code) {
-                orderItemRepository.delete(orderItem);
-                break;
-            }
+    @Transactional
+    public void removeItemFromCart(int customerId, int itemId) {
+        OrderItemDTO orderItem = orderItemRepository
+                .findByCustomer_CustomerIdAndItem_ItemIdAndDateOfPurchaseIsNull(customerId, itemId);
+        if (orderItem != null) {
+            orderItemRepository.delete(orderItem);
+        } else {
+            throw new RuntimeException("Item not found in cart");
         }
     }
-//TODO: sua cac ham history de tra ve Cart
-    public List<OrderItemDTO> getPurchaseHistoryDesc(int customerId) {
-        return orderItemRepository
-                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
-    }
-//    @Transactional
-//    public Cart getPurchaseHistoryDesc(int customerId) {
-//    List<OrderItem> lists = orderItemRepository
-//            .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId)
-//            .stream()
-//            .map(OrderItemDTO::convertToOrderItems)
-//            .collect(Collectors.toList());
-//        double total = lists.stream()
-//                .mapToDouble(orderItem -> orderItem.getQuantity() * orderItem.getItem().getPrice())
-//                .sum();
-//    int customerID = lists.get(0).getCustomer().getCustomerId();
-//    String phoneNumber = lists.get(0).getCustomer().getPhoneNumber();
-//    Cart newCart = new Cart();
-//    newCart.setOrderItems(lists);
-//    newCart.setPhoneNumber(phoneNumber);
-//    newCart.setTotal(total);
-//
-//    return newCart;
-//}
-    @Transactional
-    public List<OrderItemDTO> getPurchaseHistoryAsc(int customerId) {
-        return orderItemRepository
-                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(customerId);
-    }
-//    @Transactional
-//    public List<OrderItemDTO> getPurchaseHistoryAsc(int customerId) {
-//        return orderItemRepository.findByCustomer_CustomerId(customerId);
-//
-//    }
-    //TODO: viet ham tra ve cac items trong Cart (UU TIEN LAM TRUOC)
 
+    @Transactional
+    public Cart getPurchaseHistoryDesc(int customerId) {
+        List<OrderItemDTO> itemsDTO = orderItemRepository
+                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseDesc(customerId);
+        List<OrderItem> items = itemsDTO.stream()
+                .map(OrderItemDTO::convertToOrderItems)
+                .collect(Collectors.toList());
+        double total = items.stream()
+                .mapToDouble(orderItem -> orderItem.getQuantity() * orderItem.getItem().getPrice())
+                .sum();
+        String phoneNumber = "";
+        if (!items.isEmpty()) {
+            phoneNumber = items.get(0).getCustomer().getPhoneNumber();
+        }
+        Cart cart = new Cart();
+        cart.setOrderItems(items);
+        cart.setPhoneNumber(phoneNumber);
+        cart.setTotal(total);
+
+        return cart;
+    }
+
+    @Transactional
+    public Cart getPurchaseHistoryAsc(int customerId) {
+        List<OrderItemDTO> itemsDTO = orderItemRepository
+                .findByCustomer_CustomerIdAndDateOfPurchaseIsNotNullOrderByDateOfPurchaseAsc(customerId);
+        List<OrderItem> items = itemsDTO.stream()
+                .map(OrderItemDTO::convertToOrderItems)
+                .collect(Collectors.toList());
+        double total = items.stream()
+                .mapToDouble(orderItem -> orderItem.getQuantity() * orderItem.getItem().getPrice())
+                .sum();
+        String phoneNumber = "";
+        if (!items.isEmpty()) {
+            phoneNumber = items.get(0).getCustomer().getPhoneNumber();
+        }
+        Cart cart = new Cart();
+        cart.setOrderItems(items);
+        cart.setPhoneNumber(phoneNumber);
+        cart.setTotal(total);
+
+        return cart;
+    }
+
+    @Transactional
+    public Cart getCartItems(int customerId) {
+        List<OrderItemDTO> itemsDTO = orderItemRepository
+                .findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
+        
+        // If itemsDTO is empty, return an empty Cart
+        if (itemsDTO.isEmpty()) {
+            return new Cart();
+        }
+    
+        List<OrderItem> items = itemsDTO.stream()
+                .map(OrderItemDTO::convertToOrderItems)
+                .collect(Collectors.toList());
+        double total = items.stream()
+                .mapToDouble(orderItem -> orderItem.getQuantity() * orderItem.getItem().getPrice())
+                .sum();
+        String phoneNumber = "";
+        if (!items.isEmpty()) {
+            phoneNumber = items.get(0).getCustomer().getPhoneNumber();
+        }
+        Cart cart = new Cart();
+        cart.setOrderItems(items);
+        cart.setPhoneNumber(phoneNumber);
+        cart.setTotal(total);
+    
+        return cart;
+    }
 }
 
 // TODO: THEM CONFIG VAO README
