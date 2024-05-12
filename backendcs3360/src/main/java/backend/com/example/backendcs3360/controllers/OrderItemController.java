@@ -1,6 +1,5 @@
 package backend.com.example.backendcs3360.controllers;
 
-import backend.com.example.backendcs3360.dto.ItemDTO;
 import backend.com.example.backendcs3360.dto.OrderItemDTO;
 import backend.com.example.backendcs3360.models.ResponseObject;
 import backend.com.example.backendcs3360.services.OrderItemService;
@@ -20,10 +19,17 @@ public class OrderItemController {
     }
 
     @PostMapping("/add/{customerId}")
-    public ResponseEntity<ResponseObject> addItemToCart(@PathVariable int customerId, @RequestBody ItemDTO newItem) {
-        OrderItemDTO orderItem = orderItemService.addItemToCart(customerId, newItem);
+    public ResponseEntity<ResponseObject> addItemToCart(@PathVariable int customerId, @RequestBody OrderItemDTO newOrderItem) {
+        OrderItemDTO orderItem = orderItemService.addItemToCart(customerId, newOrderItem);
         return ResponseEntity.status(HttpStatus.OK).body(
             new ResponseObject("success", "Add Item to Cart successfully", orderItem));
+    }
+
+    @PutMapping("/{customerId}/{itemId}")
+    public ResponseEntity<ResponseObject> updateItemQuantity(@PathVariable int customerId, @PathVariable int itemId, @RequestParam int quantity) {
+        OrderItemDTO updatedItem = orderItemService.updateItemQuantity(customerId, itemId, quantity);
+        return ResponseEntity.status(HttpStatus.OK).body(
+            new ResponseObject("success", "Add Item to Cart successfully", updatedItem));
     }
 
     @PostMapping("/checkout/{customerId}")
