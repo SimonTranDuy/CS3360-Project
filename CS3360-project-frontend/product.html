@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce</title>
+    <link rel="stylesheet" href="./style-desktop.css" />
+    <!-- UI Slider library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+    <script src="./js/function.js"></script>
+    <script src="./js/renderProduct.js"></script>
+  </head>
+  <body>
+    <!-- main content start -->
+    <section class="main-content">
+      <div class="products-filter-container">
+        <div class="input-search">
+          <label for="searchInput">Search Product:</label>
+          <input
+            type="text"
+            id="customer-name-input"
+            placeholder="Enter product name"
+          />
+          <button onclick="searchProducts()">Search</button>
+        </div>
+        <div class="user-info-container">
+          <label for="searchInput">Phone Number:</label>
+          <input
+            type="text"
+            id="customer-phoneNumber-input"
+            placeholder="Enter your phone number"
+          />
+          <label for="searchInput">Customer Name:</label>
+          <input
+            type="text"
+            id="customer-name-input"
+            placeholder="Enter your full name"
+          />
+          <label for="searchInput">Address</label>
+          <input
+            type="text"
+            id="customer-address-input"
+            placeholder="Enter your address"
+          />
+          <button onclick="postCustomerInfo()">Submit</button>
+        </div>
+        <div>
+          <button onclick="displayAscendingOrder()">Lowest To Highest</button>
+          <button onclick="displayDescendingOrder()">Highest To Lowest</button>
+        </div>
+      </div>
+      <!-- <div class="user-info-container">
+          <label for="nameInput">Name:</label>
+          <input type="text" id="nameInput" placeholder="Enter your name" />
+          <label for="phoneInput">Phone Number:</label>
+          <input type="tel" id="phoneInput" placeholder="Enter your phone number" pattern="[1-9]\d*" />
+        </div> -->
+
+      <div>
+        <h3>
+          Total items in the cart: <span id="number-of-items-in-cart"></span>
+        </h3>
+      </div>
+      <div>
+        <button><a href="./cart.html">To cart</a></button>
+      </div>
+      <div class="table-container" id="table-container">
+        <h2>Product List</h2>
+        <table id="product-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Brand</th>
+              <th>Size</th>
+              <th>Material</th>
+              <th>Weight</th>
+              <th>Quantity</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </section>
+    <!-- main content end -->
+    <!-- footer start -->
+  </body>
+</html>
