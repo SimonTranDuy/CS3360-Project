@@ -32,38 +32,34 @@ public class OrderItemService {
     }
 
     @Transactional
-    public OrderItemDTO addItemToCart(int customerId, int itemId) {
+    public OrderItemDTO addItemToCart(OrderItemDTO orderItemDTO) {
+        int customerId = orderItemDTO.getCustomer().getCustomerId();
+        int itemId = orderItemDTO.getItem().getItemId();
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
         OrderItemDTO orderItem = null;
-
+    
         // Check if the item already exists in the cart
         for (OrderItemDTO cartItem : cartItems) {
             if (cartItem.getItem().getItemId() == itemId) {
-                orderItem = cartItem;
-                break;
+                throw new RuntimeException("Item already exists in the cart");
             }
         }
-
-        // If the item exists in the cart, increase its quantity by 1
-        if (orderItem != null) {
-            orderItem.setQuantity(orderItem.getQuantity() + 1);
+    
+        // If the item does not exist in the cart, create a new order item
+        orderItem = new OrderItemDTO();
+        if (cartItems.isEmpty()) {
+            orderItem.setOrderCode(generateUniqueOrderCode());
         } else {
-            // If the item does not exist in the cart, create a new order item
-            orderItem = new OrderItemDTO();
-            if (cartItems.isEmpty()) {
-                orderItem.setOrderCode(generateUniqueOrderCode());
-            } else {
-                orderItem.setOrderCode(cartItems.get(0).getOrderCode());
-            }
-
-            CustomerDTO customer = customerRepository.findById(customerId)
-                    .orElseThrow(() -> new RuntimeException("Customer not found"));
-            ItemDTO item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found"));
-            orderItem.setCustomer(customer);
-            orderItem.setItem(item);
-            orderItem.setQuantity(1);
+            orderItem.setOrderCode(cartItems.get(0).getOrderCode());
         }
-
+    
+        CustomerDTO customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        ItemDTO item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found"));
+        orderItem.setCustomer(customer);
+        orderItem.setItem(item);
+        orderItem.setQuantity(orderItemDTO.getQuantity());
+    
         return orderItemRepository.save(orderItem);
     }
 
@@ -184,5 +180,3 @@ public class OrderItemService {
         return cart;
     }
 }
-
-// TODO: THEM CONFIG VAO README

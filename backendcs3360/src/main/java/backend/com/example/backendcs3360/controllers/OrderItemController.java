@@ -18,9 +18,9 @@ public class OrderItemController {
     }
 
     // Add an item to the cart
-    @PostMapping("/add/{customerId}/{itemId}")
-    public ResponseEntity<ResponseObject> addItemToCart(@PathVariable int customerId, @PathVariable int itemId) {
-        OrderItemDTO orderItem = orderItemService.addItemToCart(customerId, itemId);
+    @PostMapping("/add")
+    public ResponseEntity<ResponseObject> addItemToCart(@RequestBody OrderItemDTO orderItemDTO) {
+        OrderItemDTO orderItem = orderItemService.addItemToCart(orderItemDTO);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("success", "Add Item to Cart successfully", orderItem));
     }

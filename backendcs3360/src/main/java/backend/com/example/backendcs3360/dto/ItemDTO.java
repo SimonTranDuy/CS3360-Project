@@ -1,10 +1,18 @@
 package backend.com.example.backendcs3360.dto;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "items")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = ClothesDTO.class, name = "clothes"),
+    @JsonSubTypes.Type(value = AccessoriesDTO.class, name = "accessories")
+})
 public abstract class ItemDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,14 +25,14 @@ public abstract class ItemDTO {
     @Column(name = "description")
     private String description;
 
+    public ItemDTO() {
+    }
+
     public ItemDTO(int itemId, String productName, double price, String description) {
         this.itemId = itemId;
         this.productName = productName;
         this.price = price;
         this.description = description;
-    }
-
-    public ItemDTO() {
     }
 
     public int getItemId() {

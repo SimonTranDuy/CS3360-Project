@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 
 import backend.com.example.backendcs3360.models.Customer;
 
-import java.util.List;
-
 @Entity
 // To assign name of database table corresponds to class Customer
 @Table(name = "customers")
@@ -21,8 +19,8 @@ public class CustomerDTO {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<OrderItemDTO> orderItems;
+    // @OneToMany(fetch = FetchType.EAGER)
+    // private List<OrderItemDTO> orderItems;
 
     public CustomerDTO() {
     }
