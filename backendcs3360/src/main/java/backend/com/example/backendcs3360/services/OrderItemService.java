@@ -33,6 +33,9 @@ public class OrderItemService {
 
     @Transactional
     public OrderItemDTO addItemToCart(OrderItemDTO orderItemDTO) {
+        if (orderItemDTO.getCustomer() == null) {
+            throw new RuntimeException("Customer is required");
+        }
         int customerId = orderItemDTO.getCustomer().getCustomerId();
         int itemId = orderItemDTO.getItem().getItemId();
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
