@@ -1,5 +1,6 @@
 package backend.com.example.backendcs3360.dto;
 
+import backend.com.example.backendcs3360.models.Customer;
 import jakarta.persistence.*;
 
 import backend.com.example.backendcs3360.models.Customer;
@@ -10,7 +11,7 @@ import backend.com.example.backendcs3360.models.Customer;
 public class CustomerDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
-    @Column(name = "customer_id") // To asign name of colume in database table corresponds to customer_id field
+    @Column(name = "customer_id") 
     private int customerId;
     @Column(name = "customer_name")
     private String customerName;
@@ -67,7 +68,7 @@ public class CustomerDTO {
     @Override
     public String toString() {
         return "CustomerDTO{" +
-                "customer_id=" + customerId +
+                "customerId=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
@@ -76,7 +77,7 @@ public class CustomerDTO {
 
     public CustomerDTO convertToCustomer(){
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setCustomerId(this.getCustomerId());
+        customerDTO.setCustomerId(this.customerId);
         customerDTO.setCustomerName(this.getCustomerName());
         customerDTO.setAddress(this.getAddress());
         customerDTO.setPhoneNumber(this.getPhoneNumber());
