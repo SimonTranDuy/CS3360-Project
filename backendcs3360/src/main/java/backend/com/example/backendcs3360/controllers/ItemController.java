@@ -20,6 +20,7 @@ public class ItemController {
         this.itemService = itemService;
     }
 
+    @CrossOrigin
     @GetMapping("/get-all")
     public ResponseEntity<ResponseObject> getAllProducts(){
         List<ItemDTO> productList = itemService.getAllItems();
@@ -28,6 +29,7 @@ public class ItemController {
         );
     }
 
+    @CrossOrigin
     @GetMapping("/get-by-name/{productName}")
     public ResponseEntity<ResponseObject> getProductByName(@PathVariable String productName){
         List<ItemDTO> productList = itemService.getByName(productName);
@@ -43,6 +45,7 @@ public class ItemController {
                 new ResponseObject("success", "Query product successfully", productList)
         );
     }
+    @CrossOrigin
     @GetMapping("/get-all-desc")
     public ResponseEntity<ResponseObject> getAllProductsByPriceDesc() {
         List<ItemDTO> productList =  itemService.getAllItemsByPriceDesc();
@@ -50,7 +53,7 @@ public class ItemController {
                 new ResponseObject("success", "Query product successfully", productList)
         );
     }
-
+    @CrossOrigin
     @PostMapping("/post-accessories")
     public ResponseEntity<ResponseObject> postNewAccessories(@RequestBody Accessories item){
         itemService.insertNewAccessories(item);
@@ -58,9 +61,18 @@ public class ItemController {
                 new ResponseObject("success", "Insert new product successfully", null)
         );
     }
+    @CrossOrigin
     @PostMapping("/post-clothes")
     public ResponseEntity<ResponseObject> postNewClothes(@RequestBody Clothes item){
         itemService.insertNewClothes(item);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("success", "Insert new product successfully", null)
+        );
+    }
+    @CrossOrigin
+    @DeleteMapping("/delete/{itemId}")
+    public ResponseEntity<ResponseObject> deleteItem(@PathVariable int itemId){
+        itemService.deleteItemById(itemId);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("success", "Insert new product successfully", null)
         );

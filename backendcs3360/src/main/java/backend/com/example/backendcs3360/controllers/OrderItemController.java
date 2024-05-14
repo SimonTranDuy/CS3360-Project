@@ -1,13 +1,12 @@
 package backend.com.example.backendcs3360.controllers;
 
 import backend.com.example.backendcs3360.dto.OrderItemDTO;
+import backend.com.example.backendcs3360.models.Cart;
 import backend.com.example.backendcs3360.models.ResponseObject;
 import backend.com.example.backendcs3360.services.OrderItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/orderItems")
@@ -18,20 +17,24 @@ public class OrderItemController {
         this.orderItemService = orderItemService;
     }
 
-    @PostMapping("/add/{customerId}")
-    public ResponseEntity<ResponseObject> addItemToCart(@PathVariable int customerId, @RequestBody OrderItemDTO newOrderItem) {
-        OrderItemDTO orderItem = orderItemService.addItemToCart(customerId, newOrderItem);
+    // Add an item to the cart
+    @PostMapping("/add")
+    public ResponseEntity<ResponseObject> addItemToCart(@RequestBody OrderItemDTO orderItemDTO) {
+        OrderItemDTO orderItem = orderItemService.addItemToCart(orderItemDTO);
         return ResponseEntity.status(HttpStatus.OK).body(
-            new ResponseObject("success", "Add Item to Cart successfully", orderItem));
+                new ResponseObject("success", "Add Item to Cart successfully", orderItem));
     }
 
-    @PutMapping("/{customerId}/{itemId}")
-    public ResponseEntity<ResponseObject> updateItemQuantity(@PathVariable int customerId, @PathVariable int itemId, @RequestParam int quantity) {
-        OrderItemDTO updatedItem = orderItemService.updateItemQuantity(customerId, itemId, quantity);
+    // Update the quantity of an item in the cart
+    @PutMapping("change-quantity/{customerId}/{itemId}")
+    public ResponseEntity<ResponseObject> updateItemQuantity(@RequestBody OrderItemDTO newOrderItem,
+            @PathVariable int customerId, @PathVariable int itemId) {
+        OrderItemDTO updatedItem = orderItemService.updateItemQuantity(newOrderItem, customerId, itemId);
         return ResponseEntity.status(HttpStatus.OK).body(
-            new ResponseObject("success", "Add Item to Cart successfully", updatedItem));
+                new ResponseObject("success", "Update Item to Cart successfully", updatedItem));
     }
 
+    // Checkout the cart before purchase
     @PostMapping("/checkout/{customerId}")
     public ResponseEntity<ResponseObject> checkout(@PathVariable int customerId) {
         orderItemService.checkout(customerId);
@@ -39,25 +42,36 @@ public class OrderItemController {
                 new ResponseObject("success", "Purchase successfully", null));
     }
 
-    @DeleteMapping("/remove/{customerId}/{orderCode}")
+    // Remove an item from the cart
+    @DeleteMapping("delete/{customerId}/{itemId}")
     public ResponseEntity<ResponseObject> removeItemFromCart(@PathVariable int customerId,
-            @PathVariable String orderCode) {
-        orderItemService.removeItemFromCart(customerId, orderCode);
+            @PathVariable int itemId) {
+        orderItemService.removeItemFromCart(customerId, itemId);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("success", "Remove Item from Cart successfully", null));
     }
 
+    // Get purchase history in descending order
     @GetMapping("/historyDesc/{customerId}")
     public ResponseEntity<ResponseObject> getPurchaseHistoryDesc(@PathVariable int customerId) {
-        List<OrderItemDTO> purchaseHistory = orderItemService.getPurchaseHistoryDesc(customerId);
+        Cart cart = orderItemService.getPurchaseHistoryDesc(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("success", "See History successfully", purchaseHistory));
+                new ResponseObject("success", "See History successfully", cart));
     }
 
+    // Get purchase history in ascending order
     @GetMapping("/historyAsc/{customerId}")
     public ResponseEntity<ResponseObject> getPurchaseHistoryAsc(@PathVariable int customerId) {
-        List<OrderItemDTO> purchaseHistory = orderItemService.getPurchaseHistoryAsc(customerId);
+        Cart cart = orderItemService.getPurchaseHistoryAsc(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("success", "See History successfully", purchaseHistory));
+                new ResponseObject("success", "See History successfully", cart));
+    }
+
+    // Get all items in the cart
+    @GetMapping("/get-all/{customerId}")
+    public ResponseEntity<ResponseObject> getCartItems(@PathVariable int customerId) {
+        Cart cart = orderItemService.getCartItems(customerId);
+        return ResponseEntity.status(HttpStatus.OK).body(
+            new ResponseObject("success", "Get all Cart successfully", cart));
     }
 }

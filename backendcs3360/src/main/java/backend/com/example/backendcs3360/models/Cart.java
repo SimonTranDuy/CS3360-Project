@@ -5,9 +5,8 @@ import java.util.Date;
 
 
 public class Cart {
-    private int cartId;
 //    @Column(name = "total")
-    private double total;
+    private double total = 0.0;
 //    @Column(name = "phone_number")
     private String phoneNumber;
 //    @Temporal(TemporalType.TIMESTAMP) // Specifies the database field as a TIMESTAMP.
@@ -25,14 +24,6 @@ public class Cart {
         this.total = total;
         this.phoneNumber = phoneNumber;
         this.dateOfPurchase = dateOfPurchase;
-    }
-
-    public int getCardId() {
-        return cartId;
-    }
-
-    public void setCardId(int cartId) {
-        this.cartId = cartId;
     }
 
     public double getTotal() {
@@ -70,8 +61,7 @@ public class Cart {
     @Override
     public String toString() {
         return "Cart{" +
-                "cartId=" + cartId +
-                ", orderItems=" + orderItems +
+                "orderItems=" + orderItems +
                 ", total=" + total +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", dateOfPurchase=" + dateOfPurchase +

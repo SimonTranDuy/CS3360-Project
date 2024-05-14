@@ -1,5 +1,6 @@
 package backend.com.example.backendcs3360.dto;
 
+import backend.com.example.backendcs3360.models.Customer;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +9,7 @@ import jakarta.persistence.*;
 public class CustomerDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
-    @Column(name = "customer_id") // To asign name of colume in database table corresponds to customer_id field
+    @Column(name = "customer_id") 
     private int customerId;
     @Column(name = "customer_name")
     private String customerName;
@@ -16,6 +17,9 @@ public class CustomerDTO {
     private String phoneNumber;
     @Column(name = "address")
     private String address;
+
+    // @OneToMany(fetch = FetchType.EAGER)
+    // private List<OrderItemDTO> orderItems;
 
     public CustomerDTO() {
     }
@@ -62,19 +66,19 @@ public class CustomerDTO {
     @Override
     public String toString() {
         return "CustomerDTO{" +
-                "customer_id=" + customerId +
+                "customerId=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }
 
-    public CustomerDTO convertToCustomer(){
-        CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setCustomerId(this.customerId);
-        customerDTO.setCustomerName(this.getCustomerName());
-        customerDTO.setAddress(this.getAddress());
-        customerDTO.setPhoneNumber(this.getPhoneNumber());
-        return customerDTO;
+    public Customer convertToCustomerModel(){
+        Customer customer = new Customer();
+        customer.setCustomerId(this.getCustomerId());
+        customer.setCustomerName(this.getCustomerName());
+        customer.setAddress(this.getAddress());
+        customer.setPhoneNumber(this.getPhoneNumber());
+        return customer;
     }
 }

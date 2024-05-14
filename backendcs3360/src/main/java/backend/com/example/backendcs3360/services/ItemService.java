@@ -55,4 +55,7 @@ public class ItemService {
     public List<ItemDTO> getAllItemsByPriceDesc() {
         return itemRepository.findByOrderByPriceDesc();
     }
+    public void deleteItemById(int id){
+        itemRepository.deleteById(id);
+    }
 }
