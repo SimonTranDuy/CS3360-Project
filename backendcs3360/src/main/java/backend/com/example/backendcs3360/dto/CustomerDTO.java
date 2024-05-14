@@ -3,8 +3,6 @@ package backend.com.example.backendcs3360.dto;
 import backend.com.example.backendcs3360.models.Customer;
 import jakarta.persistence.*;
 
-import backend.com.example.backendcs3360.models.Customer;
-
 @Entity
 // To assign name of database table corresponds to class Customer
 @Table(name = "customers")
@@ -73,15 +71,6 @@ public class CustomerDTO {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
                 '}';
-    }
-
-    public CustomerDTO convertToCustomer(){
-        CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setCustomerId(this.customerId);
-        customerDTO.setCustomerName(this.getCustomerName());
-        customerDTO.setAddress(this.getAddress());
-        customerDTO.setPhoneNumber(this.getPhoneNumber());
-        return customerDTO;
     }
 
     public Customer convertToCustomerModel(){
