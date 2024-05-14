@@ -68,13 +68,4 @@ public class CustomerDTO {
                 ", address='" + address + '\'' +
                 '}';
     }
-
-    public CustomerDTO convertToCustomer(){
-        CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setCustomerId(this.customerId);
-        customerDTO.setCustomerName(this.getCustomerName());
-        customerDTO.setAddress(this.getAddress());
-        customerDTO.setPhoneNumber(this.getPhoneNumber());
-        return customerDTO;
-    }
 }

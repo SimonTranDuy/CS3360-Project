@@ -1,5 +1,6 @@
 package backend.com.example.backendcs3360.models;
 
+import backend.com.example.backendcs3360.dto.CustomerDTO;
 
 //@Entity
 //// To assign name of database table corresponds to class Customer
@@ -80,5 +81,14 @@ public class Customer
         ", phoneNumber='" + phoneNumber + '\'' + 
         ", address='" + address + '\'' +
         "}";
+    }
+    
+    public CustomerDTO convertToDTO(){
+        CustomerDTO newDTO = new CustomerDTO();
+        newDTO.setCustomerId(this.customerId);
+        newDTO.setCustomerName(this.getCustomerName());
+        newDTO.setAddress(this.getAddress());
+        newDTO.setPhoneNumber(this.getPhoneNumber());
+        return newDTO;
     }
 }

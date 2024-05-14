@@ -1,18 +1,13 @@
 package backend.com.example.backendcs3360.services;
 
-import backend.com.example.backendcs3360.exceptions.CustomerNotFoundException;
-import backend.com.example.backendcs3360.exceptions.InvalidDataException;
-import backend.com.example.backendcs3360.exceptions.PhoneNumberExistsException;
 import backend.com.example.backendcs3360.dto.CustomerDTO;
+import backend.com.example.backendcs3360.models.Customer;
 import backend.com.example.backendcs3360.repositories.CustomerRepository;
-// import backend.com.example.backendcs3360.models.Customer;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-// import java.util.stream.Collector;
 
 @Service
 public class CustomerService {
@@ -22,89 +17,74 @@ public class CustomerService {
         this.customerRepository = repository;
     }
 
+    // Method getAllCustomers
     public List<CustomerDTO> getAllCustomers() {
-        return customerRepository.findAll().stream()
-                .map(CustomerDTO::convertToCustomer)
-                .collect(Collectors.toList());
-    }
-
-    public Optional<CustomerDTO> findById(Integer customerId) {
-        return customerRepository.findById(customerId).map(CustomerDTO::convertToCustomer);
-    }
-
-    public List<CustomerDTO> findByCustomerName(String customerName) {
-        // Convert search name into lowercase
-        String searchName = customerName.trim().toLowerCase();
-
-        List<CustomerDTO> customers = customerRepository.findByCustomerNameContainingIgnoreCase(searchName).stream()
-                .map(CustomerDTO::convertToCustomer)
-                .collect(Collectors.toList());
+        List<CustomerDTO> customers = customerRepository.findAll();
+        // if (customers.isEmpty()) {
+        //     throw new RuntimeException("No customers found.");
+        // }
         return customers;
     }
 
-    public CustomerDTO findByPhoneNumber(String phoneNumber) {
-        CustomerDTO customer = customerRepository.findByPhoneNumber(phoneNumber.trim());
-        return customer != null ? customer.convertToCustomer() : null;
+    // Method findByPhoneNumber
+    public Optional<CustomerDTO> findByPhoneNumber(String phoneNumber) {
+        return customerRepository.findByPhoneNumber(phoneNumber);
     }
 
-    public List<CustomerDTO> findByAddress(String address) {
-        String searchAddress = address.trim().toLowerCase();
-
-        List<CustomerDTO> customers = customerRepository.findByAddressContainingIgnoreCase(searchAddress).stream()
-                .map(CustomerDTO::convertToCustomer)
-                .collect(Collectors.toList());
-        return customers;
+// Method insertCustomer
+public CustomerDTO insertCustomer(Customer newCustomer) {
+    if (newCustomer.getCustomerName() == null || newCustomer.getCustomerName().isEmpty()) {
+        throw new RuntimeException("Name cannot be empty");
     }
 
-    public CustomerDTO insertCustomer(CustomerDTO newCustomerDTO) {
-        // To check name must not be empty
-        if (newCustomerDTO.getCustomerName() == null || newCustomerDTO.getCustomerName().isEmpty()) {
-            throw new InvalidDataException("Name cannot be empty");
+    if (newCustomer.getPhoneNumber() == null || newCustomer.getPhoneNumber().isEmpty()) {
+        throw new RuntimeException("Phone number cannot be empty");
+    }
+
+    if (newCustomer.getPhoneNumber().length() != 10) {
+        throw new RuntimeException("Wrong format! Phone number must have 10 numbers");
+    }
+
+    Optional<CustomerDTO> existingCustomerDTO = customerRepository.findByPhoneNumber(newCustomer.getPhoneNumber());
+    if (existingCustomerDTO.isPresent()) {
+        // Return existing customer if phone number already exists
+        return existingCustomerDTO.get();
+    } else {
+        // Save new customer if phone number doesn't exist
+        CustomerDTO newDTO = newCustomer.convertToDTO();
+        return customerRepository.save(newDTO);
+    }
+}
+
+
+    // Method updateOrInsertCustomer
+    public CustomerDTO updateOrInsertCustomer(Customer customer, Integer customerId) {
+        if (customerId == null) {
+            throw new RuntimeException("Customer ID cannot be null");
         }
-
-        // To check phone number must not be empty
-        if (newCustomerDTO.getPhoneNumber() == null || newCustomerDTO.getPhoneNumber().isEmpty()) {
-            throw new InvalidDataException("Phone number cannot be empty");
-        }
-
-        // To check if phone number existed or not
-        if (isPhoneNumberExists(newCustomerDTO.getPhoneNumber())) {
-            throw new PhoneNumberExistsException("Phone number already existed");
-        }
-
-        // If there are no errors, proceed to add a new customer
-        CustomerDTO newCustomer = newCustomerDTO.convertToCustomer();
-        return customerRepository.save(newCustomer);
-        // CustomerDTO savedCustomer = customerRepository.save(newCustomerDTO);
-        // return savedCustomer;
-    }
-
-    public boolean isPhoneNumberExists(String phoneNumber) {
-        return customerRepository.existsByPhoneNumber(phoneNumber);
-    }
-
-    public CustomerDTO updateOrInsertCustomer(CustomerDTO newCustomerDTO, Integer customerId) {
-        CustomerDTO newCustomer = newCustomerDTO.convertToCustomer();
-        newCustomer.setCustomerId(customerId);
 
         Optional<CustomerDTO> existingCustomerOptional = customerRepository.findById(customerId);
         if (existingCustomerOptional.isPresent()) {
+            // Cập nhật thông tin nếu khách hàng đã tồn tại
             CustomerDTO existingCustomer = existingCustomerOptional.get();
-            existingCustomer.setCustomerName(newCustomerDTO.getCustomerName());
-            existingCustomer.setPhoneNumber(newCustomerDTO.getPhoneNumber());
-            existingCustomer.setAddress(newCustomerDTO.getAddress());
+            existingCustomer.setCustomerName(customer.getCustomerName());
+            existingCustomer.setPhoneNumber(customer.getPhoneNumber());
+            existingCustomer.setAddress(customer.getAddress());
             return customerRepository.save(existingCustomer);
         } else {
-            // Throw exception when cannot find customer
-            throw new CustomerNotFoundException("Customer not found with id: " + customerId);
+            // Tạo một khách hàng mới nếu không tìm thấy khách hàng với customerId
+            CustomerDTO newCustomer = customer.convertToDTO();
+            newCustomer.setCustomerId(customerId);
+            return customerRepository.save(newCustomer);
         }
     }
 
-    public boolean deleteCustomer(Integer customerId) {
-        if (!customerRepository.existsById(customerId)) {
-            throw new CustomerNotFoundException("Customer not found with id: " + customerId);
-        }
-        customerRepository.deleteById(customerId);
-        return true;
-    }    
+// Method deleteCustomer
+public void deleteCustomer(Integer customerId) {
+    if (!customerRepository.existsById(customerId)) {
+        throw new RuntimeException("Customer not found with id: " + customerId);
+    }
+    customerRepository.deleteById(customerId);
+}
+
 }
