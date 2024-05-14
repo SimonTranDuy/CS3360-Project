@@ -58,22 +58,22 @@ public class CustomerController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<ResponseObject> insertCustomer(@RequestBody Customer newCustomer) {
-        Object result = customerService.insertCustomer(newCustomer);
+    public ResponseEntity<ResponseObject> insertCustomer(@RequestBody CustomerDTO newCustomerDTO) {
+        Customer customer = customerService.insertCustomer(newCustomerDTO);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseObject("success", "Customer added successfully", result));
+                .body(new ResponseObject("success", "Customer added successfully", customer));
     }
 
-    @PutMapping("/update/{customerId}")
-    public ResponseEntity<ResponseObject> updateOrInsertCustomer(@RequestBody Customer customer, @PathVariable Integer customerId) {
-        CustomerDTO updatedCustomer = customerService.updateOrInsertCustomer(customer, customerId);
+    @PutMapping("/update")
+    public ResponseEntity<ResponseObject> updateOrInsertCustomer(@RequestBody CustomerDTO customerDTO) {
+        Customer customer = customerService.updateCustomer(customerDTO);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseObject("success", "Customer updated/inserted successfully", updatedCustomer));
+                .body(new ResponseObject("success", "Customer updated successfully", customer));
     }
 
-    @DeleteMapping("/delete/{customerId}")
-    public ResponseEntity<ResponseObject> deleteCustomer(@PathVariable Integer customerId) {
-        customerService.deleteCustomer(customerId);
+    @DeleteMapping("/delete/{phoneNumber}")
+    public ResponseEntity<ResponseObject> deleteCustomer(@PathVariable String phoneNumber) {
+        customerService.deleteCustomerByPhoneNumber(phoneNumber);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseObject("success", "Customer deleted successfully", null));
     }

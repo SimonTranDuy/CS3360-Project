@@ -3,6 +3,7 @@ package backend.com.example.backendcs3360.services;
 import backend.com.example.backendcs3360.dto.CustomerDTO;
 import backend.com.example.backendcs3360.models.Customer;
 import backend.com.example.backendcs3360.repositories.CustomerRepository;
+import backend.com.example.backendcs3360.repositories.OrderItemRepository;
 
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,11 @@ import java.util.Optional;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final OrderItemRepository itemRepository;
 
-    public CustomerService(CustomerRepository repository) {
+    public CustomerService(CustomerRepository repository, OrderItemRepository itemRepository) {
         this.customerRepository = repository;
+        this.itemRepository = itemRepository;
     }
 
     // Method getAllCustomers
@@ -26,65 +29,68 @@ public class CustomerService {
         return customers;
     }
 
+
     // Method findByPhoneNumber
     public Optional<CustomerDTO> findByPhoneNumber(String phoneNumber) {
         return customerRepository.findByPhoneNumber(phoneNumber);
     }
 
 // Method insertCustomer
-public CustomerDTO insertCustomer(Customer newCustomer) {
-    if (newCustomer.getCustomerName() == null || newCustomer.getCustomerName().isEmpty()) {
+public Customer insertCustomer(CustomerDTO newCustomerDTO) {
+    if (newCustomerDTO.getCustomerName() == null || newCustomerDTO.getCustomerName().isEmpty()) {
         throw new RuntimeException("Name cannot be empty");
     }
 
-    if (newCustomer.getPhoneNumber() == null || newCustomer.getPhoneNumber().isEmpty()) {
+    if (newCustomerDTO.getPhoneNumber() == null || newCustomerDTO.getPhoneNumber().isEmpty()) {
         throw new RuntimeException("Phone number cannot be empty");
     }
 
-    if (newCustomer.getPhoneNumber().length() != 10) {
-        throw new RuntimeException("Wrong format! Phone number must have 10 numbers");
+    if (!newCustomerDTO.getPhoneNumber().matches("\\d{10}")) {
+        throw new RuntimeException("Phone number must be a 10-digit number");
     }
 
-    Optional<CustomerDTO> existingCustomerDTO = customerRepository.findByPhoneNumber(newCustomer.getPhoneNumber());
+    Optional<CustomerDTO> existingCustomerDTO = customerRepository
+            .findByPhoneNumber(newCustomerDTO.getPhoneNumber());
     if (existingCustomerDTO.isPresent()) {
-        // Return existing customer if phone number already exists
-        return existingCustomerDTO.get();
+        // Return the existing customer if phone number exists
+        return existingCustomerDTO.get().convertToCustomerModel();
     } else {
         // Save new customer if phone number doesn't exist
-        CustomerDTO newDTO = newCustomer.convertToDTO();
-        return customerRepository.save(newDTO);
+        CustomerDTO savedCustomerDTO = customerRepository.save(newCustomerDTO);
+        // Convert the saved CustomerDTO to Customer and return it
+        return savedCustomerDTO.convertToCustomerModel();
     }
 }
 
-
-    // Method updateOrInsertCustomer
-    public CustomerDTO updateOrInsertCustomer(Customer customer, Integer customerId) {
-        if (customerId == null) {
-            throw new RuntimeException("Customer ID cannot be null");
-        }
-
-        Optional<CustomerDTO> existingCustomerOptional = customerRepository.findById(customerId);
+    // Method updateCustomer
+    public Customer updateCustomer(CustomerDTO customerDTO) {
+        Optional<CustomerDTO> existingCustomerOptional = customerRepository
+                .findByPhoneNumber(customerDTO.getPhoneNumber());
         if (existingCustomerOptional.isPresent()) {
-            // Cập nhật thông tin nếu khách hàng đã tồn tại
+            // Update the existing customer
             CustomerDTO existingCustomer = existingCustomerOptional.get();
-            existingCustomer.setCustomerName(customer.getCustomerName());
-            existingCustomer.setPhoneNumber(customer.getPhoneNumber());
-            existingCustomer.setAddress(customer.getAddress());
-            return customerRepository.save(existingCustomer);
+            existingCustomer.setCustomerName(customerDTO.getCustomerName());
+            existingCustomer.setPhoneNumber(customerDTO.getPhoneNumber());
+            existingCustomer.setAddress(customerDTO.getAddress());
+            CustomerDTO updatedCustomerDTO = customerRepository.save(existingCustomer);
+            // Convert the updated CustomerDTO to Customer and return it
+            return updatedCustomerDTO.convertToCustomerModel();
         } else {
-            // Tạo một khách hàng mới nếu không tìm thấy khách hàng với customerId
-            CustomerDTO newCustomer = customer.convertToDTO();
-            newCustomer.setCustomerId(customerId);
-            return customerRepository.save(newCustomer);
+            throw new RuntimeException("Customer not found with phone number: " + customerDTO.getPhoneNumber());
         }
     }
 
-// Method deleteCustomer
-public void deleteCustomer(Integer customerId) {
-    if (!customerRepository.existsById(customerId)) {
-        throw new RuntimeException("Customer not found with id: " + customerId);
+    // Method deleteCustomerByPhoneNumber
+    public void deleteCustomerByPhoneNumber(String phoneNumber) {
+        Optional<CustomerDTO> existingCustomerOptional = customerRepository.findByPhoneNumber(phoneNumber);
+        if (existingCustomerOptional.isPresent()) {
+            // Delete the related items
+            itemRepository.deleteByCustomerId(existingCustomerOptional.get().getCustomerId());
+            // Delete the existing customer
+            customerRepository.delete(existingCustomerOptional.get());
+        } else {
+            throw new RuntimeException("Customer not found with phone number: " + phoneNumber);
+        }
     }
-    customerRepository.deleteById(customerId);
-}
 
 }

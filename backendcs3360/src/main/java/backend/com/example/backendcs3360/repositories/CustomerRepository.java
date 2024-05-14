@@ -7,8 +7,5 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerRepository extends JpaRepository<CustomerDTO, Integer> {
-    Optional<CustomerDTO> findByPhoneNumberContaining(String phoneNumber);
     Optional<CustomerDTO> findByPhoneNumber(String phoneNumber);
-    boolean existsByPhoneNumber(String phoneNumber);
-    
 }
