@@ -18,9 +18,8 @@ public class Clothes extends Item {
         super();
     }
 
-    public Clothes(int itemId, String productName, double price, String description, String brand, String size)
-    {
-        super(itemId, productName, price, description);
+    public Clothes(int itemId, String productName, double price, String description, String brand, String size, String imagePath) {
+        super(itemId, productName, price, description, imagePath);
         this.brand = brand;
         this.size = size;
     }
@@ -56,6 +55,7 @@ public class Clothes extends Item {
         newDTO.setPrice(this.getPrice());
         newDTO.setProductName(this.getProductName());
         newDTO.setItemId(this.getItemId());
+        newDTO.setImagePath(this.getImagePath());
         return newDTO;
     }
 }
