@@ -4,6 +4,7 @@ import backend.com.example.backendcs3360.dto.OrderItemDTO;
 import backend.com.example.backendcs3360.dto.ItemDTO;
 import backend.com.example.backendcs3360.dto.CustomerDTO;
 
+import backend.com.example.backendcs3360.dto.OrderItemReqDTO;
 import backend.com.example.backendcs3360.models.Cart;
 import backend.com.example.backendcs3360.models.OrderItem;
 import backend.com.example.backendcs3360.repositories.CustomerRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -32,12 +34,13 @@ public class OrderItemService {
     }
 
     @Transactional
-    public OrderItemDTO addItemToCart(OrderItemDTO orderItemDTO) {
-        if (orderItemDTO.getCustomer() == null) {
-            throw new RuntimeException("Customer is required");
-        }
-        int customerId = orderItemDTO.getCustomer().getCustomerId();
-        int itemId = orderItemDTO.getItem().getItemId();
+    public OrderItemDTO addItemToCart(OrderItemReqDTO orderItemDTO) {
+//        if (orderItemDTO.getCustomerId() == null) {
+//            throw new RuntimeException("Customer is required");
+//
+
+        int customerId = orderItemDTO.getCustomerId();
+        int itemId = orderItemDTO.getItemId();
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
         OrderItemDTO orderItem = null;
     
@@ -47,7 +50,6 @@ public class OrderItemService {
                 throw new RuntimeException("Item already exists in the cart");
             }
         }
-    
         // If the item does not exist in the cart, create a new order item
         orderItem = new OrderItemDTO();
         if (cartItems.isEmpty()) {

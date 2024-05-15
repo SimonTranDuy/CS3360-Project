@@ -1,6 +1,7 @@
 package backend.com.example.backendcs3360.controllers;
 
 import backend.com.example.backendcs3360.dto.OrderItemDTO;
+import backend.com.example.backendcs3360.dto.OrderItemReqDTO;
 import backend.com.example.backendcs3360.models.Cart;
 import backend.com.example.backendcs3360.models.ResponseObject;
 import backend.com.example.backendcs3360.services.OrderItemService;
@@ -19,7 +20,7 @@ public class OrderItemController {
 
     // Add an item to the cart
     @PostMapping("/add")
-    public ResponseEntity<ResponseObject> addItemToCart(@RequestBody OrderItemDTO orderItemDTO) {
+    public ResponseEntity<ResponseObject> addItemToCart(@RequestBody OrderItemReqDTO orderItemDTO) {
         OrderItemDTO orderItem = orderItemService.addItemToCart(orderItemDTO);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("success", "Add Item to Cart successfully", orderItem));
