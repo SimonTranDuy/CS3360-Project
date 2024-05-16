@@ -1,226 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Order History</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <style>
-    /* CSS để tạo giao diện */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="orderHistory.css" />
+  </head>
 
-    .table-auto {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .table-auto th,
-    .table-auto td {
-      border: 1px solid #e2e8f0;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .bg-zinc-100 {
-      background-color: #f7fafc;
-    }
-
-    .dark:bg-zinc-700 {
-      background-color: #4a5568;
-    }
-
-    .text-zinc-800 {
-      color: #2d3748;
-    }
-
-    .dark:text-zinc-200 {
-      color: #edf2f7;
-    }
-
-    .font-bold {
-      font-weight: bold;
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .mt-4 {
-      margin-top: 1rem;
-    }
-
-    .my-8 {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .p-4 {
-      padding: 1rem;
-    }
-
-    .bg-white {
-      background-color: #ffffff;
-    }
-
-    .shadow-lg {
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    .rounded-lg {
-      border-radius: 0.5rem;
-    }
-
-    .bg-blue-500 {
-      background-color: #4299e1;
-    }
-
-    .text-white {
-      color: #ffffff;
-    }
-
-    .rounded-lg {
-      border-radius: 0.5rem;
-    }
-
-    .p-2 {
-      padding: 0.5rem;
-    }
-
-    /* Hiệu ứng nổi bóng khi di chuột vào nút */
-    .btn {
-      background-color: #4299e1;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .btn:hover {
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container mx-auto my-8 p-4 bg-white dark:bg-zinc-800 shadow-lg rounded-lg">
-    <h1 class="text-center text-zinc-800 dark:text-zinc-200 text-2xl font-bold">Order History</h1>
-    <button id="sort-desc" class="btn">Sort Descending</button>
-    <button id="sort-asc" class="btn">Sort Ascending</button>
-    <button id="refresh-orders" class="btn">Refresh Orders</button>
-    <table class="w-full mt-4 table-auto">
-      <thead>
-        <tr class="bg-zinc-100 dark:bg-zinc-700">
-          <th class="px-4 py-2">Order ID</th>
-          <th class="px-4 py-2">Order Date</th>
-          <th class="px-4 py-2">Order Code</th>
-          <th class="px-4 py-2">Customer Name</th>
-          <th class="px-4 py-2">Phone Number</th>
-          <th class="px-4 py-2">Address</th>
-          <th class="px-4 py-2">Item Name</th>
-          <th class="px-4 py-2">Quantity</th>
-          <th class="px-4 py-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="order-history-body">
-        <tr>
-          <td class="border px-4 py-2">1</td>
-          <td class="border px-4 py-2">2024-01-01</td>
-          <td class="border px-4 py-2">ABC123</td>
-          <td class="border px-4 py-2">John Doe</td>
-          <td class="border px-4 py-2">123-456-7890</td>
-          <td class="border px-4 py-2">123 Main St</td>
-          <td class="border px-4 py-2">Product A</td>
-          <td class="border px-4 py-2">2</td>
-          <td class="border px-4 py-2">
-            <button class="btn see-detail">See Details</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="border px-4 py-2">2</td>
-          <td class="border px-4 py-2">2024-01-05</td>
-          <td class="border px-4 py-2">DEF456</td>
-          <td class="border px-4 py-2">Jane Smith</td>
-          <td class="border px-4 py-2">987-654-3210</td>
-          <td class="border px-4 py-2">456 Elm St</td>
-          <td class="border px-4 py-2">Product B</td>
-          <td class="border px-4 py-2">1</td>
-          <td class="border px-4 py-2">
-            <button class="btn see-detail">See Details</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="border px-4 py-2">3</td>
-          <td class="border px-4 py-2">2024-01-10</td>
-          <td class="border px-4 py-2">GHI789</td>
-          <td class="border px-4 py-2">Alice Johnson</td>
-          <td class="border px-4 py-2">555-123-4567</td>
-          <td class="border px-4 py-2">789 Oak St</td>
-          <td class="border px-4 py-2">Product C</td>
-          <td class="border px-4 py-2">3</td>
-          <td class="border px-4 py-2">
-            <button class="btn see-detail">See Details</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <script>
-    // Hàm để lấy và hiển thị dữ liệu lịch sử đơn hàng từ backend
-    function fetchOrderHistory(order = 'desc') {
-      const customerId = 1; // Thay bằng customerId thực tế
-      const url = order === 'asc' ? `/api/orders/history/asc/${customerId}` : `/api/orders/history/desc/${customerId}`;
-
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          const tbody = document.getElementById('order-history-body');
-          tbody.innerHTML = ''; // Xóa nội dung cũ
-
-          data.orderItems.forEach(orderItem => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td class="px-4 py-2">${orderItem.listOfItemsId}</td>
-              <td class="px-4 py-2">${new Date(orderItem.dateOfPurchase).toLocaleDateString()}</td>
-              <td class="px-4 py-2">${orderItem.orderCode}</td>
-              <td class="px-4 py-2">${orderItem.customer.name}</td>
-              <td class="px-4 py-2">${orderItem.customer.phoneNumber}</td>
-              <td class="px-4 py-2">${orderItem.customer.address}</td>
-              <td class="px-4 py-2">${orderItem.item.name}</td>
-              <td class="px-4 py-2">${orderItem.quantity}</td>
-              <td class="px-4 py-2">
-                <button class="btn see-detail">See Details</button>
-              </td>
-            `;
-            tbody.appendChild(row);
-          });
-        })
-        .catch(error => console.error('Error fetching order history:', error));
-    }
-
-    // Gọi hàm fetchOrderHistory với 'desc' khi trang được tải
-    document.addEventListener('DOMContentLoaded', () => fetchOrderHistory());
-
-    // Thêm sự kiện click cho các nút sắp xếp và làm mới
-    document.getElementById('sort-desc').addEventListener('click', () => fetchOrderHistory('desc'));
-    document.getElementById('sort-asc').addEventListener('click', () => fetchOrderHistory('asc'));
-    document.getElementById('refresh-orders').addEventListener('click', () => fetchOrderHistory());
-
-    // Xử lý sự kiện cho nút "See Details"
-    document.addEventListener('click', (event) => {
-      if (event.target.classList.contains('see-detail')) {
-        const row = event.target.closest('tr');
-        const orderId = row.children[0].textContent;
-        alert(`See details for Order ID: ${orderId}`);
-      }
-    });
-  </script>
-</body>
-
+  <body>
+    <div
+      class="container mx-auto my-8 p-4 bg-white dark:bg-zinc-800 shadow-lg rounded-lg"
+    >
+      <h1
+        class="text-center text-zinc-800 dark:text-zinc-200 text-2xl font-bold"
+      >
+        Order History
+      </h1>
+      <button id="sort-desc" class="btn">Sort Descending</button>
+      <button id="sort-asc" class="btn">Sort Ascending</button>
+      <button id="refresh-orders" class="btn">Refresh Orders</button>
+      <table class="w-full mt-4 table-auto">
+        <thead>
+          <tr class="bg-zinc-100 dark:bg-zinc-700">
+            <th class="px-4 py-2">Order ID</th>
+            <th class="px-4 py-2">Order Date</th>
+            <th class="px-4 py-2">Order Code</th>
+            <th class="px-4 py-2">Customer Name</th>
+            <th class="px-4 py-2">Phone Number</th>
+            <th class="px-4 py-2">Address</th>
+            <th class="px-4 py-2">Item Name</th>
+            <th class="px-4 py-2">Quantity</th>
+            <th class="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="order-history-body"></tbody>
+      </table>
+    </div>
+    <script src="./js/renderHistory.js"></script>
+  </body>
 </html>
