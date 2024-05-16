@@ -290,6 +290,4 @@ function postNewOrdersItem(product) {
     quantity: product.quantity,
     coupon: {},
   };
-
-
 }
