@@ -55,29 +55,32 @@ header {
 }
 
 .input-search,
-.customer-info-container,
+#customer-info-container,
 .cart-summary {
     margin-bottom: 20px;
 }
 
 .input-search label,
-.customer-info-container label {
+#customer-info-container label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    font-size: 1.1em;
 }
 
 .input-search input,
-.customer-info-container input {
+#customer-info-container input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    font-size: 1.1em;
 }
 
 .input-search button,
-.customer-info-container button,
+#customer-info-container button,
+#customer-info-button,
 .cart-button {
     display: block;
     width: 100%;
@@ -88,10 +91,12 @@ header {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 1.1em; /* Updated font size */
 }
 
 .input-search button:hover,
-.customer-info-container button:hover,
+#customer-info-container button:hover,
+#customer-info-button:hover,
 .cart-button:hover {
     background-color: #e64a19;
 }
@@ -103,7 +108,8 @@ header {
 .product-section {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px; /* Increase the gap between products */
+    margin-bottom: 40px; /* Increase the space between clothes and accessories sections */
 }
 
 .product-card {
@@ -136,7 +142,7 @@ header {
 }
 
 .product-info h2 {
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin: 10px 0;
     cursor: pointer;
 }
@@ -150,16 +156,18 @@ header {
 .current-price {
     color: #ff5722;
     font-weight: bold;
+    font-size: 1.2em;
 }
 
 .original-price {
     text-decoration: line-through;
     color: #999;
+    font-size: 1.2em;
 }
 
 .product-meta {
     margin: 10px 0;
-    font-size: 0.9em;
+    font-size: 1em;
     color: #666;
 }
 
@@ -183,6 +191,7 @@ footer {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 1.1em;
 }
 
 .dropbtn:hover {
@@ -204,6 +213,7 @@ footer {
     text-decoration: none;
     display: block;
     transition: background-color 0.3s;
+    font-size: 1.1em;
 }
 
 .dropdown-content a:hover {
