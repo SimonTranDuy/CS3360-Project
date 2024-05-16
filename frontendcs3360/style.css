@@ -70,7 +70,7 @@ header {
 
 .input-search input,
 #customer-info-container input {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -83,7 +83,7 @@ header {
 #customer-info-button,
 .cart-button {
     display: block;
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -240,3 +240,4 @@ footer {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
