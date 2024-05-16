@@ -14,23 +14,19 @@ document.addEventListener("DOMContentLoaded", function () {
 // fetch data from API getAllProducts
 async function getData(url = baseURL) {
   try {
-    const response = await fetch(
-      "http://localhost:8080/api/v1/products/get-all",
-      {
-        method: "GET",
-        mode: "cors", // Use "cors" instead of "no-cors"
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(url, {
+      method: "GET",
+      mode: "cors", // Use "cors" instead of "no-cors"
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     let data = await response.json();
-    console.log(data);
     return data;
     //   console.log(data); // Log or process the data as needed
   } catch (error) {
@@ -40,11 +36,11 @@ async function getData(url = baseURL) {
 
 async function postCustomerInfo() {
   const customerInfo = {
-    name: document.getElementById("customer-name-input").value,
-    email: document.getElementById("customer-phoneNumber-input").value,
-    phoneNumber: document.getElementById("customer-name-input").value,
+    customerName: document.getElementById("customer-name-input").value,
+    phoneNumber: document.getElementById("customer-phoneNumber-input").value,
     address: document.getElementById("customer-address-input").value,
   };
+  console.log(customerInfo);
   try {
     const response = await fetch(baseURL + "customers/insert", {
       method: "POST",
@@ -100,12 +96,14 @@ async function displayCurrentCart() {
 }
 // function get products by NAME with GET method
 async function searchProducts() {
+  console.log("searching");
   // Get the input value
-  const productName = document.getElementById("searchInput").value;
+  const productName = document.getElementById("product-search-input").value;
   if (productName.length > 0) {
     try {
       const response = await fetch(
-        baseURL + "products/get-by-name/" + encodeURIComponent(productName),
+        "http://localhost:8080/api/v1/products/get-by-name/" +
+          encodeURIComponent(productName),
         {
           method: "GET",
           mode: "cors", // Use "cors" instead of "no-cors"
@@ -203,50 +201,76 @@ async function displayDescendingOrder() {
 }
 
 // function display all received data, every function above call this function to render the results
-function displaySearchResults(results) {
-  console.log(results);
-  const resultsContainer = document.getElementById("table-body");
-  resultsContainer.innerHTML = ""; // Clear previous results
-
-  if (!results) {
-    resultsContainer.innerHTML = "<p>No results found</p>";
-  } else {
-    // Assuming each result is an object with a 'productName' property
-    results.map((results) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-          <td>${results.productName}</td>
-          <td>${results.price}</td>
-          <td>${results.brand}</td>
-          <td>${results.size}</td>
-          <td>${results.material}</td>
-          <td>${results.weight}</td>
-          <td><input type="number" value="1"></input></td>
-          <td>${results.description}</td>
-          <td><button class="add-to-cart-btn">Add to cart</button></td>
-      `;
-
-      // Find the button inside the row and add an event listener to it
-      const addToCartButton = row.querySelector(".add-to-cart-btn");
-      addToCartButton.addEventListener("click", () => {
-        results.quantity = parseInt(
-          row.querySelector("input[type=number]").value
-        );
-        // Add the product to cart
-        addToCart(results);
-        updateNumberOfItemsInCart();
-      });
-
-      resultsContainer.appendChild(row);
-      // console.log(results);
-    });
-  }
+function displaySearchResults(products) {
+  const clothesSection = document.getElementById("clothes-section");
+  const accessoriesSection = document.getElementById("accessories-section");
+  clothesSection.innerHTML = "";
+  accessoriesSection.innerHTML = "";
+  // Assuming each result is an object with a 'productName' property
+  products.forEach((product) => {
+    const addToCartButton = document.createElement("button");
+    addToCartButton.textContent = "Add to Cart";
+    addToCartButton.classList.add("add-to-cart-button");
+    addToCartButton.addEventListener("click", () => addToCart(product));
+    const productCard = document.createElement("div");
+    productCard.classList.add("product-card");
+    productCard.innerHTML = `
+              <img src="${product.imagePath}" alt="${product.productName}">
+              <div class="product-info">
+                  <h2>${product.productName}</h2>
+                  <div class="price">
+                      <span class="current-price">${product.price} $</span>
+                  </div>
+                  <p>${product.description}</p>
+                  <div class="product-meta">
+                      <span>Size: ${product.size}</span>
+                      <span>Material: ${product.material}</span>
+                      <span>Color: ${product.color}</span>
+                  </div>
+              </div>
+          `;
+    productCard.appendChild(addToCartButton);
+    if (!product.weight) {
+      clothesSection.appendChild(productCard);
+    } else {
+      accessoriesSection.appendChild(productCard);
+    }
+  });
 }
 
 // Add a product to the cart using both post method postNewOrdersItem and save that object data to localStorage.
-function addToCart(product) {
-  saveOrdersItemToLocalStorage(product);
-  postNewOrdersItem(product);
+async function addToCart(product) {
+  console.log("adding to cart");
+  console.log(product);
+  const customerId = JSON.parse(
+    localStorage.getItem("customerInfo")
+  ).customerId;
+  const productToAdd = {
+    customerId: customerId,
+    itemId: product.itemId,
+    quantity: 1,
+  };
+  console.log(productToAdd);
+  try {
+    const response = await fetch("http://localhost:8080/api/orderItems/add", {
+      method: "POST",
+      mode: "cors", // Use "cors" instead of "no-cors"
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productToAdd),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // displaySearchResults(data.data);
+        console.log(data);
+      });
+
+    // return await response.json();
+    //   console.log(data); // Log or process the data as needed
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+  }
 }
 // rerender the number of items in the cart
 function updateNumberOfItemsInCart() {
