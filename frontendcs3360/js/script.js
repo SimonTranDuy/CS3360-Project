@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
 });
 
+let cartCount = 0; // Initialize cart count
+
 function toggleCustomerInfo() {
     const infoContainer = document.getElementById('customer-info-container');
     const infoButton = document.getElementById('customer-info-button');
@@ -25,16 +27,11 @@ function renderProducts() {
         productCard.classList.add('product-card');
 
         productCard.innerHTML = `
-            <div class="product-header">
-                <span class="badge">${product.badge}</span>
-                <span class="discount">${product.discount}</span>
-            </div>
             <img src="${product.image}" alt="${product.name}">
             <div class="product-info">
                 <h2>${product.name}</h2>
                 <div class="price">
                     <span class="current-price">${product.currentPrice}</span>
-                    <span class="original-price">${product.originalPrice}</span>
                 </div>
                 <p>${product.description}</p>
                 <div class="product-meta">
@@ -42,6 +39,7 @@ function renderProducts() {
                     <span>Material: ${product.material}</span>
                     <span>Color: ${product.color}</span>
                 </div>
+                <button class="add-to-cart-button" onclick="addToCart()">Add to Cart</button>
             </div>
         `;
 
@@ -53,14 +51,16 @@ function renderProducts() {
     });
 }
 
+function addToCart() {
+    cartCount++;
+    updateCartCount();
+}
+
 function getProducts() {
     return [
         {
             name: 'Nike Running Shoes',
-            badge: 'Always Low Price',
-            discount: 'Discount 30%',
             currentPrice: '$70.00',
-            originalPrice: '$100.00',
             description: 'High-quality running shoes with great comfort and support.',
             size: 'M, L, XL',
             material: 'Mesh',
@@ -70,10 +70,7 @@ function getProducts() {
         },
         {
             name: 'Adidas Hoodie',
-            badge: 'Best Seller',
-            discount: 'Discount 20%',
             currentPrice: '$50.00',
-            originalPrice: '$70.00',
             description: 'Comfortable and stylish hoodie for everyday wear.',
             size: 'S, M, L',
             material: 'Cotton',
@@ -83,10 +80,7 @@ function getProducts() {
         },
         {
             name: 'Puma Sports Cap',
-            badge: 'Online Offer',
-            discount: 'Discount 15%',
             currentPrice: '$20.00',
-            originalPrice: '$25.00',
             description: 'Lightweight cap perfect for sports and outdoor activities.',
             size: 'One Size',
             material: 'Polyester',
@@ -96,10 +90,7 @@ function getProducts() {
         },
         {
             name: 'Under Armour T-shirt',
-            badge: 'Hot Deal',
-            discount: 'Discount 25%',
             currentPrice: '$30.00',
-            originalPrice: '$40.00',
             description: 'Breathable T-shirt for ultimate performance and comfort.',
             size: 'S, M, L, XL',
             material: 'Polyester',
@@ -109,10 +100,7 @@ function getProducts() {
         },
         {
             name: 'Reebok Sports Bag',
-            badge: 'Special Offer',
-            discount: 'Discount 20%',
             currentPrice: '$40.00',
-            originalPrice: '$50.00',
             description: 'Spacious and durable sports bag for all your gear.',
             size: 'One Size',
             material: 'Nylon',
@@ -122,10 +110,7 @@ function getProducts() {
         },
         {
             name: 'Nike Training Pants',
-            badge: 'Best Seller',
-            discount: 'Discount 25%',
             currentPrice: '$45.00',
-            originalPrice: '$60.00',
             description: 'Comfortable and flexible training pants for all activities.',
             size: 'M, L, XL, XXL',
             material: 'Cotton Blend',
@@ -135,10 +120,7 @@ function getProducts() {
         },
         {
             name: 'Adidas Sneakers',
-            badge: 'Hot Deal',
-            discount: 'Discount 30%',
             currentPrice: '$80.00',
-            originalPrice: '$120.00',
             description: 'Stylish and comfortable sneakers for everyday use.',
             size: 'M, L, XL',
             material: 'Leather',
@@ -148,10 +130,7 @@ function getProducts() {
         },
         {
             name: 'Puma Jacket',
-            badge: 'Online Offer',
-            discount: 'Discount 35%',
             currentPrice: '$90.00',
-            originalPrice: '$140.00',
             description: 'Warm and stylish jacket for cold weather.',
             size: 'S, M, L, XL',
             material: 'Polyester',
@@ -161,10 +140,7 @@ function getProducts() {
         },
         {
             name: 'Under Armour Shorts',
-            badge: 'Special Offer',
-            discount: 'Discount 20%',
             currentPrice: '$25.00',
-            originalPrice: '$35.00',
             description: 'Lightweight and comfortable shorts for training.',
             size: 'S, M, L, XL',
             material: 'Polyester',
@@ -174,10 +150,7 @@ function getProducts() {
         },
         {
             name: 'Reebok Running Shoes',
-            badge: 'Best Seller',
-            discount: 'Discount 30%',
             currentPrice: '$75.00',
-            originalPrice: '$110.00',
             description: 'Durable and supportive running shoes for all terrains.',
             size: 'M, L, XL',
             material: 'Mesh',
@@ -187,10 +160,7 @@ function getProducts() {
         },
         {
             name: 'Nike Cap',
-            badge: 'Hot Deal',
-            discount: 'Discount 15%',
             currentPrice: '$18.00',
-            originalPrice: '$21.00',
             description: 'Comfortable cap with adjustable strap.',
             size: 'One Size',
             material: 'Cotton',
@@ -200,10 +170,7 @@ function getProducts() {
         },
         {
             name: 'Adidas Backpack',
-            badge: 'Special Offer',
-            discount: 'Discount 25%',
             currentPrice: '$40.00',
-            originalPrice: '$55.00',
             description: 'Spacious and durable backpack for daily use.',
             size: 'One Size',
             material: 'Nylon',
@@ -213,10 +180,7 @@ function getProducts() {
         },
         {
             name: 'Puma Socks',
-            badge: 'Best Seller',
-            discount: 'Discount 10%',
             currentPrice: '$9.00',
-            originalPrice: '$10.00',
             description: 'Comfortable and breathable socks for sports.',
             size: 'One Size',
             material: 'Cotton Blend',
@@ -226,10 +190,7 @@ function getProducts() {
         },
         {
             name: 'Under Armour Gloves',
-            badge: 'Hot Deal',
-            discount: 'Discount 20%',
             currentPrice: '$15.00',
-            originalPrice: '$20.00',
             description: 'Warm gloves perfect for cold weather.',
             size: 'S, M, L',
             material: 'Wool Blend',
@@ -239,10 +200,7 @@ function getProducts() {
         },
         {
             name: 'Reebok Headband',
-            badge: 'Online Offer',
-            discount: 'Discount 15%',
             currentPrice: '$8.00',
-            originalPrice: '$10.00',
             description: 'Lightweight and comfortable headband for sports.',
             size: 'One Size',
             material: 'Cotton',
@@ -252,10 +210,7 @@ function getProducts() {
         },
         {
             name: 'Nike Sports Bra',
-            badge: 'Best Seller',
-            discount: 'Discount 25%',
             currentPrice: '$25.00',
-            originalPrice: '$35.00',
             description: 'Supportive and comfortable sports bra.',
             size: 'S, M, L',
             material: 'Polyester',
@@ -282,16 +237,11 @@ function searchProducts() {
         productCard.classList.add('product-card');
 
         productCard.innerHTML = `
-            <div class="product-header">
-                <span class="badge">${product.badge}</span>
-                <span class="discount">${product.discount}</span>
-            </div>
             <img src="${product.image}" alt="${product.name}">
             <div class="product-info">
                 <h2>${product.name}</h2>
                 <div class="price">
                     <span class="current-price">${product.currentPrice}</span>
-                    <span class="original-price">${product.originalPrice}</span>
                 </div>
                 <p>${product.description}</p>
                 <div class="product-meta">
@@ -299,6 +249,7 @@ function searchProducts() {
                     <span>Material: ${product.material}</span>
                     <span>Color: ${product.color}</span>
                 </div>
+                <button class="add-to-cart-button" onclick="addToCart()">Add to Cart</button>
             </div>
         `;
 
@@ -331,10 +282,6 @@ function displayDescendingOrder() {
     displayProducts(sortedProducts);
 }
 
-function displayBestSellers() {
-    // Implement sorting by best sellers
-}
-
 function displayProducts(products) {
     const clothesSection = document.getElementById('clothes-section');
     const accessoriesSection = document.getElementById('accessories-section');
@@ -347,16 +294,11 @@ function displayProducts(products) {
         productCard.classList.add('product-card');
 
         productCard.innerHTML = `
-            <div class="product-header">
-                <span class="badge">${product.badge}</span>
-                <span class="discount">${product.discount}</span>
-            </div>
             <img src="${product.image}" alt="${product.name}">
             <div class="product-info">
                 <h2>${product.name}</h2>
                 <div class="price">
                     <span class="current-price">${product.currentPrice}</span>
-                    <span class="original-price">${product.originalPrice}</span>
                 </div>
                 <p>${product.description}</p>
                 <div class="product-meta">
@@ -364,6 +306,7 @@ function displayProducts(products) {
                     <span>Material: ${product.material}</span>
                     <span>Color: ${product.color}</span>
                 </div>
+                <button class="add-to-cart-button" onclick="addToCart()">Add to Cart</button>
             </div>
         `;
 
@@ -376,5 +319,5 @@ function displayProducts(products) {
 }
 
 function updateCartCount() {
-    document.getElementById('number-of-items-in-cart').textContent = '0';
+    document.getElementById('number-of-items-in-cart').textContent = cartCount;
 }

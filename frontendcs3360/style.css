@@ -125,7 +125,13 @@ header {
     transform: scale(1.05);
 }
 
-.product-card img,
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Ensures the image covers the entire area without distortion */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
 .product-card h2 {
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -159,16 +165,27 @@ header {
     font-size: 1.2em;
 }
 
-.original-price {
-    text-decoration: line-through;
-    color: #999;
-    font-size: 1.2em;
-}
-
 .product-meta {
     margin: 10px 0;
     font-size: 1em;
     color: #666;
+}
+
+.add-to-cart-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff5722;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-button:hover {
+    background-color: #e64a19;
 }
 
 footer {
