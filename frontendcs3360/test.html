@@ -1,0 +1,93 @@
+<header class="bg-zinc-800 text-white p-4">
+    <h1 class="text-2xl">Clothes & Accessories CS 3360 Shop</h1>
+    <nav class="brand-nav">
+      <a href="#" class="mr-2">Nike</a>
+      <a href="#" class="mr-2">Adidas</a>
+      <a href="#" class="mr-2">Puma</a>
+      <a href="#" class="mr-2">Under Armour</a>
+      <a href="#">Reebok</a>
+    </nav>
+    <div class="additional-buttons mt-2">
+      <button onclick="applyDiscount()" class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2">
+        Apply Discount
+      </button>
+      <button onclick="clearCart()" class="bg-red-500 text-white px-4 py-2 rounded-md">
+        Clear Cart
+      </button>
+    </div>
+  </header>
+  <section class="main-content p-4">
+    <div class="products-filter-container">
+      <div class="input-search mb-4">
+        <label for="searchInput" class="block">Search Product:</label>
+        <input
+          type="text"
+          id="product-search-input"
+          placeholder="Enter product name"
+          class="border p-2 rounded-md mr-2"
+        />
+        <button onclick="searchProducts()" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+          Search
+        </button>
+      </div>
+      <div class="user-info-container mb-4">
+        <label for="customer-phoneNumber-input" class="block">Phone Number:</label>
+        <input
+          type="text"
+          id="customer-phoneNumber-input"
+          placeholder="Enter your phone number"
+          class="border p-2 rounded-md mb-2"
+        />
+        <label for="customer-name-input" class="block">Customer Name:</label>
+        <input
+          type="text"
+          id="customer-name-input"
+          placeholder="Enter your full name"
+          class="border p-2 rounded-md mb-2"
+        />
+        <label for="customer-address-input" class="block">Address:</label>
+        <input
+          type="text"
+          id="customer-address-input"
+          placeholder="Enter your address"
+          class="border p-2 rounded-md mb-2"
+        />
+        <button onclick="postCustomerInfo()" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+          Submit
+        </button>
+      </div>
+      <div class="mb-4">
+        <h3>Total items in the cart: <span id="number-of-items-in-cart"></span></h3>
+      </div>
+      <div>
+        <button class="cart-button bg-blue-500 text-white px-4 py-2 rounded-md">
+          <a href="./cart.html">To cart</a>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="product-list p-4">
+    <div class="filter-buttons mb-4">
+      <div class="dropdown">
+        <button class="dropbtn bg-zinc-300 text-zinc-800 px-4 py-2 rounded-md">Sort By</button>
+        <div class="dropdown-content">
+          <a href="#" onclick="displayBestSellers()">Best Sellers</a>
+          <a href="#" onclick="displayZeroInstallment()">0% Installment</a>
+          <a href="#" onclick="displayLowPrice()">Low Price</a>
+          <a href="#" onclick="displayHighPrice()">High Price</a>
+          <a href="#" onclick="displayOnlineOffers()">Online Offers</a>
+          <a href="#" onclick="displayAscendingOrder()">Lowest to Highest</a>
+          <a href="#" onclick="displayDescendingOrder()">Highest to Lowest</a>
+        </div>
+      </div>
+    </div>
+    <h2>Clothes</h2>
+    <div id="clothes-section" class="product-section"></div>
+    <h2>Accessories</h2>
+    <div id="accessories-section" class="product-section"></div>
+  </section>
+  <footer class="bg-zinc-800 text-white p-4">
+    <p>&copy; 2024 CS 3360. All rights reserved.</p>
+  </footer>
+  <script src="./js/script.js"></script>
+  
