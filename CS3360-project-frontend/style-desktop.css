@@ -1,0 +1,468 @@
+/* style for desktop */
+@media only screen and (min-width: 1200px) {
+  /* set font for whole page */
+  html {
+    height: 100%;
+  }
+  body {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+      Helvetica, Arial, "Lucida Grande", sans-serif;
+    margin: 0;
+    /* min-height: 100%; */
+    color: black;
+    height: max-content;
+  }
+  /* header navbar style start */
+  /* header {
+        position: fixed;
+        top: 0;
+        left: 0;
+      } */
+  /* hover pointer for link */
+  a:hover {
+    cursor: pointer;
+  }
+  /* navbar properties */
+  .navbar {
+    overflow: hidden;
+    border-bottom: 1px solid #64c9f3;
+    display: flex;
+    align-items: stretch;
+    padding: 0 14%;
+    height: 10vh;
+  }
+  /* navbar mobile navigate turn off with desktop view */
+  .navbar-mobile-navigate {
+    display: none;
+  }
+  /* <a> tag in navbar */
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navbar a:hover {
+    color: #009bda;
+    transition: 0.1s;
+  }
+  /* logo */
+  .subnav-logo {
+    /* width: 50%; */
+    height: 100%;
+  }
+  /* subnav-container */
+  .subnav-container {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    /* transition: ; */
+  }
+  /* subnav content */
+  .subnav {
+    float: left;
+    overflow: hidden;
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+  }
+  /* subnabtn that's inside the subnav class */
+  .subnav .subnavbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  .subnav:hover {
+    border-bottom: #64c9f3 3px solid;
+    transition: 0.1s;
+  }
+  .subnav-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 10.1%;
+    z-index: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    opacity: 1;
+    transition: opacity 0.3s, display 0.3s;
+  }
+
+  .subnav-content a {
+    float: left;
+    text-decoration: none;
+    color: black;
+    width: 25%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+  /* navbar header end */
+
+  /* main page about us page start */
+  section {
+    /* height: 100vh; */
+    height: 100%;
+  }
+  /* banner start */
+  .banner {
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  .banner-img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    aspect-ratio: 1920/800;
+  }
+  .banner-content {
+    position: absolute;
+    z-index: 1;
+    bottom: 3.25rem;
+    color: white;
+    font-weight: 700;
+    left: 10%;
+  }
+  .banner-content h3 {
+    font-size: 3.25rem;
+    margin: 0;
+  }
+  .banner-content p {
+    font-size: 1.875rem;
+  }
+  /* banner end */
+
+  /* about us start */
+  .about-section-1 {
+    padding-top: 3%;
+    padding-left: 15%;
+    padding-bottom: 3%;
+  }
+  .about-section-1 p {
+    max-width: 58.222rem;
+    font-size: 18px;
+    color: #434343;
+    line-height: 200%;
+  }
+  /* box list start */
+  .box-list-about-us {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 58.228rem;
+    column-gap: 1.788rem;
+  }
+  .box-list-wrapper {
+    /* flex: 1; */
+    width: 100%;
+  }
+  .box-list-wrapper:nth-child(1) {
+    /* flex-grow: 1; */
+    max-width: 24.94rem;
+    width: 100%;
+  }
+  .box-list-wrapper:nth-child(2) {
+    /* flex-grow: 1; */
+    max-width: 31.5rem;
+    width: 100%;
+  }
+
+  .box-list-title {
+    border-bottom: 1px solid #64c9f3;
+    gap: 0.44rem;
+    font-weight: 500;
+    /* font-size: 1rem; */
+    line-height: calc(22 / 18);
+    color: #009bda;
+  }
+  .list {
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    gap: 0.889rem 1.778rem;
+    margin-top: 0.444rem;
+  }
+  .item {
+    font-weight: 550;
+    font-size: 1rem;
+    color: #434343;
+    line-height: 1.222rem;
+    position: relative;
+  }
+  /* main page about us end */
+  /* main content homepage start */
+  /* carousel slide show styling */
+  /* * {
+        box-sizing: border-box;
+      } */
+
+  /* Slideshow container */
+  .slideshow-container {
+    box-sizing: border-box;
+
+    max-width: 100%;
+    position: relative;
+    margin: auto;
+  }
+
+  /* Hide the images by default */
+  .mySlides {
+    display: none;
+  }
+  .mySlides:nth-child(1) {
+    display: block;
+  }
+
+  /* Next & previous buttons */
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover,
+  .next:hover {
+    background-color: #009bda;
+  }
+
+  /* Caption text */
+  .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+
+  /* The dots/bullets/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .active,
+  .dot:hover {
+    background-color: #717171;
+  }
+
+  /* Fading animation */
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* carousel slide show styling end */
+
+  /* footer start */
+  footer {
+    width: 100%;
+    padding: 3.333rem 0 2.222rem;
+    background: linear-gradient(292.23deg, #083b79 9.46%, #0b4c9a 94.57%);
+    color: white;
+    position: absolute;
+    /* bottom: 0; */
+    left: 0;
+    /* display: flex;
+        flex-direction: column;
+        align-items: center; */
+    /* bottom: 0; */
+  }
+  .footer-wrapper {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+  .blue-text {
+    color: #64c9f3 !important;
+  }
+  .footer-wrapper-top {
+    gap: 1.778rem;
+    display: flex;
+
+    align-items: center;
+  }
+
+  .footer-wrapper-middle {
+    gap: 2rem 2.5rem;
+    margin-top: 1.788rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .footer-link-item-title {
+    font-weight: 500;
+    font-size: 1.167rem;
+    line-height: 1.889rem;
+    white-space: nowrap;
+  }
+  .footer-link ul {
+    padding: 0;
+    list-style: none;
+  }
+  .footer-link a {
+    text-decoration: none;
+  }
+  .footer-link li {
+    margin-top: 0.889rem;
+  }
+
+  .footer-wrapper-bottom {
+    padding-top: 1.333rem;
+    margin-top: 1.778rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+  }
+  .bottom-content {
+    flex: 1;
+  }
+  .bottom-content:nth-child(2) {
+    margin: 0 2.222rem;
+    flex: 1;
+  }
+  .bottom-title {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: calc(22 / 18);
+  }
+  .bottom-caption {
+    font-size: 0.889rem;
+    line-height: calc(19 / 16);
+    margin-top: 0.444rem;
+  }
+  .bottom-right-social-links-box {
+    gap: 0.889rem;
+    display: flex;
+  }
+  .bottom-right p {
+    color: #64c9f3;
+    font-size: 0.889rem;
+    line-height: calc(19 / 16);
+    margin-top: 0.444rem;
+  }
+
+  /* footer end */
+
+  /* responsive column section start forBank.html */
+
+  .content-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2% 0;
+  }
+
+  .column-content {
+    flex: 1;
+    margin: 8px;
+    min-width: 200px;
+  }
+  .column-content:nth-child(5) {
+    flex: 1;
+    padding: 0;
+  }
+  .column-content h2 {
+    color: #0b3f7e;
+  }
+  .column-content p {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.778rem;
+    color: #434343;
+  }
+  /* Example styling for the columns */
+  .column-content {
+    border: 1px solid #64c9f3;
+    padding: 0% 2%;
+  }
+  .content-container img {
+    box-sizing: border-box;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2% 0;
+  }
+  /* responsive column section end forBank.html */
+
+  /* responsive column section start for product.html */
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
+  }
+  table {
+    /* padding: 0; */
+    border-collapse: collapse;
+    width: 70%;
+    text-align: center;
+  }
+  table td {
+    border: 1px solid;
+    padding: 0;
+    margin: 0;
+    height: 100px;
+  }
+  table th {
+    border: 1px solid;
+    padding: 0;
+    margin: 0;
+    height: 100px;
+  }
+
+  /* slider styling */
+  #priceRange {
+    width: 80%;
+    margin: 20px auto;
+  }
+}
