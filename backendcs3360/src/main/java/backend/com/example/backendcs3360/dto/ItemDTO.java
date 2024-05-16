@@ -24,15 +24,18 @@ public abstract class ItemDTO {
     private double price;
     @Column(name = "description")
     private String description;
+    @Column(name = "image_path")
+    private String imagePath;
 
     public ItemDTO() {
     }
 
-    public ItemDTO(int itemId, String productName, double price, String description) {
+    public ItemDTO(int itemId, String productName, double price, String description, String imagePath) {
         this.itemId = itemId;
         this.productName = productName;
         this.price = price;
         this.description = description;
+        this.imagePath = imagePath;
     }
 
     public int getItemId() {
@@ -67,6 +70,14 @@ public abstract class ItemDTO {
         this.description = description;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public String toString() {
         return "ItemDTO{" +
@@ -74,6 +85,7 @@ public abstract class ItemDTO {
                 ", productName='" + productName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
+                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 

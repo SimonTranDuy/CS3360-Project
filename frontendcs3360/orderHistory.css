@@ -1,0 +1,98 @@
+/* CSS để tạo giao diện */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.table-auto {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-auto th,
+.table-auto td {
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  text-align: left;
+}
+
+.bg-zinc-100 {
+  background-color: #f7fafc;
+}
+
+.dark:bg-zinc-700 {
+  background-color: #4a5568;
+}
+
+.text-zinc-800 {
+  color: #2d3748;
+}
+
+.dark:text-zinc-200 {
+  color: #edf2f7;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.bg-blue-500 {
+  background-color: #4299e1;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+/* Hiệu ứng nổi bóng khi di chuột vào nút */
+.btn {
+  background-color: #4299e1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}

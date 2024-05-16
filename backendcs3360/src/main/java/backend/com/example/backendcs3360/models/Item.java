@@ -15,14 +15,17 @@ public abstract class Item {
 //    @Column(name = "description")
     private String description;
 
+    private String imagePath;
+
     public Item() {
     }
 
-    public Item(int itemId, String productName, Double price, String description) {
+    public Item(int itemId, String productName, Double price, String description, String imagePath) {
         this.itemId = itemId;
         this.productName = productName;
         this.price = price;
         this.description = description;
+        this.imagePath = imagePath;
     }
 
     public int getItemId() {
@@ -57,6 +60,14 @@ public abstract class Item {
         this.description = description;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
 
     @Override
     public String toString() {
@@ -65,6 +76,7 @@ public abstract class Item {
                 ", product_name='" + productName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
+                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 }
