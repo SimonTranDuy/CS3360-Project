@@ -40,22 +40,23 @@ async function getData(url = baseURL) {
 
 async function postCustomerInfo() {
   const customerInfo = {
-    name: document.getElementById("customer-name-input").value,
-    email: document.getElementById("customer-phoneNumber-input").value,
-    phoneNumber: document.getElementById("customer-name-input").value,
+    customerName: document.getElementById("customer-name-input").value,
+    phoneNumber: document.getElementById("customer-phoneNumber-input").value,
     address: document.getElementById("customer-address-input").value,
   };
+  console.log(customerInfo);
   try {
-    const response = await fetch(baseURL + "customers/insert", {
-      method: "POST",
-      mode: "cors", // Use "cors" instead of "no-cors"
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(customerInfo),
-    });
+    const response = await fetch(
+      "http://localhost:8080/api/v1/customers/insert",
+      {
+        method: "POST",
+        mode: "cors", // Use "cors" instead of "no-cors"
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(customerInfo),
+      }
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -290,6 +291,4 @@ function postNewOrdersItem(product) {
     quantity: product.quantity,
     coupon: {},
   };
-
-
 }
