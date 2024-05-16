@@ -9,8 +9,8 @@ import backend.com.example.backendcs3360.models.Accessories;
 @Entity
 @Table(name = "accessories")
 public class AccessoriesDTO extends ItemDTO{
-    public AccessoriesDTO(int itemId, String productName, double price, String description) {
-        super(itemId, productName, price, description);
+    public AccessoriesDTO(int itemId, String productName, double price, String description, String imagePath, String type, String material, double weight) {
+        super(itemId, productName, price, description, imagePath);
     }
     @Column(name = "type")
     private String type;
@@ -55,6 +55,7 @@ public class AccessoriesDTO extends ItemDTO{
         newItem.setDescription(this.getDescription());
         newItem.setPrice(this.getPrice());
         newItem.setProductName(this.getProductName());
+        newItem.setImagePath(this.getImagePath());
         newItem.setType(this.getType());
         newItem.setMaterial(this.getMaterial());
         newItem.setWeight(this.getWeight());

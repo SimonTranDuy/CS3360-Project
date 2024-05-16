@@ -18,8 +18,8 @@ public class Accessories extends Item {
         super();
     }
 
-    public Accessories(int itemId, String productName, double price, String description, String type, String material, double weight) {
-        super(itemId, productName, price, description);
+    public Accessories(int itemId, String productName, double price, String description, String type, String material, double weight, String imagePath) {
+        super(itemId, productName, price, description, imagePath);
         this.type = type;
         this.material = material;
         this.weight = weight;
@@ -68,6 +68,7 @@ public class Accessories extends Item {
         newDTO.setPrice(this.getPrice());
         newDTO.setProductName(this.getProductName());
         newDTO.setItemId(this.getItemId());
+        newDTO.setImagePath(this.getImagePath());
         return newDTO;
     }
 }
