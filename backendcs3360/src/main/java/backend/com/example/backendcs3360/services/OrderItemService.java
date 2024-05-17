@@ -35,21 +35,20 @@ public class OrderItemService {
 
     @Transactional
     public OrderItemDTO addItemToCart(OrderItemReqDTO orderItemDTO) {
-//        if (orderItemDTO.getCustomerId() == null) {
-//            throw new RuntimeException("Customer is required");
-//
-
         int customerId = orderItemDTO.getCustomerId();
         int itemId = orderItemDTO.getItemId();
         List<OrderItemDTO> cartItems = orderItemRepository.findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
         OrderItemDTO orderItem = null;
-    
+
         // Check if the item already exists in the cart
         for (OrderItemDTO cartItem : cartItems) {
             if (cartItem.getItem().getItemId() == itemId) {
-                throw new RuntimeException("Item already exists in the cart");
+                // If the item exists, update the quantity and save
+                cartItem.setQuantity(cartItem.getQuantity() + orderItemDTO.getQuantity());
+                return orderItemRepository.save(cartItem);
             }
         }
+
         // If the item does not exist in the cart, create a new order item
         orderItem = new OrderItemDTO();
         if (cartItems.isEmpty()) {
@@ -57,17 +56,16 @@ public class OrderItemService {
         } else {
             orderItem.setOrderCode(cartItems.get(0).getOrderCode());
         }
-    
+
         CustomerDTO customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
         ItemDTO item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found"));
         orderItem.setCustomer(customer);
         orderItem.setItem(item);
         orderItem.setQuantity(orderItemDTO.getQuantity());
-    
+
         return orderItemRepository.save(orderItem);
     }
-
     @Transactional
     public OrderItemDTO updateItemQuantity(OrderItemDTO newOrderItem, int customerId, int itemId) {
         OrderItemDTO orderItem = orderItemRepository
