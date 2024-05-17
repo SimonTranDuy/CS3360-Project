@@ -159,12 +159,12 @@ public class OrderItemService {
     public Cart getCartItems(int customerId) {
         List<OrderItemDTO> itemsDTO = orderItemRepository
                 .findByCustomer_CustomerIdAndDateOfPurchaseIsNull(customerId);
-        
+
         // If itemsDTO is empty, return an empty Cart
         if (itemsDTO.isEmpty()) {
             return new Cart();
         }
-    
+
         List<OrderItem> items = itemsDTO.stream()
                 .map(OrderItemDTO::convertToOrderItems)
                 .collect(Collectors.toList());
@@ -179,7 +179,7 @@ public class OrderItemService {
         cart.setOrderItems(items);
         cart.setPhoneNumber(phoneNumber);
         cart.setTotal(total);
-    
+
         return cart;
     }
 }
