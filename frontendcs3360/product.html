@@ -4,20 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-commerce - Clothes & Accessories</title>
-    <link rel="stylesheet" href="./style.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-    />
+    <link rel="stylesheet" href="css/product.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
     <!-- UI Slider library -->
   </head>
   <body>
     <header>
       <h1>Clothes & Accessories CS 3360 Shop</h1>
       <nav class="brand-nav">
-        <a href="./product.html">Item</a>
-        <a href="./cart.html">Cart</a>
-        <a href="./orderhistory.html">Order History</a>
+        <a href="product.html" class="active bubble-link">Home</a>
+        <a href="cart.html" >Cart</a>
       </nav>
     </header>
     <section class="main-content">
@@ -82,7 +81,10 @@
           <h3>
             Total items in the cart: <span id="number-of-items-in-cart"></span>
           </h3>
-          <button class="cart-button"><a href="./cart.html">To cart</a></button>
+          <button class="cart-button" onclick="window.location.href='cart.html'">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+        </button>
         </div>
       </div>
       <div class="main-content-right">

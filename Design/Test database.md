@@ -11,7 +11,6 @@ id | name |
 --| -----|
 1 | Rolex watch
 2 | Duy's Clothes
-3 | Tuan Anh's penis
 
 # list_of_items
 

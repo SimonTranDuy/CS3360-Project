@@ -1,10 +1,10 @@
 
 <h1>DATABASE DESIGN</h1>
-<image src="Design/db.png"></image>
+<image src="Design/cs3360-db.png"></image>
 
-<h2>- NẾU TRẢ VỀ BẢN GHI THÌ LẤY LIST OF ITEMS ID ĐÓ ĐỂ ADD ITEM MỚI VÀO DỰA TRÊN LIST OF ITEMS ID ĐÓ (THÊM VÀO GIỎ HÀNG)</h2>
-<h2>- NẾU NHƯ KO TRẢ VỀ GÌ (GIỎ HÀNG TRỐNG) THÌ GENERATE LIST OF ITEMS ID MỚI VÀ INSERT VÀO BẢNG</h2>
-<h2>- DỰA VÀO CUSTOMER ID VÀ DATE OF PURCHASE ĐỂ LẤY CÁC ĐƠN HÀNG ĐÃ MUA, CÁC ĐƠN HÀNG CÓ CÙNG DATE OF PURCHASE GỘP VÀO MỘT ĐƠN, CÁC ĐƠN HÀNG DATE OF PURCHASE NULL LÀ HÀNG CHƯA THANH TOÁN TRONG GIỎ</h2>
+<li>NẾU TRẢ VỀ BẢN GHI THÌ LẤY LIST OF ITEMS ID ĐÓ ĐỂ ADD ITEM MỚI VÀO DỰA TRÊN LIST OF ITEMS ID ĐÓ (THÊM VÀO GIỎ HÀNG)</li>
+<li>NẾU NHƯ KO TRẢ VỀ GÌ (GIỎ HÀNG TRỐNG) THÌ GENERATE LIST OF ITEMS ID MỚI VÀ INSERT VÀO BẢNG</li>
+<li>DỰA VÀO CUSTOMER ID VÀ DATE OF PURCHASE ĐỂ LẤY CÁC ĐƠN HÀNG ĐÃ MUA, CÁC ĐƠN HÀNG CÓ CÙNG DATE OF PURCHASE GỘP VÀO MỘT ĐƠN, CÁC ĐƠN HÀNG DATE OF PURCHASE NULL LÀ HÀNG CHƯA THANH TOÁN TRONG GIỎ</li>
 
 ```sql
 SELECT customer_id = ? 
@@ -58,15 +58,33 @@ Table list_of_items {
   
 }
 ```
+<h1>CONFIG SQL</h1>
 
+```
+spring.application.name=demo
+spring.jpa.hibernate.ddl-auto=update
+
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.datasource.url=jdbc:mysql://localhost:3306/your_schema
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+#allow table's name like tblProduct (allow creating customized table name)
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.open-in-view=false
+spring.jpa.properties.hibernate.transaction.jta.platform=org.hibernate.engine.transaction.jta.platform.internal.AtomikosJtaPlatform
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```
 <br/>
 <br/>
 <br/>
 <br/>
 <br/>
+
 
 <h1>CLASS DESIGN</h1>
-<image src="Design/classDesign.png"></image>
+<image src="Design/cs3360-class.png"></image>
 
 
 <br/>
@@ -90,24 +108,8 @@ Table list_of_items {
     <li>05/05/2024: Đã xong models, đang làm repositories</li>
     <li>09/05/2024: Đã dựng xong cơ bản của luồng liên quan đến Item, thiếu các luồng findby...</li>
     <li>11/06/2024: Xong services + controller, check? </li>
-    <li> 12/05/2024: Đã xong toàn bộ backend, cần xem lại customer</li>
+    <li> 12/05/2024: Đã xong toàn bộ backend</li>
+    <li> 18/05/2024: Đã xong toàn bộ frontend</li>
+    <li> 19/05/2024: Test chương trình</li>
 </ul>
 
-<h1>CONFIG SQL</h1>
-
-```
-spring.application.name=demo
-spring.jpa.hibernate.ddl-auto=update
-
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-spring.datasource.url=jdbc:mysql://localhost:3306/your_schema
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-#allow table's name like tblProduct (allow creating customized table name)
-spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-spring.jpa.properties.hibernate.format_sql=true
-spring.jpa.open-in-view=false
-spring.jpa.properties.hibernate.transaction.jta.platform=org.hibernate.engine.transaction.jta.platform.internal.AtomikosJtaPlatform
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-```

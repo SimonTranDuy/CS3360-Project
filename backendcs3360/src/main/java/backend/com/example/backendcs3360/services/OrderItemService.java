@@ -66,7 +66,6 @@ public class OrderItemService {
 
         return orderItemRepository.save(orderItem);
     }
-
     @Transactional
     public OrderItemDTO updateItemQuantity(OrderItemDTO newOrderItem, int customerId, int itemId) {
         OrderItemDTO orderItem = orderItemRepository
