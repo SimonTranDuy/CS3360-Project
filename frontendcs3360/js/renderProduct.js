@@ -119,7 +119,7 @@ async function searchProducts() {
     try {
       const response = await fetch(
         "http://localhost:8080/api/v1/products/get-by-name/" +
-          encodeURIComponent(productName),
+        encodeURIComponent(productName),
         {
           method: "GET",
           mode: "cors", // Use "cors" instead of "no-cors"
@@ -231,20 +231,22 @@ function displaySearchResults(products) {
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
-              <img src="${product.imagePath}" alt="${product.productName}">
-              <div class="product-info">
-                  <h2>${product.productName}</h2>
-                  <div class="price">
-                      <span class="current-price">${product.price} $</span>
-                  </div>
-                  <p>${product.description}</p>
-                  <div class="product-meta">
-                      <span>Size: ${product.size}</span>
-                      <span>Material: ${product.material}</span>
-                      <span>Color: ${product.color}</span>
-                  </div>
-              </div>
-          `;
+    <img src="${product.imagePath}" alt="${product.productName}">
+    <div class="product-info">
+        <h2>${product.productName}</h2>
+        <div class="price">
+            <span class="current-price">${product.price} $</span>
+        </div>
+        <p>${product.description}</p>
+        <div class="product-meta">
+            ${product.brand ? `<span>Brand: ${product.brand}</span><br>` : ''}
+            ${product.size ? `<span>Size: ${product.size}</span><br>` : ''}
+            ${product.type ? `<span>Type: ${product.type}</span><br>` : ''}
+            ${product.material ? `<span>Material: ${product.material}</span><br>` : ''}
+            ${product.weight ? `<span>Weight: ${product.weight}</span><br>` : ''}
+        </div>
+    </div>
+`;
     productCard.appendChild(addToCartButton);
     if (!product.weight) {
       clothesSection.appendChild(productCard);
@@ -258,9 +260,17 @@ function displaySearchResults(products) {
 async function addToCart(product) {
   // console.log("adding to cart");
   // console.log(product);
-  const customerId = JSON.parse(
-    localStorage.getItem("customerInfo")
-  ).customerId;
+  const customerInfo = JSON.parse(localStorage.getItem("customerInfo"));
+
+  // Check if customer info exists
+  if (!customerInfo) {
+    // If customer info does not exist, display an error message and stop the function
+    document.getElementById("warning-message").innerText = "Please enter your information first!";
+
+    // Scroll to the warning message
+    document.getElementById("warning-message").scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
   const productToAdd = {
     customerId: customerId,
     itemId: product.itemId,
@@ -335,4 +345,23 @@ function postNewOrdersItem(product) {
     quantity: product.quantity,
     coupon: {},
   };
+}
+
+function signOut() {
+  // Clear all data in localStorage
+  localStorage.clear();
+
+  window.location.reload();
+}
+
+window.onload = function () {
+  // Get customer info from localStorage
+  const customerInfo = JSON.parse(localStorage.getItem("customerInfo"));
+
+  // If customer info exists, display it
+  if (customerInfo) {
+    document.getElementById("customer-phoneNumber-input").value = customerInfo.phoneNumber;
+    document.getElementById("customer-name-input").value = customerInfo.customerName;
+    document.getElementById("customer-address-input").value = customerInfo.address;
+  }
 }
