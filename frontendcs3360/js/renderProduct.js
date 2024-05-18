@@ -7,7 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
     displaySearchResults(data.data);
     // console.log(dataToRender);
   });
-  if (window.localStorage.getItem("cart")) {
+  fetchCart();
+  updateNumberOfItemsInCart();
+});
+// rerender when change in localStorage in different tabs and windows
+window.addEventListener("storage", function (event) {
+  if (event.key === "cartItems") {
     updateNumberOfItemsInCart();
   }
 });
@@ -65,34 +70,45 @@ async function postCustomerInfo() {
   }
 }
 
-async function displayCurrentCart() {
-  const customerId = JSON.parse(
-    localStorage.getItem("customerInfo")
-  ).customerId;
+async function fetchCart() {
+  let cartInfo = {};
+
+  const customerInfo = JSON.parse(localStorage.getItem("customerInfo"));
+  const customerId = customerInfo.customerId;
+  //   console.log(customerId);
+  const url = `http://localhost:8080/api/orderItems/get-all/${customerId}`;
+  // const testURL = `http://localhost:8080/api/orderItems/get-all/1`;
+  //   console.log(url);
+  //   console.log(customerInfo);
   try {
-    const response = await fetch(
-      "http://localhost:8080/api/orderItems/get-all/" + customerId,
-      {
-        method: "POST",
-        mode: "cors", // Use "cors" instead of "no-cors"
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(url, {
+      method: "GET",
+      mode: "cors", // Use "cors" instead of "no-cors"
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    let data = await response.json();
-    console.log(data);
-    localStorage.setItem("cart", JSON.stringify(data.data));
-    return data;
+
+    await response.json().then((data) => {
+      cartInfo = data.data;
+      localStorage.setItem("cartInfo", JSON.stringify(cartInfo));
+    });
+
     //   console.log(data); // Log or process the data as needed
   } catch (error) {
     console.error("Error fetching data:", error);
   }
+  // console.log(cartInfo);
+  //  cartItems.push(cartInfo.orderItems);
+  if (localStorage.getItem("cartItems") != null) {
+    localStorage.removeItem("cartItems");
+  }
+  let cartItems = cartInfo.orderItems;
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  // console.log(cartItems);
 }
 // function get products by NAME with GET method
 async function searchProducts() {
@@ -240,8 +256,8 @@ function displaySearchResults(products) {
 
 // Add a product to the cart using both post method postNewOrdersItem and save that object data to localStorage.
 async function addToCart(product) {
-  console.log("adding to cart");
-  console.log(product);
+  // console.log("adding to cart");
+  // console.log(product);
   const customerId = JSON.parse(
     localStorage.getItem("customerInfo")
   ).customerId;
@@ -250,7 +266,7 @@ async function addToCart(product) {
     itemId: product.itemId,
     quantity: 1,
   };
-  console.log(productToAdd);
+  // console.log(productToAdd);
   try {
     const response = await fetch("http://localhost:8080/api/orderItems/add", {
       method: "POST",
@@ -271,19 +287,24 @@ async function addToCart(product) {
   } catch (error) {
     console.error("Error fetching search results:", error);
   }
+  await fetchCart();
+  updateNumberOfItemsInCart();
 }
 // rerender the number of items in the cart
 function updateNumberOfItemsInCart() {
-  const cartData = JSON.parse(localStorage.getItem("cart"));
-  let total = 0;
-  cartData.map((item) => {
-    // console.log(item.quantity);
-    total += item.quantity;
-  });
+  const cartData = JSON.parse(localStorage.getItem("cartItems"));
+  console.log(cartData);
+
   const numberOfItemsInCart = document.getElementById(
     "number-of-items-in-cart"
   );
-  numberOfItemsInCart.innerHTML = total;
+  if (cartData) {
+    numberOfItemsInCart.innerHTML = "";
+    numberOfItemsInCart.innerHTML = cartData.length;
+  } else {
+    numberOfItemsInCart.innerHTML = "";
+    numberOfItemsInCart.innerHTML = 0;
+  }
 }
 
 // save OrdersItem to localStorage
