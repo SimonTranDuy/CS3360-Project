@@ -32,6 +32,42 @@ header {
     background-color: #555;
 }
 
+.brand-nav a.active {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+/* Bubble effect */
+.bubble-link {
+    position: relative;
+    z-index: 1;
+}
+
+.bubble-link:hover::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(76, 175, 80, 0.2); /* Light green color, less prominent */
+    border-radius: 5px; /* Slightly rounded corners */
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    animation: bubble-expand 0.3s ease-in-out forwards;
+}
+
+@keyframes bubble-expand {
+    from {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
 .main-content {
     display: flex;
     justify-content: space-around;
@@ -91,7 +127,8 @@ header {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 1.1em; /* Updated font size */
+    font-size: 1.1em;
+    /* Updated font size */
 }
 
 .input-search button:hover,
@@ -108,8 +145,10 @@ header {
 .product-section {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px; /* Increase the gap between products */
-    margin-bottom: 40px; /* Increase the space between clothes and accessories sections */
+    gap: 30px;
+    /* Increase the gap between products */
+    margin-bottom: 40px;
+    /* Increase the space between clothes and accessories sections */
 }
 
 .product-card {
@@ -128,7 +167,8 @@ header {
 .product-card img {
     width: 100%;
     height: 200px;
-    object-fit: cover; /* Ensures the image covers the entire area without distortion */
+    object-fit: cover;
+    /* Ensures the image covers the entire area without distortion */
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -240,4 +280,3 @@ footer {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
