@@ -11,7 +11,7 @@ async function fetchOrderHistory(order = "desc") {
   const testURL = `http://localhost:8080/api/orderItems/historyAsc/10`;
   console.log(customerInfo);
   try {
-    const response = await fetch(testURL, {
+    const response = await fetch(url, {
       method: "GET",
       mode: "cors", // Use "cors" instead of "no-cors"
       headers: {
