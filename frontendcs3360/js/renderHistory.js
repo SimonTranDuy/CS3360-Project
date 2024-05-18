@@ -44,9 +44,7 @@ const renderOrderHistory = () => {
     <td class="px-4 py-2">${orderItem.quantity}</td>
     <td class="px-4 py-2">${orderItem.item.price}</td>
     <td class="px-4 py-2">${orderItem.item.price * orderItem.quantity}</td>
-              <td class="px-4 py-2">${new Date(
-                orderItem.dateOfPurchase
-              ).toLocaleDateString()}</td>
+    <td class="px-4 py-2">${new Date(orderItem.dateOfPurchase).toLocaleString()}</td>
 
             `;
     tbody.appendChild(row);
