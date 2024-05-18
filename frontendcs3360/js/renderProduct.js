@@ -40,16 +40,24 @@ async function getData(url = baseURL) {
 }
 
 async function postCustomerInfo() {
+  const phoneNumberInput = document.getElementById("customer-phoneNumber-input").value;
+
+  // Validate the phone number
+  if (!/^\d{10}$/.test(phoneNumberInput)) {
+    document.getElementById("message").innerText = "Invalid phone number. Please enter a 10-digit number.";
+    return;
+  }
+
   const customerInfo = {
     customerName: document.getElementById("customer-name-input").value,
-    phoneNumber: document.getElementById("customer-phoneNumber-input").value,
+    phoneNumber: phoneNumberInput,
     address: document.getElementById("customer-address-input").value,
   };
-  console.log(customerInfo);
+
   try {
     const response = await fetch(baseURL + "customers/insert", {
       method: "POST",
-      mode: "cors", // Use "cors" instead of "no-cors"
+      mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
       headers: {
@@ -57,16 +65,21 @@ async function postCustomerInfo() {
       },
       body: JSON.stringify(customerInfo),
     });
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
     let data = await response.json();
-    console.log(data);
     localStorage.setItem("customerInfo", JSON.stringify(data.data));
+
+    // Display a success message
+    document.getElementById("message").innerText = "Your information has been successfully submitted!";
     return data;
-    //   console.log(data); // Log or process the data as needed
+
   } catch (error) {
     console.error("Error fetching data:", error);
+    document.getElementById("message").innerText = "An error occurred. Please try again.";
   }
 }
 
@@ -261,7 +274,6 @@ async function addToCart(product) {
   // console.log("adding to cart");
   // console.log(product);
   const customerInfo = JSON.parse(localStorage.getItem("customerInfo"));
-
   // Check if customer info exists
   if (!customerInfo) {
     // If customer info does not exist, display an error message and stop the function
@@ -272,7 +284,7 @@ async function addToCart(product) {
     return;
   }
   const productToAdd = {
-    customerId: customerId,
+    customerId: customerInfo.customerId,
     itemId: product.itemId,
     quantity: 1,
   };

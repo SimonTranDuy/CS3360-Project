@@ -286,3 +286,8 @@ footer {
 .button-container button:first-child {
     margin-right: 0.5cm;
 }
+
+#message {
+    color: red;
+    margin-top: 10px;
+  }
