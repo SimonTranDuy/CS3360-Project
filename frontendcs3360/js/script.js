@@ -15,6 +15,7 @@ function toggleCustomerInfo() {
     infoContainer.style.display = "none";
     infoButton.textContent = "Customer Information";
   }
+  document.getElementById("warning-message").innerText = "";
 }
 // function isInputInfo() {
 //   const customerInfo = localStorage.getItem("customerInfo");
