@@ -1,31 +1,33 @@
-// Hàm để lấy và hiển thị dữ liệu lịch sử đơn hàng từ backend
 async function fetchOrderHistory(order = "desc") {
   const customerInfo = JSON.parse(localStorage.getItem("customerInfo"));
   const customerId = customerInfo.customerId;
-  console.log(customerId);
+
   const url =
     order === "asc"
       ? `http://localhost:8080/api/orderItems/historyAsc/${customerId}`
       : `http://localhost:8080/api/orderItems/historyDesc/${customerId}`;
-  console.log(url);
-  const testURL = `http://localhost:8080/api/orderItems/historyAsc/1`;
-  console.log(customerInfo);
+
   try {
-    const response = await fetch(testURL, {
+    const response = await fetch(url, {
       method: "GET",
-      mode: "cors", // Use "cors" instead of "no-cors"
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
     });
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
     let data = await response.json();
-    console.log(data);
     localStorage.setItem("orderHistoryData", JSON.stringify(data.data));
+
+    // Call the renderOrderHistory function to update the UI
+    renderOrderHistory();
+
     return data;
-    //   console.log(data); // Log or process the data as needed
+
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -56,3 +58,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   await fetchOrderHistory();
   renderOrderHistory();
 });
+
+window.onload = function() {
+  fetchOrderHistory('asc');
+};

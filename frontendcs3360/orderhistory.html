@@ -20,7 +20,11 @@
     </header>
     <section class="main-content">
       <div class="order-history-container">
-        <h2>Order History</h2>
+        <div style="display: flex; align-items: center;">
+          <h2>Order History</h2>
+          <button onclick="fetchOrderHistory('asc')" style="margin-left: 10px;">&#x2191;</button>
+          <button onclick="fetchOrderHistory('desc')" style="margin-left: 10px;">&#x2193;</button>
+        </div>
         <div class="order-history-table-wrapper">
           <table class="table-auto w-full" id="order-history-table">
             <thead>

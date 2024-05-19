@@ -55,16 +55,34 @@ async function postCustomerInfo() {
   };
 
   try {
-    const response = await fetch(baseURL + "customers/insert", {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(customerInfo),
-    });
+    let response;
+    const existingCustomerInfo = JSON.parse(localStorage.getItem("customerInfo"));
+
+    if (existingCustomerInfo && existingCustomerInfo.phoneNumber === phoneNumberInput) {
+      // If the phone number already exists, update the customer
+      response = await fetch(baseURL + "customers/update", {
+        method: "PUT",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(customerInfo),
+      });
+    } else {
+      // If the phone number doesn't exist, insert a new customer
+      response = await fetch(baseURL + "customers/insert", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(customerInfo),
+      });
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
