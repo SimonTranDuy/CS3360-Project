@@ -79,7 +79,7 @@ async function postCustomerInfo() {
 
   } catch (error) {
     console.error("Error fetching data:", error);
-    document.getElementById("message").innerText = "An error occurred. Please try again.";
+    document.getElementById("message").innerText = "Please fill in all information!";
   }
 }
 
