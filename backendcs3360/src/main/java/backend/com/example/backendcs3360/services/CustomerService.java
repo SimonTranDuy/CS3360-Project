@@ -70,7 +70,7 @@ public Customer insertCustomer(CustomerDTO newCustomerDTO) {
             // Update the existing customer
             CustomerDTO existingCustomer = existingCustomerOptional.get();
             existingCustomer.setCustomerName(customerDTO.getCustomerName());
-            existingCustomer.setPhoneNumber(customerDTO.getPhoneNumber());
+            // existingCustomer.setPhoneNumber(customerDTO.getPhoneNumber());
             existingCustomer.setAddress(customerDTO.getAddress());
             CustomerDTO updatedCustomerDTO = customerRepository.save(existingCustomer);
             // Convert the updated CustomerDTO to Customer and return it
