@@ -33,10 +33,10 @@ async function fetchOrderHistory(order = "desc") {
   }
 }
 
-// Thêm sự kiện click cho các nút sắp xếp và làm mới
+// Add the order history to the table
 const renderOrderHistory = () => {
   const tbody = document.getElementById("order-history-body");
-  tbody.innerHTML = ""; // Xóa nội dung cũ
+  tbody.innerHTML = ""; 
   const data = JSON.parse(localStorage.getItem("orderHistoryData"));
 
   data.orderItems.forEach((orderItem) => {
@@ -53,7 +53,7 @@ const renderOrderHistory = () => {
   });
 };
 
-// Gọi hàm fetchOrderHistory với 'desc' khi trang được tải
+// Call the fetchOrderHistory function when the DOM is loaded
 document.addEventListener("DOMContentLoaded", async function () {
   await fetchOrderHistory();
   renderOrderHistory();

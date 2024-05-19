@@ -38,33 +38,7 @@ async function fetchCart() {
   // console.log(cartItems);
   renderCartItems();
 }
-let mockData = [
-  {
-    name: "Nike Running Shoes",
-    currentPrice: "$70.00",
-    quantity: 2,
-  },
-  {
-    name: "Adidas Hoodie",
-    currentPrice: "$50.00",
-    quantity: 1,
-  },
-  {
-    name: "Puma Sports Cap",
-    currentPrice: "$20.00",
-    quantity: 3,
-  },
-  {
-    name: "Under Armour T-shirt",
-    currentPrice: "$30.00",
-    quantity: 1,
-  },
-  {
-    name: "Reebok Sports Bag",
-    currentPrice: "$40.00",
-    quantity: 2,
-  },
-];
+
 function renderCartItems() {
   const cartBody = document.getElementById("cart-body");
   const emptyCartMessage = document.getElementById("empty-cart-message");
